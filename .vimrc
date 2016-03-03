@@ -53,6 +53,8 @@ let g:Powerline_colorscheme='solarized256'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 " bash 支持设置
 "       1,函数注释快捷键：\cfu
+"       PS:更加详细的信息请见《印象笔记-vim-插件》笔记
+"           或帮助手册
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:BASH_AuthorName   = 'bamboo'
 let g:BASH_Email        = 'unlessbamboo@gmail.com'
