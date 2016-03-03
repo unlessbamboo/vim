@@ -1,3 +1,9 @@
+" @file vimrc
+" @brief    Slow down your step, and catch up with others.
+" @author unlessbamboo
+" @version 1.0
+" @date 2015-03-03
+
 " Set mapleader
 let mapleader = ","
 
