@@ -400,6 +400,7 @@ nmap <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 """""""""""""""""""""""""""""""""""""""
 " 切割
 nmap <silent><leader>vs :vs<cr>
+nmap <silent><leader>sp :sp<cr>
 " 左边窗口
 nmap <silent><leader>hw <C-w>h
 " 右边窗口
