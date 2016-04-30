@@ -46,7 +46,7 @@ set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
 set laststatus=2
 " 保证xshell或者putty能够正常显示颜色
-set t_Co=256
+" set t_Co=256
 " 主题风格
 let g:Powerline_colorscheme='solarized256'
 
@@ -495,9 +495,12 @@ endif
 set background=dark
 "" 设置终端支持的颜色是256颜色
 set t_Co=256
+
 " 选择颜色主题--molokai 或者 solarized
-"colorscheme solarized
+" colorscheme solarized
+" let g:solarized_termcolors=256
 colorscheme molokai
+
 " 匹配函数名，为函数名定义颜色做准备
 autocmd BufNewFile,BufRead * :syntax match cfunctions 
             \"\<[a-zA-Z_][a-zA-Z_0-9]*\>[^()]*)("me=e-2
