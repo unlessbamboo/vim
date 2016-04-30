@@ -40,6 +40,7 @@ let NERDTreeAutoDeleteBuffer=1
 """"""""""""""""""""""""""""""""""""""" 
 "---->>>>powerline状态栏插件
 """"""""""""""""""""""""""""""""""""""" 
+" set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim/
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 " 添加新的字体
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
