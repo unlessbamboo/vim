@@ -16,12 +16,14 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 filetype off
 " 可以通过execute pathogen#infect('bundle/{}', '~/src/vim/bundle/{}')来指定
 " vim插件的存放位置，默认为.vim/bundle
-call pathogen#infect()
-" 生成各个插件的文档
-call pathogen#helptags()
+execute pathogen#infect()
+"call pathogen#infect()
+"" 生成各个插件的文档
+"call pathogen#helptags()
 " 自动检测文件类型
 filetype plugin indent on
 syntax on
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> vim-pyenv 用于保证pyenv和vim的兼容运行，好像没用
@@ -119,6 +121,21 @@ map <silent> <leader>ln :lnext<cr>
 map <silent> <leader>lp :lprev<cr>
 " 关闭pyflakes插件的语法检查
 let g:pyflakes_use_quickfix = 0
+
+
+""""""""""""""""""""""""""""""""""""""" 
+" syntastic的配置参数
+"   
+""""""""""""""""""""""""""""""""""""""" 
+" Conflicts withs powerline
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 
 
 """"""""""""""""""""""""""""""""""""""" 
