@@ -132,10 +132,26 @@ let g:pyflakes_use_quickfix = 0
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+" 自动拉起或者关闭错误窗口
+let g:syntastic_auto_loc_list = 0
+" 打开文件时检测
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" 每次保存时检测
+let g:syntastic_check_on_wq = 1
 
+" gcc/g++ 语句支持
+"   auto check my headers files.
+" add search path, look bamboo.vim file.
+let g:syntastic_c_include_dirs = ['include', 
+            \]
+let g:syntastic_cpp_include_dirs = ['include', 
+            \]
+let g:syntastic_c_check_header = 1
+let g:syntastic_cpp_check_header = 1
+" check when compile code?
+let b:syntastic_c_cflags = '-I/usr/include -I/include'
+let b:syntastic_cpp_cflags = '-I/usr/include -I/include'
+let g:syntastic_cpp_compiler_options = '-std=c++11'
 
 
 """"""""""""""""""""""""""""""""""""""" 
@@ -482,22 +498,6 @@ set hlsearch
 "nohlsearch
 
 
-""""""""""""""""""""""""""""""""""""""""""""""
-" --->>> bamboo.vim的配置
-"           1，设置tags的加载，不同的语言加载不同的tags
-"           2，设置path(一般仅仅用于C语言)
-"                   用于gf命令，快速调到指定的文件，当然文件必须
-"                   在path搜索目录中:
-"                     跳过去:gf(光标下的文件名)或者find + 文件名
-"                     跳回来：<C-^>
-"           3，现在一般用LookupFile来代替find命令，见上面的说明
-"       
-""""""""""""""""""""""""""""""""""""""""""""""
-if filereadable("bamboo.vim")
-    source bamboo.vim
-endif
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 "----> molokai配色步骤:
 "               1，molokai.vim放入colors/目录下面
@@ -634,3 +634,21 @@ set completeopt=longest,menu
 "       具体截图请看：quickfix-screenshot/文件中的截图
 """"""""""""""""""""""""""""""""""""""" 
 " 快捷键设置暂时没有
+
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" --->>> bamboo.vim的配置(建议放在最后)
+"           1，设置tags的加载，不同的语言加载不同的tags
+"           2，设置path(一般仅仅用于C语言)
+"                   用于gf命令，快速调到指定的文件，当然文件必须
+"                   在path搜索目录中:
+"                     跳过去:gf(光标下的文件名)或者find + 文件名
+"                     跳回来：<C-^>
+"           3，现在一般用LookupFile来代替find命令，见上面的说明
+"       
+""""""""""""""""""""""""""""""""""""""""""""""
+if filereadable("bamboo.vim")
+    source bamboo.vim
+endif
+
+
