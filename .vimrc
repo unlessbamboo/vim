@@ -31,6 +31,29 @@ syntax on
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ---> emmet-vim，用于html,css的编写
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable just for html/css
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+" Redifine trigger key，default <c-y>
+let g:user_emmet_leader_key='<C-y>'
+" Add custom snippets when install web-api for emmet-vim
+"let g:user_emmet_settings = webapi#json#decode(
+            "\join(readfile(expand('~/.snippets_custom.json')), "\n"))
+            
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ---> webapi-vim，An interface to WEB APIs
+"       快捷键：
+"           1，自动添加图片大小，<c-y>i，路径所指图片必须存在
+"           2，注释
+"               移动到需要注释的标签头部，<c-y>j，进行注释和取消
+"           3，url
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> vim-signify，自动比较当前文件和最新版本中的区别
 "               一旦出现差异，会在左边提示相关信息
 """""""""""""""""""""""""""""""""""""""""""""""""""""""

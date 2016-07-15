@@ -67,3 +67,9 @@
 [submodule "bundle/vim-signify"]
 	path = bundle/vim-signify
 	url = https://github.com/mhinz/vim-signify.git
+[submodule "bundle/emmet-vim"]
+	path = bundle/emmet-vim
+	url = https://github.com/mattn/emmet-vim.git
+[submodule "bundle/webapi-vim"]
+	path = bundle/webapi-vim
+	url = https://github.com/mattn/webapi-vim.git
