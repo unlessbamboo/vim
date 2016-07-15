@@ -55,9 +55,6 @@
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
-[submodule "vim-json"]
-	path = vim-json
-	url = https://github.com/helino/vim-json.git
 [submodule "bundle/vim-json"]
 	path = bundle/vim-json
 	url = https://github.com/helino/vim-json.git
