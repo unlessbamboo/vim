@@ -16,6 +16,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 filetype off
 " 可以通过execute pathogen#infect('bundle/{}', '~/src/vim/bundle/{}')来指定
 " vim插件的存放位置，默认为.vim/bundle
+Plugin 'pangloss/vim-javascript'
 execute pathogen#infect()
 "call pathogen#infect()
 "" 生成各个插件的文档
@@ -65,6 +66,13 @@ let g:BASH_Company      = 'BigUniverse'
 
 
 """"""""""""""""""""""""""""""""""""""" 
+"---->>>>>python相关配置
+""""""""""""""""""""""""""""""""""""""" 
+" 关闭smartindent
+"au! FileType python setl nosmartindent
+
+
+""""""""""""""""""""""""""""""""""""""" 
 "---->>>>>python自动补全插件 jedi vim
 """"""""""""""""""""""""""""""""""""""" 
 " 在跳转的同时进行切割，可选项有left/right/top/bottom/winwidth
@@ -102,10 +110,14 @@ let g:pymode_doc_key='K'
 " Linting，python2.7
 let g:pymode_lint=1
 let g:pymode_lint_checker="pyflakes,pep8"
+" ignore some special errors
+let g:pymode_lint_ignore = "E402,W0611"
+" auto open window if any errors have been found
+let g:pymode_lint_cwindow = 1
 " auto check on save
-let g:pymode_lint_write=1
+let g:pymode_lint_write = 1
 " support virtualenv
-let g:pymode_virtualenv=1
+let g:pymode_virtualenv = 1
 " Enable breakpoints plugin
 let g:pymode_breakpoint = 1
 let g:pymode_breakpoint_bind = '<leader>b'
@@ -114,13 +126,17 @@ let g:pymode_syntax = 1
 let g:pymode_syntax_all = 1
 let g:pymode_syntax_indent_errors = g:pymode_syntax_all
 let g:pymode_syntax_space_errors = g:pymode_syntax_all
+" signs
+let g:pymode_lint_signs = 1
+let g:pymode_lint_todo_symbol = "WW"
+let g:pymode_lint_comment_symbol = "CC"
 " Don't autofold code
 let g:pymode_folding = 0
+" 关闭pyflakes插件的语法检查
+"let g:pyflakes_use_quickfix = 0
 " 缓存中的跳转映射--python-mode中的CodeCheck代码检查
 map <silent> <leader>ln :lnext<cr>
 map <silent> <leader>lp :lprev<cr>
-" 关闭pyflakes插件的语法检查
-let g:pyflakes_use_quickfix = 0
 
 
 """"""""""""""""""""""""""""""""""""""" 
@@ -139,7 +155,7 @@ let g:syntastic_check_on_open = 1
 " 每次保存时检测
 let g:syntastic_check_on_wq = 1
 
-" gcc/g++ 语句支持
+" gcc/g++ 语句支持，被bamboo.vim覆盖
 "   auto check my headers files.
 " add search path, look bamboo.vim file.
 let g:syntastic_c_include_dirs = ['include', 
@@ -176,6 +192,7 @@ nmap <silent> <leader>py :Pydocstring<cr>
 "       num<leader>cc:光标以下num行注释(包括当前行)
 "       num<leader>cm:光标以下num块注释(包括当前行)
 """""""""""""""""""""""""""""""""""""""
+" for c++ style, change the '@' to '\'
 
 
 """"""""""""""""""""""""""""""""""""""""
@@ -189,7 +206,7 @@ nmap <silent> <leader>py :Pydocstring<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " 生成filenametags文件，注意tf和:中间的空格就正常的空格哦
 nmap <silent> <leader>ft :!bash 
-            \ /home/bin/filenametags.sh
+            \ /home/bamboo/.local/bin/filenametags
             \<cr>:source ~/.vimrc<cr>
 " 加载指定的tags文件，而不是默认的tags文件
 if filereadable("./filenametags")
@@ -362,10 +379,13 @@ autocmd! bufwritepost .vimrc source ~/.vimrc
 "                               区分
 """"""""""""""""""""""""""""""""""""""""""""""
 " 生成tags的命令
-map <F9> :!ctags  --languages=c,c++,python,java,php,sh -R 
-            \ --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
+map <F9> :!ctags --exclude=jj
+            \ --languages=c,c++,python,java,php,sh -R 
+            \ --c++-kinds=+p --fields=+iaS --extra=+q .
+            \ <CR><CR> :TlistUpdate<CR>
 imap <F9> <ESC>:!ctags  --languages=c,c++,python,java,php,sh -R 
-            \ --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
+            \ --c++-kinds=+p --fields=+iaS --extra=+q .
+            \ <CR><CR> :TlistUpdate<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""
 " ---> cscope生成选项：
