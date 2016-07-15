@@ -16,7 +16,6 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 filetype off
 " 可以通过execute pathogen#infect('bundle/{}', '~/src/vim/bundle/{}')来指定
 " vim插件的存放位置，默认为.vim/bundle
-Plugin 'pangloss/vim-javascript'
 execute pathogen#infect()
 "call pathogen#infect()
 "" 生成各个插件的文档
@@ -29,6 +28,25 @@ syntax on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> vim-pyenv 用于保证pyenv和vim的兼容运行，好像没用
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ---> vim-javascript，配置js开发环境
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_ngdoc = 1
+let g:javascript_plugin_flow = 1
+" 自定义隐匿字符
+let g:javascript_conceal_function       = "ƒ"
+let g:javascript_conceal_null           = "ø"
+let g:javascript_conceal_this           = "@"
+let g:javascript_conceal_return         = "⇚"
+let g:javascript_conceal_undefined      = "¿"
+let g:javascript_conceal_NaN            = "ℕ"
+let g:javascript_conceal_prototype      = "¶"
+let g:javascript_conceal_static         = "•"
+let g:javascript_conceal_super          = "Ω"
+let g:javascript_conceal_arrow_function = "⇒"
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -140,7 +158,9 @@ map <silent> <leader>lp :lprev<cr>
 
 
 """"""""""""""""""""""""""""""""""""""" 
-" syntastic的配置参数
+" --->语法检查，syntastic的配置参数
+"       获取错误信息：Errors或者lopen
+"       错误间跳转：lne或者lp
 "   
 """"""""""""""""""""""""""""""""""""""" 
 " Conflicts withs powerline
@@ -154,7 +174,6 @@ let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 " 每次保存时检测
 let g:syntastic_check_on_wq = 1
-
 " gcc/g++ 语句支持，被bamboo.vim覆盖
 "   auto check my headers files.
 " add search path, look bamboo.vim file.
@@ -383,7 +402,7 @@ map <F9> :!ctags --exclude=jj
             \ --languages=c,c++,python,java,php,sh -R 
             \ --c++-kinds=+p --fields=+iaS --extra=+q .
             \ <CR><CR> :TlistUpdate<CR>
-imap <F9> <ESC>:!ctags  --languages=c,c++,python,java,php,sh -R 
+imap <F9> <ESC>:!ctags  --languages=c,c++,python,java,php,sh,js -R 
             \ --c++-kinds=+p --fields=+iaS --extra=+q .
             \ <CR><CR> :TlistUpdate<CR>
 
@@ -617,9 +636,9 @@ set pastetoggle=<F7>
 "
 """"""""""""""""""""""""""""""""""""""""""""""
 " 基于缩进的代码折叠
-set foldmethod=indent
+"set foldmethod=indent
 " 基于语法的代码折叠
-"set foldmethod=syntax
+set foldmethod=syntax
 " 启动时关闭代码折叠
 set nofoldenable
 
