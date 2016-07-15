@@ -14,7 +14,8 @@ let mapleader = ","
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 " 首先关闭文件检测
 filetype off
-" 可以通过execute pathogen#infect('bundle/{}', '~/src/vim/bundle/{}')来指定
+" 可以通过execute pathogen#infect('bundle/{}', 
+"                   '~/src/vim/bundle/{}')来指定
 " vim插件的存放位置，默认为.vim/bundle
 execute pathogen#infect()
 "call pathogen#infect()
@@ -40,11 +41,14 @@ autocmd FileType html,css EmmetInstall
 let g:user_emmet_leader_key='<C-y>'
 " Add custom snippets when install web-api for emmet-vim
 "let g:user_emmet_settings = webapi#json#decode(
-            "\join(readfile(expand('~/.snippets_custom.json')), "\n"))
+            "\join(readfile(expand(
+            "\'~/.snippets_custom.json')), "\n"))
             
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> webapi-vim，An interface to WEB APIs
+"       参考：
+" https://raw.githubusercontent.com/mattn/emmet-vim/master/TUTORIAL
 "       快捷键：
 "           1，自动添加图片大小，<c-y>i，路径所指图片必须存在
 "           2，注释
