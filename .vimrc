@@ -138,13 +138,13 @@ let NERDTreeAutoDeleteBuffer=1
 """"""""""""""""""""""""""""""""""""""" 
 "---->>>>powerline状态栏插件
 """"""""""""""""""""""""""""""""""""""" 
-" set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim/
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+"set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim/
 " 添加新的字体
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
 set laststatus=2
 " 保证xshell或者putty能够正常显示颜色
-" set t_Co=256
+set t_Co=256
 " 主题风格
 let g:Powerline_colorscheme='solarized256'
 
