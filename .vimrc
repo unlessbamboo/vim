@@ -33,12 +33,38 @@ syntax on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> emmet-vim，用于html,css的编写
+"           展开缩略词：div>p#foo$*3>a + <c-y> + ,
+"           包裹指定变为指定的标签：
+"               V+选取+<c-y>, + (输入ul>li*)
+"               其中后面的根据实际情况输入
+"           选中标签（插入模式）：
+"               整个标签（<c-y>d）
+"               标签内容（<c-y>D）
+"           编辑点跳转：
+"               下一个：<c-y>n
+"               上一个：<c-y>N
+"           更新图片大小
+"               <c-y>i，图片必须真实存在
+"           合并多行
+"               <c-y>m
+"           移除某一个标签对
+"               <c-y>k
+"           分割/合并标签
+"               将标签从<tags></tags>合并<tags ../>
+"           切换注释
+"               <c-y>/
+"           生成锚
+"               <c-y>a
+"           根据URL地址生成引用文本
+"               <c-y>A
+"   注意：如果更改了快捷键，请修改上面的<c-y>
+"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable just for html/css
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 " Redifine trigger key，default <c-y>
-let g:user_emmet_leader_key='<C-y>'
+let g:user_emmet_leader_key='<Tab>'
 " Add custom snippets when install web-api for emmet-vim
 "let g:user_emmet_settings = webapi#json#decode(
             "\join(readfile(expand(
