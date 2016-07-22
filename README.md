@@ -1,5 +1,7 @@
 # vim
 .vim directory
+
+:
 ----------------------------------2016-07-22-----------------------------------
 Going use YouCompleteMe plugins.
 Backup old vim configure at this branch.
