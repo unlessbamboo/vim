@@ -7,6 +7,8 @@
 " Set mapleader
 let mapleader = ","
 
+set shell=bash\ -i
+
 
 """"""""""""""""""""""""""""""""""""""" 
 "---->>>>vim-pathogen管理插件
@@ -24,6 +26,72 @@ execute pathogen#infect()
 " 自动检测文件类型
 filetype plugin indent on
 syntax on
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ---> (YCM)YouCompleteMe插件
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ----------------python的设置
+" 自动获取virtualenv中的信息（如果actiavate)
+" 建议将下面的设置放在bamboo.vim中
+"let g:ycm_python_binary_path=""
+
+" ---------------YCM本身的设置
+" 主动进行补全快捷键设置，默认情况下会使用TAB补全的
+"       Tab         一直循环往下，不用像老式的<C-n>
+"       shift + tab 不适用于控制台（非gvim/macvim）
+" 触发补全设置
+let g:ycm_key_invoke_completion = '<C-n>'
+" 让vim的补全行为同IDE保持一致
+set completeopt=longest,menu
+" 跳转到定义处
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <F6> :YcmForceCompileAndDiagnostics<CR>  "force recomile with
+
+" ---------------貌似没用的配置
+" 离开插入模式后自动关闭预览窗口
+"autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+" 回车即选中当前项
+"inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+" 上下左右键的行为 会显示其他信息
+"inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+"inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+"inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+"inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+" syntastic
+"nnoremap <leader>lo :lopen<CR>  "open locationlist
+"nnoremap <leader>lc :lclose<CR> "close locationlist
+"inoremap <leader><leader> <C-x><C-o>
+
+" 不显示开启vim时检查ycm_extra_conf文件的信息  
+"let g:ycm_confirm_extra_conf=0
+"" 开启基于tag的补全，可以在这之后添加需要的标签路径  
+"let g:ycm_collect_identifiers_from_tags_files=1
+""注释和字符串中的文字也会被收入补全
+"let g:ycm_collect_identifiers_from_comments_and_strings = 0
+"" 输入第2个字符开始补全
+"let g:ycm_min_num_of_chars_for_completion=2
+"" 禁止缓存匹配项,每次都重新生成匹配项
+"let g:ycm_cache_omnifunc=0
+"" 开启语义补全
+"let g:ycm_seed_identifiers_with_syntax=1  
+""在注释输入中也能补全
+"let g:ycm_complete_in_comments = 1
+""在字符串输入中也能补全
+"let g:ycm_complete_in_strings = 1
+"" 设置在下面几种格式的文件上屏蔽ycm
+"let g:ycm_filetype_blacklist = {
+      "\ 'tagbar' : 1,
+            "\ 'nerdtree' : 1,
+                  "\}
+                  ""youcompleteme  默认tab  s-tab 和 ultisnips 冲突
+                  "let g:ycm_key_list_select_completion = ['<Down>']
+                  "let g:ycm_key_list_previous_completion = ['<Up>']
+                  "" 修改对C函数的补全快捷键，默认是CTRL + space，修改为ALT +
+                  ";
+                  "let g:ycm_key_invoke_completion = '<M-;>'
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -723,15 +791,16 @@ set nofoldenable
 """"""""""""""""""""""""""""""""""""""" 
 " 自动补全分析：需要用到检测文件和智能补全预览窗口,tags文件
 " 按键介绍：
-"       关键字补全  <c-x> <c-n>         默认不用按ctrl+x
+"       关键字补全  <c-x> <c-n>         默认不用按ctrl+x，python可能需要
 "       整行补全    <c-x> <c-l>         先按ctrl+x 再按ctrl+l 
 "       文件名补全  <c-x> <c-f>         同上(必须对文件所在目录有访问权限)
 "       字典补全    <c-x> <c-k>         ???
 "       全能补全    <c-x> <c-o>         ???
 " PS:该插件名称为:omnicppcomplete
+" PSS:2016-07-22因为python语言的补全问题，尝试使用YCM替换补全
 """"""""""""""""""""""""""""""""""""""" 
 " 关闭智能补全时的预览窗口
-set completeopt=longest,menu
+"set completeopt=longest,menu
 
 
 """"""""""""""""""""""""""""""""""""""" 
