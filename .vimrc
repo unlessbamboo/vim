@@ -7,9 +7,6 @@
 " Set mapleader
 let mapleader = ","
 
-set shell=bash\ -i
-
-
 """"""""""""""""""""""""""""""""""""""" 
 "---->>>>vim-pathogen管理插件
 """"""""""""""""""""""""""""""""""""""" 
@@ -26,6 +23,20 @@ execute pathogen#infect()
 " 自动检测文件类型
 filetype plugin indent on
 syntax on
+
+
+""""""""""""""""""""""""""""""""""""""" 
+"---->>>>vim-instant-markdown插件
+"       如果浏览器不能自动打开：http://localhost:8090
+""""""""""""""""""""""""""""""""""""""" 
+"zshrc的配置
+set shell=bash\ -i
+let g:instant_markdown_slow=1
+" 关闭自动开启浏览器的配置，使用命令:InstantMarkdownPreview
+" 开启
+let g:instant_markdown_autostart=0
+" 映射快捷键
+map <silent> <leader>imp :InstantMarkdownPreview<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
