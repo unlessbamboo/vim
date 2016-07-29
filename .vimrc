@@ -9,20 +9,19 @@ let mapleader = ","
 
 """"""""""""""""""""""""""""""""""""""" 
 "---->>>>vim-pathogen管理插件
+"           功能：用于加载插件
+"           使用：pathogen + git使用类vundle功能
 """"""""""""""""""""""""""""""""""""""" 
 runtime bundle/vim-pathogen/autoload/pathogen.vim
-" 首先关闭文件检测
-filetype off
 " 可以通过execute pathogen#infect('bundle/{}', 
 "                   '~/src/vim/bundle/{}')来指定
 " vim插件的存放位置，默认为.vim/bundle
 execute pathogen#infect()
-"call pathogen#infect()
-"" 生成各个插件的文档
+" 生成各个插件的文档
 "call pathogen#helptags()
 " 自动检测文件类型
-filetype plugin indent on
 syntax on
+filetype plugin indent on
 
 
 """"""""""""""""""""""""""""""""""""""" 
