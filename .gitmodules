@@ -1,6 +1,3 @@
-[submodule "bundle/bash-support"]
-	path = bundle/bash-support
-	url = https://github.com/vim-scripts/bash-support.vim.git
 [submodule "bundle/vim-pathogen"]
 	path = bundle/vim-pathogen
 	url = https://github.com/tpope/vim-pathogen.git
