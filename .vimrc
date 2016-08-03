@@ -492,7 +492,7 @@ map <silent> <leader>ff :FirstExplorerWindow<cr>
 " goto bottom explorer window
 map <silent> <leader>bb :BottomExplorerWindow<cr>
 " reload
-nmap <silent> <F6> :WMToggle<cr>
+nmap <silent> <F10> :WMToggle<cr>
 
 
 """""""""""""""""""""""""""""""""""""""
