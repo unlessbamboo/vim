@@ -126,29 +126,6 @@ let g:javascript_conceal_super          = "Ω"
 let g:javascript_conceal_arrow_function = "⇒"
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ---> nerdtree 配置
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" nerdtree 子窗口中不显示冗余帮助信息
-let NERDTreeMinimalUI=1
-" 删除文件时自动删除文件对应 buffer
-let NERDTreeAutoDeleteBuffer=1
-
-
-""""""""""""""""""""""""""""""""""""""" 
-"---->>>>powerline状态栏插件
-""""""""""""""""""""""""""""""""""""""" 
-" set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim/
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
-" 添加新的字体
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
-set laststatus=2
-" 保证xshell或者putty能够正常显示颜色
-" set t_Co=256
-" 主题风格
-let g:Powerline_colorscheme='solarized256'
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 " bash 支持设置
 "       1,函数注释快捷键：\cfu
@@ -291,60 +268,6 @@ nmap <silent> <leader>py :Pydocstring<cr>
 " for c++ style, change the '@' to '\'
 
 
-""""""""""""""""""""""""""""""""""""""""
-" --->>> lookupfile配置
-"       1,<F5>开启窗口，输入bamboo.c + Enter，之后使用<C-N>,<C-P>选择
-"       2,LUBufs：缓冲区浏览，在所有的缓冲区中寻找某个函数等，类似cscope
-"       3,LUWalk：目录浏览
-"       4,忽略大小写查找：\c或者\C
-"       PS:依赖genutils插件
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 生成filenametags文件，注意tf和:中间的空格就正常的空格哦
-nmap <silent> <leader>ft :!bash 
-            \ /home/bamboo/.local/bin/filenametags
-            \<cr>:source ~/.vimrc<cr>
-" 加载指定的tags文件，而不是默认的tags文件
-if filereadable("./filenametags")
-    let g:LookupFile_TagExpr = '"./filenametags"'
-endif
-" 最少输入字符位数才开始查找
-let g:LookupFile_MinPatLength = 3
-" 不保存上次查找的字符串
-let g:LookupFile_PreserveLastPattern = 0
-" 保存查找历史
-let g:LookupFile_PreservePatternHistory = 1 
-" 回车打开第一个匹配项目
-let g:LookupFile_AlwaysAcceptFirst = 1
-" 不允许创建不存在的文件
-let g:LookupFile_AllowNewFiles = 0
-" 映射LookupFile为,lk
-nmap <silent> <leader>luk :LUTags<cr>
-" 映射LUBufs为,ll
-nmap <silent> <leader>lul :LUBufs<cr>
-" 映射LUWalk为,lw
-nmap <silent> <leader>luw :LUWalk<cr>
-" 默认设置忽略大小写查找, 重写该函数
-function! LookupFile_IgnoreCaseFunc(pattern)
-    let _tags = &tags
-    try
-        let &tags = eval(g:LookupFile_TagExpr)
-        let newpattern = '\c' . a:pattern
-        let tags = taglist(newpattern)
-    catch
-        echohl ErrorMsg | echo "Exception: " . v:exception | echohl NONE
-        return ""
-    finally
-        let &tags = _tags
-    endtry
-
-    " Show the matches for what is typed so far.
-    let files = map(tags, 'v:val["filename"]')
-    return files
-endfunction
-let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
-
-
 """""""""""""""""""""""""""""""""""""""""
 " ---> taglist的配置：vim跟随缓冲区退出，这里的文件数目不是根据窗口数哦，比如
 "                   打开vim（没有跟随文件）此时主编辑区不算是一个文件。
@@ -361,61 +284,6 @@ let Tlist_Use_Right_Window=0
 let Tlist_File_Fold_Auto_Close=0
 " 自动加载
 autocmd BufWritePost *.* :TlistUpdate
-
-""""""""""""""""""""""""""""""""""""""" 
-" BufExplorer介绍：快速浏览所有文件的buf插件，小型的文件
-"                     缓存管理
-" 按键介绍：   
-"           1）在光标指定到BufExplorer时（忽略）
-"           2）命令模式下：
-"               bn       打开下一个buffer文件
-"               bp       打开上一个buffer文件
-"               b num    打开指定号码的文件
-"               num1,num2bd 删除num1到num2之间的缓存
-"           3）普通模式下：
-"               \bv      垂直打开一个窗口浏览所有的文件缓存
-"               \bs      水平打开（这是bufExplore的功能）
-"           4) 关闭bufExplorer（前提是进入该窗口）：
-"               d        删除单个缓冲文件
-"               bd       删除所有缓冲文件
-"               在会话保存中会用到（关闭所有动态窗口）
-""""""""""""""""""""""""""""""""""""""" 
-" Do not show default help.
-let g:bufExplorerDefaultHelp=0       
-" Show relative paths.
-let g:bufExplorerShowRelativePath=1  
-" Sort by most recently used.
-let g:bufExplorerSortBy='mru'        
-" Split left.
-let g:bufExplorerSplitRight=0        
-" Split vertically.
-let g:bufExplorerSplitVertical=1     
-" Split width
-let g:bufExplorerSplitVertSize = 30  
-" Open in new window.
-let g:bufExplorerUseCurrentWindow=1  
-autocmd BufWinEnter \[Buf\ List\] setl nonumber
-
-
-""""""""""""""""""""""""""""""""""""""""""""""
-" ---> winmanager的配置： 界面分隔,是否自动打开winmanager，设置winmanger高度
-"                          <F6>快捷键开启，设置自动开启变量在winmanager.vim中设置
-""""""""""""""""""""""""""""""""""""""""""""""
-" 设置显示方式或者界面分隔
-" 或者'TagList|FileExplorer, BufExplorer'
-let g:winManagerWindowLayout = "BufExplorer,FileExplorer|TagList"
-let g:defaultExplorer = 0
-" 自动打开winmanager
-let g:AutoOpenWinManager=0
-" 设置宽度
-let g:winMaagerWidth=30
-" goto first explorer window
-map <silent> <leader>ff :FirstExplorerWindow<cr>
-" goto bottom explorer window
-map <silent> <leader>bb :BottomExplorerWindow<cr>
-" reload
-nmap <silent> <F6> :WMToggle<cr>
-
 
 """""""""""""""""""""""""""""""""""""""
 " --->  DoxygenToolkit注释文档配置:
@@ -439,21 +307,6 @@ let g:DoxygenToolkit_briefTag_funcName = "yes"
 let g:DoxygenToolkit_maxFunctionProtoLines = 30
 " 高亮显示
 let g:doxygen_enhanced_color=1 
-
-
-"#######################################个人vim设置##########################
-"""""""""""""""""""""""""""""""""""""""
-" --->  重新载入vimrc配置:
-"       <leader>ss为映射，生效时将leader替换为变量mapleader,
-"               即<leader>ss变为",ss"快捷键
-"       <leader>ee ---- ",ee"快捷键，打开配置
-"""""""""""""""""""""""""""""""""""""""
-" Fast reloading of the .vimrc
-map <silent> <leader>ss :source ~/.vimrc<cr>
-" Fast editing of .vimrc
-map <silent> <leader>ee :e ~/.vimrc<cr>
-" When .vimrc is edited, reload it
-autocmd! bufwritepost .vimrc source ~/.vimrc
 
 
 """"""""""""""""""""""""""""""""""""""""""""""
@@ -545,25 +398,6 @@ nmap <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 
 """""""""""""""""""""""""""""""""""""""
-" --->  窗口切割映射键和跳转快捷键
-"       
-"""""""""""""""""""""""""""""""""""""""
-" 切割
-nmap <silent><leader>vs :vs<cr>
-nmap <silent><leader>sp :sp<cr>
-" 左边窗口
-nmap <silent><leader>hw <C-w>h
-" 右边窗口
-nmap <silent><leader>lw <C-w>l
-" 上边窗口
-nmap <silent><leader>kw <C-w>k
-" 下边窗口
-nmap <silent><leader>jw <C-w>j
-" 移动窗口，左右移动
-nmap <silent><leader>rw <C-w><C-r>
-
-
-"""""""""""""""""""""""""""""""""""""""
 " --->  宏快捷键
 "           @a寄存器 ---》 <leader>h寄存器
 "       
@@ -615,25 +449,42 @@ set hlsearch
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-"----> molokai配色步骤:
+"----> 配色配置1
+"   molokai配色步骤:
 "               1，molokai.vim放入colors/目录下面
 "               2，molokai默认没有给对应元素配色
 "               3，配置都是自定义的，可以删除
 "
-"--->>solarized配色步骤：
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 配色主题
+colorscheme molokai
+" 原始的monokai背景色
+let g:molokai_original=1
+" 256支持
+let g:rehash256=1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"--->>配色配置2
+"   solarized配色步骤：
 "               1，vim-colors-solarized存入bundle目录下
 "               2，设置配色方案
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 背景颜色(dark/light)
-set background=dark
-"" 设置终端支持的颜色是256颜色
-set t_Co=256
+"" 背景（dark/light）
+"if has('gui_running')
+    "set background=dark
+"else
+    "set background=light
+"endif
+"" 256支持
+"let g:solarized_termcolors=256
+"" 选择颜色主题solarized
+"colorscheme solarized
 
-" 选择颜色主题--molokai 或者 solarized
-" colorscheme solarized
-" let g:solarized_termcolors=256
-colorscheme molokai
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"--->>配色配置3
+"       其他通用配置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 匹配函数名，为函数名定义颜色做准备
 autocmd BufNewFile,BufRead * :syntax match cfunctions 
             \"\<[a-zA-Z_][a-zA-Z_0-9]*\>[^()]*)("me=e-2
@@ -652,11 +503,21 @@ set cursorline
 
 
 """"""""""""""""""""""""""""""""""""""" 
-"---->>>>Tmux
+"--->>配色配置4
+"   powerline状态栏插件
+"       结合terminal的状态栏设置，涉及字体等信息，
+"       见印象笔记->vim->powerline安装
+"   PS:
+"       后期一键自动化安装的时候容易，现在配置很麻烦
 """"""""""""""""""""""""""""""""""""""" 
-if exists('$TMUX')
-    set term=screen-256color
-endif
+" 找到powerline插件位置，当然也可以放在vim目录下面
+set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+" 添加新的字体
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
+set laststatus=2
+" 主题风格
+let g:Powerline_colorscheme='solarized256'
+
 
 
 """"""""""""""""""""""""""""""""""""""" 
@@ -752,6 +613,190 @@ set completeopt=longest,menu
 " 快捷键设置暂时没有
 
 
+
+"""""""""""""""""""""""""""""""""""""""文件缓冲区窗口模块"""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""" 
+" ---> 文件缓冲区窗口插件1
+"       BufExplorer介绍：快速浏览所有文件的buf插件，小型的文件
+"                           缓存管理
+"       按键介绍：   
+"                 1）在光标指定到BufExplorer时（忽略）
+"                 2）命令模式下：
+"                     bn       打开下一个buffer文件
+"                     bp       打开上一个buffer文件
+"                     b num    打开指定号码的文件
+"                     num1,num2bd 删除num1到num2之间的缓存
+"                 3）普通模式下：
+"                     \bv      垂直打开一个窗口浏览所有的文件缓存
+"                     \bs      水平打开（这是bufExplore的功能）
+"                 4) 关闭bufExplorer（前提是进入该窗口）：
+"                     d        删除单个缓冲文件
+"                     bd       删除所有缓冲文件
+"                     在会话保存中会用到（关闭所有动态窗口）
+""""""""""""""""""""""""""""""""""""""" 
+" Do not show default help.
+let g:bufExplorerDefaultHelp=0       
+" Show relative paths.
+let g:bufExplorerShowRelativePath=1  
+" Sort by most recently used.
+let g:bufExplorerSortBy='mru'        
+" Split left.
+let g:bufExplorerSplitRight=0        
+" Split vertically.
+let g:bufExplorerSplitVertical=1     
+" Split width
+let g:bufExplorerSplitVertSize = 30  
+" Open in new window.
+let g:bufExplorerUseCurrentWindow=1  
+autocmd BufWinEnter \[Buf\ List\] setl nonumber
+
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" ---> 文件缓冲区窗口插件2
+"       winmanager的配置： 界面分隔,是否自动打开winmanager，
+"                       设置winmanger高度
+""""""""""""""""""""""""""""""""""""""""""""""
+" 设置显示方式或者界面分隔，左上角BE/FE共用一个窗口，右下角为taglist
+" 其中左上角BufExporer和FP的切换使用Ctrl + N
+let g:winManagerWindowLayout = "BufExplorer,FileExplorer|TagList"
+let g:defaultExplorer = 0
+" 自动打开winmanager
+let g:AutoOpenWinManager=0
+" 设置宽度
+let g:winMaagerWidth=30
+" goto first explorer window
+map <silent> <leader>ff :FirstExplorerWindow<cr>
+" goto bottom explorer window
+map <silent> <leader>bb :BottomExplorerWindow<cr>
+" reload
+nmap <silent> <F6> :WMToggle<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ---> 文件缓冲区窗口插件3
+"      nerdtree 配置
+"           显示当前目录下的树形目录树，有时候有用
+"      PS: 建议结合lookupfile来使用
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 是否在vim启动的时候默认开启NERDTree
+"autocmd VimEnter * NERDTree
+" 窗口显示的位置，默认为左边
+"let NERDTreeWinPos='right'
+" 是否自动显示BookMarks
+let NERDTreeShowBookmarks=1
+" nerdtree 子窗口中不显示冗余帮助信息
+let NERDTreeMinimalUI=1
+" 删除文件时自动删除文件对应 buffer
+let NERDTreeAutoDeleteBuffer=1
+" 启动或者隐藏NERDTree
+nmap <silent> <F2> :NERDTreeToggle<cr>
+
+
+""""""""""""""""""""""""""""""""""""""""
+" ---> 文件缓冲区窗口插件4
+"   lookupfile配置
+"       1,<F5>开启窗口，输入bamboo.c + Enter，之后使用<C-N>,<C-P>选择
+"       2,LUBufs：缓冲区浏览，在所有的缓冲区中寻找某个函数等，类似cscope
+"       3,LUWalk：目录浏览
+"       4,忽略大小写查找：\c或者\C
+"       PS:依赖genutils插件
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 生成filenametags文件，注意tf和:中间的空格就正常的空格哦
+" 其中/home/bamboo/.local/bin/filenametags可执行文件见：
+" <https://github.com/unlessbamboo/grocery-shop/blob/master/bamboo/shell/filenametags>
+nmap <silent> <leader>ft :!bash 
+            \ /home/bamboo/.local/bin/filenametags
+            \<cr>:source ~/.vimrc<cr>
+" 加载指定的tags文件，而不是默认的tags文件，增加查找性能
+if filereadable("./filenametags")
+    let g:LookupFile_TagExpr = '"./filenametags"'
+endif
+" 最少输入字符位数才开始查找匹配
+let g:LookupFile_MinPatLength = 3
+" 不保存上次查找的字符串
+let g:LookupFile_PreserveLastPattern = 0
+" 保存查找历史
+let g:LookupFile_PreservePatternHistory = 1 
+" 回车打开第一个匹配项目
+let g:LookupFile_AlwaysAcceptFirst = 1
+" 不允许创建不存在的文件
+let g:LookupFile_AllowNewFiles = 0
+" F5的功能，查找文件，映射LookupFile为,lk
+nmap <silent> <leader>luk :LUTags<cr>
+" 浏览缓冲区，列出缓冲区中所有文件，映射LUBufs为ll
+nmap <silent> <leader>lul :LUBufs<cr>
+" 浏览目录，查看该目录下所有文件，映射LUWalk为lw
+nmap <silent> <leader>luw :LUWalk<cr>
+" 默认设置忽略大小写查找, 重写该函数
+function! LookupFile_IgnoreCaseFunc(pattern)
+    let _tags = &tags
+    try
+        let &tags = eval(g:LookupFile_TagExpr)
+        let newpattern = '\c' . a:pattern
+        let tags = taglist(newpattern)
+    catch
+        echohl ErrorMsg | echo "Exception: " . v:exception | echohl NONE
+        return ""
+    finally
+        let &tags = _tags
+    endtry
+
+    " Show the matches for what is typed so far.
+    let files = map(tags, 'v:val["filename"]')
+    return files
+endfunction
+let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
+
+
+
+
+"""""""""""""""""""""""""""""""""""""""自定义模块"""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""
+" --->  重新载入vimrc配置:
+"       <leader>ss为映射，生效时将leader替换为变量mapleader,
+"               即<leader>ss变为",ss"快捷键
+"       <leader>ee ---- ",ee"快捷键，打开配置
+"""""""""""""""""""""""""""""""""""""""
+" Fast reloading of the .vimrc
+map <silent> <leader>ss :source ~/.vimrc<cr>
+" Fast editing of .vimrc
+map <silent> <leader>ee :e ~/.vimrc<cr>
+" When .vimrc is edited, reload it
+autocmd! bufwritepost .vimrc source ~/.vimrc
+
+
+"""""""""""""""""""""""""""""""""""""""
+" --->  窗口切割映射键和跳转快捷键
+"       
+"""""""""""""""""""""""""""""""""""""""
+" 切割
+nmap <silent><leader>vs :vs<cr>
+nmap <silent><leader>sp :sp<cr>
+" 左边窗口
+nmap <silent><leader>hw <C-w>h
+" 右边窗口
+nmap <silent><leader>lw <C-w>l
+" 上边窗口
+nmap <silent><leader>kw <C-w>k
+" 下边窗口
+nmap <silent><leader>jw <C-w>j
+" 移动窗口，左右移动
+nmap <silent><leader>rw <C-w><C-r>
+
+
+""""""""""""""""""""""""""""""""""""""" 
+"---->>>>Tmux
+"       PS:放在最末尾
+""""""""""""""""""""""""""""""""""""""" 
+" 设置终端支持的颜色是256颜色
+set t_Co=256
+" tmux设置
+if exists('$TMUX')
+    set term=screen-256color
+endif
+
+
 """"""""""""""""""""""""""""""""""""""""""""""
 " --->>> bamboo.vim的配置(建议放在最后)
 "           1，设置tags的加载，不同的语言加载不同的tags
@@ -766,5 +811,3 @@ set completeopt=longest,menu
 if filereadable("bamboo.vim")
     source bamboo.vim
 endif
-
-
