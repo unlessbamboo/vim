@@ -127,23 +127,7 @@ let g:BASH_Email        = 'unlessbamboo@gmail.com'
 let g:BASH_Company      = 'BigUniverse'
 
 
-""""""""""""""""""""""""""""""""""""""" 
-""""""""""""""""""""""""""""""""""""""" 
-"---->>>>>python自动补全插件 jedi vim
-""""""""""""""""""""""""""""""""""""""" 
-" 在跳转的同时进行切割，可选项有left/right/top/bottom/winwidth
-"let g:jedi#use_splits_not_buffers = "left"
-let g:jedi#show_call_signatures = "1"
-" 跳转，类似<C-]>，其中返回为<C-t>
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#completions_command = "<C-N>"
-
-
+"""""""""""""""""""""""""""""""python开发"""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""" 
 "---->>>>python-mode配置(python2.7)
 "               K               显示python文档
@@ -181,6 +165,32 @@ let g:pymode_folding = 0
 " 缓存中的跳转映射--python-mode中的CodeCheck代码检查
 map <silent> <leader>ln :lnext<cr>
 map <silent> <leader>lp :lprev<cr>
+
+
+""""""""""""""""""""""""""""""""""""""" 
+"---->>>>>python自动补全插件 jedi vim
+""""""""""""""""""""""""""""""""""""""" 
+" 跳转并进行切割，可选项:left/right/top/bottom/winwidth
+"let g:jedi#use_splits_not_buffers = "left"
+let g:jedi#show_call_signatures = "1"
+" 跳转，类似<C-]>，其中返回为<C-t>
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>n"
+let g:jedi#rename_command = "<leader>r"
+let g:jedi#completions_command = "<C-N>"
+
+
+""""""""""""""""""""""""""""""""""""""" 
+" docstring的配置参数
+"               自动插入docstring字符串
+""""""""""""""""""""""""""""""""""""""" 
+" 设置拓展
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
+"nmap <silent> <C-_> <Plug>(pydocstring)
+nmap <silent> <leader>py :Pydocstring<cr>
 
 
 
@@ -251,16 +261,6 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 " 报错时做语法检查, 默认 1
 let g:syntastic_check_on_wq = 0
-
-
-""""""""""""""""""""""""""""""""""""""" 
-" docstring的配置参数
-"               自动插入docstring字符串
-""""""""""""""""""""""""""""""""""""""" 
-" 设置拓展
-autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
-"nmap <silent> <C-_> <Plug>(pydocstring)
-nmap <silent> <leader>py :Pydocstring<cr>
 
 
 

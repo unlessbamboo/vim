@@ -34,9 +34,6 @@
 [submodule "bundle/vim-pydocstring"]
 	path = bundle/vim-pydocstring
 	url = https://github.com/heavenshell/vim-pydocstring.git
-[submodule "bundle/python-mode"]
-	path = bundle/python-mode
-	url = https://github.com/klen/python-mode.git
 [submodule "bundle/vim-colors-solarized"]
 	path = bundle/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
