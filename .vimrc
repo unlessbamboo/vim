@@ -28,11 +28,6 @@ filetype plugin indent on
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ---> vim-pyenv 用于保证pyenv和vim的兼容运行，好像没用
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> emmet-vim，用于html,css的编写
 "           展开缩略词：div>p#foo$*3>a + <c-y> + ,
 "           包裹指定变为指定的标签：
@@ -525,8 +520,7 @@ map <silent> <leader>bb :BottomExplorerWindow<cr>
 nmap <silent> <F6> :WMToggle<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ---> 文件缓冲区窗口插件3
-"      nerdtree 配置
+" ---> 文件缓冲区窗口插件-3-nerdtree 配置
 "           显示当前目录下的树形目录树，有时候有用
 "      PS: 建议结合lookupfile来使用
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -545,18 +539,10 @@ nmap <silent> <F2> :NERDTreeToggle<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""
-" ---> 文件缓冲区窗口插件4
-"   lookupfile配置
-"       1,<F5>开启窗口，输入bamboo.c + Enter，之后使用<C-N>,<C-P>选择
-"       2,LUBufs：缓冲区浏览，在所有的缓冲区中寻找某个函数等，类似cscope
-"       3,LUWalk：目录浏览
-"       4,忽略大小写查找：\c或者\C
-"       PS:依赖genutils插件
-"
+" ---> 文件缓冲区窗口插件-4-lookupfile配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""
-" 生成filenametags文件，注意tf和:中间的空格就正常的空格哦
-" 其中/home/bamboo/.local/bin/filenametags可执行文件见：
-" <https://github.com/unlessbamboo/grocery-shop/blob/master/bamboo/shell/filenametags>
+" 可执行文件：
+"   <https://github.com/unlessbamboo/grocery-shop/blob/master/bamboo/shell/filenametags>
 nmap <silent> <leader>ft :!bash 
             \ /home/bamboo/.local/bin/filenametags
             \<cr>:source ~/.vimrc<cr>
