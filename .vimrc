@@ -139,32 +139,32 @@ let g:BASH_Company      = 'BigUniverse'
 "       PS:考虑到和syntastic语法检查冲突，关闭pylint检查
 "               
 """"""""""""""""""""""""""""""""""""""" 
-" 避免和jedi vim冲突
-let g:pymode_rope=0
-" Linting, disable if exists syntastic
-let g:pymode_lint=0
-
-" doc
-let g:pymode_doc=1
-" 查看文档快捷键
-let g:pymode_doc_key='K'
-" support virtualenv
-let g:pymode_virtualenv = 1
-" Enable breakpoints plugin
-let g:pymode_breakpoint = 1
-let g:pymode_breakpoint_bind = '<leader>b'
-" syntax highlighting
-let g:pymode_syntax = 1
-let g:pymode_syntax_all = 1
-let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-let g:pymode_syntax_space_errors = g:pymode_syntax_all
-" Don't autofold code
-let g:pymode_folding = 0
-" 关闭pyflakes插件的语法检查
-" let g:pyflakes_use_quickfix = 0
-" 缓存中的跳转映射--python-mode中的CodeCheck代码检查
-map <silent> <leader>ln :lnext<cr>
-map <silent> <leader>lp :lprev<cr>
+" " 避免和jedi vim冲突
+" let g:pymode_rope=0
+" " Linting, disable if exists syntastic
+" let g:pymode_lint=0
+" 
+" " doc
+" let g:pymode_doc=1
+" " 查看文档快捷键
+" let g:pymode_doc_key='K'
+" " support virtualenv
+" let g:pymode_virtualenv = 1
+" " Enable breakpoints plugin
+" let g:pymode_breakpoint = 1
+" let g:pymode_breakpoint_bind = '<leader>b'
+" " syntax highlighting
+" let g:pymode_syntax = 1
+" let g:pymode_syntax_all = 1
+" let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+" let g:pymode_syntax_space_errors = g:pymode_syntax_all
+" " Don't autofold code
+" let g:pymode_folding = 0
+" " 关闭pyflakes插件的语法检查
+" " let g:pyflakes_use_quickfix = 0
+" " 缓存中的跳转映射--python-mode中的CodeCheck代码检查
+" map <silent> <leader>ln :lnext<cr>
+" map <silent> <leader>lp :lprev<cr>
 
 
 """"""""""""""""""""""""""""""""""""""" 
@@ -452,7 +452,8 @@ set cursorline
 "       后期一键自动化安装的时候容易，现在配置很麻烦
 """"""""""""""""""""""""""""""""""""""" 
 " 找到powerline插件位置，当然也可以放在vim目录下面
-set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+" set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+set rtp+=~/.local/lib/python3.4/site-packages/powerline/bindings/vim/
 " 添加新的字体
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
 set laststatus=2
