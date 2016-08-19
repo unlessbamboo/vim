@@ -23,60 +23,8 @@ call pathogen#infect()
 call pathogen#helptags()
 
 " 自动检测文件类型，见印象笔记中说明
-syntax on
 filetype plugin indent on
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ---> emmet-vim，用于html,css的编写
-"           展开缩略词：div>p#foo$*3>a + <c-y> + ,
-"           包裹指定变为指定的标签：
-"               V+选取+<c-y>, + (输入ul>li*)
-"               其中后面的根据实际情况输入
-"           选中标签（插入模式）：
-"               整个标签（<c-y>d）
-"               标签内容（<c-y>D）
-"           编辑点跳转：
-"               下一个：<c-y>n
-"               上一个：<c-y>N
-"           更新图片大小
-"               <c-y>i，图片必须真实存在
-"           合并多行
-"               <c-y>m
-"           移除某一个标签对
-"               <c-y>k
-"           分割/合并标签
-"               将标签从<tags></tags>合并<tags ../>
-"           切换注释
-"               <c-y>/
-"           生成锚
-"               <c-y>a
-"           根据URL地址生成引用文本
-"               <c-y>A
-"   注意：如果更改了快捷键，请修改上面的<c-y>
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Enable just for html/css
-let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
-" Redifine trigger key，default <c-y>
-let g:user_emmet_leader_key='<Tab>'
-" Add custom snippets when install web-api for emmet-vim
-"let g:user_emmet_settings = webapi#json#decode(
-            "\join(readfile(expand(
-            "\'~/.snippets_custom.json')), "\n"))
-            
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ---> webapi-vim，An interface to WEB APIs
-"       参考：
-" https://raw.githubusercontent.com/mattn/emmet-vim/master/TUTORIAL
-"       快捷键：
-"           1，自动添加图片大小，<c-y>i，路径所指图片必须存在
-"           2，注释
-"               移动到需要注释的标签头部，<c-y>j，进行注释和取消
-"           3，url
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syntax on
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -95,25 +43,6 @@ let g:ag_working_path_mode="r"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> vim-json，对json文件进行语法高亮
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ---> vim-javascript，配置js开发环境
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:javascript_plugin_jsdoc = 1
-let g:javascript_plugin_ngdoc = 1
-let g:javascript_plugin_flow = 1
-" 自定义隐匿字符
-let g:javascript_conceal_function       = "ƒ"
-let g:javascript_conceal_null           = "ø"
-let g:javascript_conceal_this           = "@"
-let g:javascript_conceal_return         = "⇚"
-let g:javascript_conceal_undefined      = "¿"
-let g:javascript_conceal_NaN            = "ℕ"
-let g:javascript_conceal_prototype      = "¶"
-let g:javascript_conceal_static         = "•"
-let g:javascript_conceal_super          = "Ω"
-let g:javascript_conceal_arrow_function = "⇒"
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -167,20 +96,20 @@ let g:BASH_Company      = 'BigUniverse'
 " map <silent> <leader>lp :lprev<cr>
 
 
-""""""""""""""""""""""""""""""""""""""" 
-"---->>>>>python自动补全插件 jedi vim
-""""""""""""""""""""""""""""""""""""""" 
-" 跳转并进行切割，可选项:left/right/top/bottom/winwidth
-"let g:jedi#use_splits_not_buffers = "left"
-let g:jedi#show_call_signatures = "1"
-" 跳转，类似<C-]>，其中返回为<C-t>
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#completions_command = "<C-N>"
+" """"""""""""""""""""""""""""""""""""""" 
+" "---->>>>>python自动补全插件 jedi vim
+" """"""""""""""""""""""""""""""""""""""" 
+" " 跳转并进行切割，可选项:left/right/top/bottom/winwidth
+" " let g:jedi#use_splits_not_buffers = "left"
+" let g:jedi#show_call_signatures = "1"
+" " 跳转，类似<C-]>，其中返回为<C-t>
+" let g:jedi#goto_command = "<leader>d"
+" let g:jedi#goto_assignments_command = "<leader>g"
+" let g:jedi#goto_definitions_command = ""
+" let g:jedi#documentation_command = "K"
+" let g:jedi#usages_command = "<leader>n"
+" let g:jedi#rename_command = "<leader>r"
+" let g:jedi#completions_command = "<C-N>"
 
 
 """"""""""""""""""""""""""""""""""""""" 
@@ -194,6 +123,7 @@ nmap <silent> <leader>py :Pydocstring<cr>
 
 
 
+"=======================版本控制=========================
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> 版本控制-1-vim-signify
 "           用于所有的版本控制
@@ -225,13 +155,6 @@ nmap <silent> <leader>ph <Plug>GitGutterPrevHunk
 
 
 
-
-""""""""""""""""""""""""""""""""""""""" 
-" vim-surround配置
-"       见印象笔记中的说明
-""""""""""""""""""""""""""""""""""""""" 
-" 没有特殊的配置，不要文档中的custom configure
-
 """"""""""""""""""""""""""""""""""""""" 
 " --->语法检查，syntastic的配置参数
 "       获取错误信息：Errors或者lopen
@@ -240,56 +163,34 @@ nmap <silent> <leader>ph <Plug>GitGutterPrevHunk
 "       每一个目录都有一份独有的bamboo.vim配置当前项目的语言配置
 "   
 """"""""""""""""""""""""""""""""""""""" 
-" 必要配置1
-" Conflicts withs powerline，so close
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-" 必要配置2--错误标注（和SyntasticStatuslineFlag()配合）
-let g:syntastic_error_symbol = 'EE'
-let g:syntastic_style_error_symbol = 'E>'
-let g:syntastic_warning_symbol = 'WW'
-let g:syntastic_style_warning_symbol = 'W>'
-let g:syntastic_always_populate_loc_list = 1
-" 必要配置3
-" 不需要手动调用 SyntasticSetTocList. 默认1
-let g:syntastic_always_populate_loc_list = 1
-" 自动拉起关闭错误窗口. 
-" 0不自动. 1自动拉起关闭. 2 自动关闭. 3 自动拉起 默认2, 建议为1
-let g:syntastic_auto_loc_list = 1
-" 打开文件时做语法检查, 默认 0
-let g:syntastic_check_on_open = 1
-" 报错时做语法检查, 默认 1
-let g:syntastic_check_on_wq = 0
+" " 必要配置1
+" " Conflicts withs powerline，so close
+" " set statusline+=%#warningmsg#
+" " set statusline+=%{SyntasticStatuslineFlag()}
+" " set statusline+=%*
+" " 必要配置2--错误标注（和SyntasticStatuslineFlag()配合）
+" let g:syntastic_error_symbol = 'EE'
+" let g:syntastic_style_error_symbol = 'E>'
+" let g:syntastic_warning_symbol = 'WW'
+" let g:syntastic_style_warning_symbol = 'W>'
+" let g:syntastic_always_populate_loc_list = 1
+" " 必要配置3
+" " 不需要手动调用 SyntasticSetTocList. 默认1
+" let g:syntastic_always_populate_loc_list = 1
+" " 自动拉起关闭错误窗口. 
+" " 0不自动. 1自动拉起关闭. 2 自动关闭. 3 自动拉起 默认2, 建议为1
+" let g:syntastic_auto_loc_list = 1
+" " 打开文件时做语法检查, 默认 0
+" let g:syntastic_check_on_open = 1
+" " 报错时做语法检查, 默认 1
+" let g:syntastic_check_on_wq = 0
 
+""""""""""""""""""""""""""""""""""""""" 
+" vim-surround配置
+"       见印象笔记中的说明
+""""""""""""""""""""""""""""""""""""""" 
+" 没有特殊的配置，不要文档中的custom configure
 
-
-
-""""""""""""""""""""""""""""""""""GCC模块"""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""
-" --->  GCC模块1
-"   DoxygenToolkit注释文档配置:
-"       详细的信息见DoxygenToolkit.vim插件
-"               
-"""""""""""""""""""""""""""""""""""""""
-" 函数和类注释，进行键的映射(输入,fg，即输出如下的字段)
-nmap <leader>fg :Dox<cr>
-" 插入文件名，作者时间
-nmap <leader>fa :DoxAuthor<cr>
-" 插件license注释
-nmap <leader>fl :DoxLic<cr>
-" 跳过文档的编写，不知道干什么的
-" nmap <leader>fu :DoxUndoc<cr>
-" 块注释
-nmap <leader>fb :DoxBlock<cr>
-" c/c++语言风格见不同目录下的配置
-
-"""""""""""""""""""""""""""""""""""""""
-" --->  GCC模块2
-"""""""""""""""""""""""""""""""""""""""
-nmap <leader>as :A<cr>
-nmap <leader>ass :AS<cr>
-nmap <leader>asv :AV<cr>
 
 
 
