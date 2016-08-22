@@ -57,6 +57,19 @@ let g:BASH_Company      = 'BigUniverse'
 
 
 """"""""""""""""""""""""""""""""""""""" 
+" -->> markddown
+""""""""""""""""""""""""""""""""""""""" 
+"zshrc的配置                                               
+set shell=bash\ -i                                         
+let g:instant_markdown_slow=1                               
+" 关闭自动开启浏览器的配置，使用命令:InstantMarkdownPreview                                                   
+let g:instant_markdown_autostart=0                         
+" 映射快捷键                                               
+map <silent> <leader>imp :InstantMarkdownPreview<cr>
+
+
+
+""""""""""""""""""""""""""""""""""""""" 
 " docstring的配置参数
 "               自动插入docstring字符串
 """"""""""""""""""""""""""""""""""""""" 
@@ -83,7 +96,7 @@ nmap <leader>fu :DoxUndoc<cr>
 nmap <leader>fb :DoxBlock<cr>
 
 
-function MyDoxygenGcc()
+function! MyDoxygenGcc()
     " for C++ style, change the '@' to '\'
     let g:DoxygenToolkit_commentType = "C"
     " 高亮显示
@@ -121,7 +134,7 @@ function MyDoxygenGcc()
 endfunction
 
 
-function MyDoxygenCx()
+function! MyDoxygenCx()
     " for C++ style, change the '@' to '\'
     let g:DoxygenToolkit_commentType = "C++"
     " 高亮显示
