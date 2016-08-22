@@ -104,9 +104,6 @@ nmap <silent> <leader>ph <Plug>GitGutterPrevHunk
 " --->>> YCM configure
 "
 """"""""""""""""""""""""""""""""""""""" 
-" Default ycm config
-let g:ycm_global_ycm_extra_conf = 
-            \'~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 " 设置python或者python3
 let g:ycm_python_binary_path="python"
 
