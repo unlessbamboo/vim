@@ -151,6 +151,34 @@ let g:syntastic_python_pylint_args='--disable=W0611,W0613,C0413,C0411,c0303'
 let g:syntastic_sh_checkers=['shellcheckers']
 
 
+" gcc/g++ 语句支持：help syntastic-checkers获取更多信息
+" Check header files
+let g:syntastic_c_check_header = 1
+let b:syntastic_c_cflags = '-I/include'
+let g:syntastic_c_include_dirs = []
+" let g:syntastic__compiler_options = ''
+" 增加config的查找路径，这些配置文件中包含CFLAGS或者include目录等信息
+" let g:syntastic_c_config_file = ''
+" 移除某些错误信息
+" let g:syntastic_c_remove_include_errors = 1
+" 错误输出格式
+" let g:syntastic_c_errorformat = "%f:%l%c: %trror: %m"
+" C编译器
+let g:syntastic_c_compiler = "gcc"
+
+" g++
+let g:syntastic_cpp_check_header = 1
+let b:syntastic_cpp_cflags = '-I/include'
+" let g:syntastic_cpp_include_dirs = []                                                       
+" 编译器选项
+let g:syntastic_cpp_compiler_options = '-std=c++11'
+" Enable header files being re-checked on every file write.
+let g:syntastic_cpp_auto_refresh_includes = 1
+" let g:syntastic_cpp_remove_include_errors = 1
+" let g:syntastic_cpp_errorformat = "%f:%l%c: %trror: %m"
+let g:syntastic_cpp_compiler = "g++"
+
+
 """"""""""""""""""""""""""""""""""""""" 
 " vim-surround配置
 "       见印象笔记中的说明
