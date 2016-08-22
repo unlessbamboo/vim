@@ -67,6 +67,120 @@ nmap <silent> <leader>py :Pydocstring<cr>
 
 
 
+"=======================c-family=========================
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" -->>> DoxygenToolkit
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 函数和类注释，进行键的映射(输入,fg，即输出如下的字段)
+nmap <leader>fg :Dox<cr>
+" 插入文件名，作者时间                                 
+nmap <leader>fa :DoxAuthor<cr>
+" 插件license注释
+nmap <leader>fl :DoxLic<cr>
+" 跳过文档的编写，不知道干什么的
+nmap <leader>fu :DoxUndoc<cr>
+" 块注释
+nmap <leader>fb :DoxBlock<cr>
+
+
+function MyDoxygenGcc()
+    " for C++ style, change the '@' to '\'
+    let g:DoxygenToolkit_commentType = "C"
+    " 高亮显示
+    let g:doxygen_enhanced_color = 1
+
+    " 用于设置注释简写的信息，一般为函数名
+    "   例如：/// @brief func1
+    let g:DoxygenToolkit_briefTag_pre = "@brief "
+    "let g:DoxygenToolkit_briefTag_post = "endding"
+    let g:DoxygenToolkit_briefTag_funcName = "yes"
+
+    " 模板参数
+    let g:DoxygenToolkit_templateParamTag_pre = "@tparam "
+    " 普通函数参数
+    let g:DoxygenToolkit_paramTag_pre = "@param "
+    " 返回值
+    let g:DoxygenToolkit_returnTag = "@return "
+    let g:DoxygenToolkit_maxFunctionProtoLines = 30
+
+    " 宏定义
+    let g:DoxygenToolkit_blockTag = "@name "
+    let g:DoxygenToolkit_undocTag="DOXIGEN_SKIP_BLOCK"
+    " let g:DoxygenToolkit_blockHeader = "--------------------------------------------"
+    " let g:DoxygenToolkit_blockFooter = "--------------------------------------------"
+    " 类定义
+    let g:DoxygenToolkit_classTag = "@class "
+
+    " 文件头的输出信息
+    let g:DoxygenToolkit_fileTag = "@file "
+    let g:DoxygenToolkit_dateTag = "@date "
+    let g:DoxygenToolkit_authorTag = "@author "
+    let g:DoxygenToolkit_versionTag = "@version "
+    let g:DoxygenToolkit_licenseTag="unlessbamboo"
+    let g:DoxygenToolkit_authorName = "unlessbamboo@gmail.com"
+endfunction
+
+
+function MyDoxygenCx()
+    " for C++ style, change the '@' to '\'
+    let g:DoxygenToolkit_commentType = "C++"
+    " 高亮显示
+    let g:doxygen_enhanced_color = 1
+
+    " 用于设置注释简写的信息，一般为函数名
+    "   例如：/// @brief func1
+    let g:DoxygenToolkit_briefTag_pre = "\\brief "
+    "let g:DoxygenToolkit_briefTag_post = "endding"
+    let g:DoxygenToolkit_briefTag_funcName = "yes"
+
+    " 模板参数
+    let g:DoxygenToolkit_templateParamTag_pre = "\\tparam "
+    " 普通函数参数
+    let g:DoxygenToolkit_paramTag_pre = "\\param "
+    " @exception is also valid，C++中函数存在此类用法
+    let g:DoxygenToolkit_throwTag_pre = "\\throw "
+    " 返回值
+    let g:DoxygenToolkit_returnTag = "\\return "
+    let g:DoxygenToolkit_maxFunctionProtoLines = 30
+
+    " 宏定义
+    let g:DoxygenToolkit_blockTag = "\\name "
+    let g:DoxygenToolkit_undocTag="DOXIGEN_SKIP_BLOCK"
+    let g:DoxygenToolkit_blockHeader = "--------------------------------------------"
+    let g:DoxygenToolkit_blockFooter = "--------------------------------------------"
+    " 类定义
+    let g:DoxygenToolkit_classTag = "\\class "
+
+    " 文件头的输出信息
+    let g:DoxygenToolkit_fileTag = "\\file "
+    let g:DoxygenToolkit_dateTag = "\\date "
+    let g:DoxygenToolkit_authorTag = "\\author "
+    let g:DoxygenToolkit_versionTag = "\\version "
+    let g:DoxygenToolkit_licenseTag="unlessbamboo"
+    let g:DoxygenToolkit_authorName = "unlessbamboo@gmail.com"
+endfunction
+" 对于.h文件如何搞？，所以必须在相应项目中设置哦
+autocmd BufNewFile,BufRead *.cpp :call MyDoxygenCx()
+autocmd BufNewFile,BufRead *.c :call MyDoxygenC()
+
+
+
+"=======================HTML/CSS=========================
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" -->> emmet-vim
+"       Html and css 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable emmet-vim at special model
+"   i/n/v, or a
+" Enable all function in all mode
+let g:user_emmet_mode='a'
+" Enable just for html/css
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+" To remap the default <c-y> leader
+" let g:user_emmet_leader_key='<C-Z>'
+
+
 "=======================版本控制=========================
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> 版本控制-1-vim-signify
@@ -109,6 +223,8 @@ let g:ycm_global_ycm_extra_conf =
             \'~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 " 设置python或者python3
 let g:ycm_python_binary_path="python"
+" 关闭YCM自带的syntastci
+let g:ycm_show_diagnostics_ui = 0
 
 
 """"""""""""""""""""""""""""""""""""""" 
@@ -150,6 +266,10 @@ let g:syntastic_python_pylint_args='--disable=W0611,W0613,C0413,C0411,c0303'
 " shellcheckers and sh
 let g:syntastic_sh_checkers=['shellcheckers']
 
+" c and c++
+let g:syntastci_c_checkers=['gcc']
+let g:syntastci_cpp_checkers=['gcc']
+
 
 " gcc/g++ 语句支持：help syntastic-checkers获取更多信息
 " Check header files
@@ -177,6 +297,8 @@ let g:syntastic_cpp_auto_refresh_includes = 1
 " let g:syntastic_cpp_remove_include_errors = 1
 " let g:syntastic_cpp_errorformat = "%f:%l%c: %trror: %m"
 let g:syntastic_cpp_compiler = "g++"
+
+
 
 
 """"""""""""""""""""""""""""""""""""""" 
