@@ -1,21 +1,12 @@
 [submodule "bundle/vim-pathogen"]
 	path = bundle/vim-pathogen
 	url = https://github.com/tpope/vim-pathogen.git
-[submodule "bundle/DoxygenToolkit"]
-	path = bundle/DoxygenToolkit
-	url = https://github.com/vim-scripts/DoxygenToolkit.vim.git
-[submodule "bundle/jedi-vim"]
-	path = bundle/jedi-vim
-	url = https://github.com/davidhalter/jedi-vim.git
 [submodule "bundle/nerdcommenter"]
 	path = bundle/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
 [submodule "bundle/powerline"]
 	path = bundle/powerline
 	url = https://github.com/powerline/powerline.git
-[submodule "taglist"]
-	path = taglist
-	url = https://github.com/vim-scripts/taglist.vim.git
 [submodule "bundle/winmanager"]
 	path = bundle/winmanager
 	url = https://github.com/vim-scripts/winmanager.git
@@ -31,18 +22,9 @@
 [submodule "bundle/nerdtree"]
 	path = bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
-[submodule "bundle/vim-pydocstring"]
-	path = bundle/vim-pydocstring
-	url = https://github.com/heavenshell/vim-pydocstring.git
-[submodule "bundle/python-mode"]
-	path = bundle/python-mode
-	url = https://github.com/klen/python-mode.git
 [submodule "bundle/vim-colors-solarized"]
 	path = bundle/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
-[submodule "bundle/vim-pyenv"]
-	path = bundle/vim-pyenv
-	url = https://github.com/lambdalisue/vim-pyenv.git
 [submodule "bundle/taglist"]
 	path = bundle/taglist
 	url = https://github.com/vim-scripts/taglist.vim.git
@@ -55,27 +37,12 @@
 [submodule "bundle/vim-json"]
 	path = bundle/vim-json
 	url = https://github.com/helino/vim-json.git
-[submodule "bundle/vim-javascript"]
-	path = bundle/vim-javascript
-	url = https://github.com/pangloss/vim-javascript.git
-[submodule "bundle/ag.vim"]
-	path = bundle/ag.vim
-	url = https://github.com/rking/ag.vim.git
 [submodule "bundle/vim-signify"]
 	path = bundle/vim-signify
 	url = https://github.com/mhinz/vim-signify.git
-[submodule "bundle/emmet-vim"]
-	path = bundle/emmet-vim
-	url = https://github.com/mattn/emmet-vim.git
-[submodule "bundle/webapi-vim"]
-	path = bundle/webapi-vim
-	url = https://github.com/mattn/webapi-vim.git
 [submodule "bundle/YouCompleteMe"]
 	path = bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
-[submodule "bundle/markdown"]
-	path = bundle/markdown
+[submodule "bundle/vim-instant-markdown"]
+	path = bundle/vim-instant-markdown
 	url = https://github.com/suan/vim-instant-markdown.git
-[submodule "bundle/bash-support"]
-	path = bundle/bash-support
-	url = https://github.com/vim-scripts/bash-support.vim.git
