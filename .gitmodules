@@ -4,9 +4,6 @@
 [submodule "bundle/nerdcommenter"]
 	path = bundle/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
-[submodule "taglist"]
-	path = taglist
-	url = https://github.com/vim-scripts/taglist.vim.git
 [submodule "bundle/winmanager"]
 	path = bundle/winmanager
 	url = https://github.com/vim-scripts/winmanager.git
@@ -41,12 +38,6 @@
 	path = bundle/vim-gitgutter
 	url = git://github.com/airblade/vim-gitgutter.git
 
-[submodule "bundle/bash-support"]
-	path = bundle/bash-support
-	url = https://github.com/vim-scripts/bash-support.vim.git
-[submodule "bundle/vim-pydocstring"]
-	path = bundle/vim-pydocstring
-	url = https://github.com/heavenshell/vim-pydocstring.git
 [submodule "bundle/vim-json"]
 	path = bundle/vim-json
 	url = https://github.com/helino/vim-json.git
@@ -62,6 +53,3 @@
 [submodule "bundle/a.vim"]
 	path = bundle/a.vim
 	url = https://github.com/vim-scripts/a.vim.git
-[submodule "bundle/emmet-vim"]
-	path = bundle/emmet-vim
-	url = https://github.com/mattn/emmet-vim.git
