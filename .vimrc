@@ -56,62 +56,6 @@ let g:BASH_Email        = 'unlessbamboo@gmail.com'
 let g:BASH_Company      = 'BigUniverse'
 
 
-"""""""""""""""""""""""""""""""python开发"""""""""""""""""""""""""
-""""""""""""""""""""""""""""""""""""""" 
-"---->>>>python-mode配置(python2.7)
-"               K               显示python文档
-"               <Leader>b     Set, unset breakpoint
-"               [[            Jump on previous class or function
-"               ]]            Jump on next class or function
-"               [M            Jump on previous class or method
-"               ]M            Jump on next class or method
-"       PS:考虑到和syntastic语法检查冲突，关闭pylint检查
-"               
-""""""""""""""""""""""""""""""""""""""" 
-" " 避免和jedi vim冲突
-" let g:pymode_rope=0
-" " Linting, disable if exists syntastic
-" let g:pymode_lint=0
-" 
-" " doc
-" let g:pymode_doc=1
-" " 查看文档快捷键
-" let g:pymode_doc_key='K'
-" " support virtualenv
-" let g:pymode_virtualenv = 1
-" " Enable breakpoints plugin
-" let g:pymode_breakpoint = 1
-" let g:pymode_breakpoint_bind = '<leader>b'
-" " syntax highlighting
-" let g:pymode_syntax = 1
-" let g:pymode_syntax_all = 1
-" let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-" let g:pymode_syntax_space_errors = g:pymode_syntax_all
-" " Don't autofold code
-" let g:pymode_folding = 0
-" " 关闭pyflakes插件的语法检查
-" " let g:pyflakes_use_quickfix = 0
-" " 缓存中的跳转映射--python-mode中的CodeCheck代码检查
-" map <silent> <leader>ln :lnext<cr>
-" map <silent> <leader>lp :lprev<cr>
-
-
-" """"""""""""""""""""""""""""""""""""""" 
-" "---->>>>>python自动补全插件 jedi vim
-" """"""""""""""""""""""""""""""""""""""" 
-" " 跳转并进行切割，可选项:left/right/top/bottom/winwidth
-" " let g:jedi#use_splits_not_buffers = "left"
-" let g:jedi#show_call_signatures = "1"
-" " 跳转，类似<C-]>，其中返回为<C-t>
-" let g:jedi#goto_command = "<leader>d"
-" let g:jedi#goto_assignments_command = "<leader>g"
-" let g:jedi#goto_definitions_command = ""
-" let g:jedi#documentation_command = "K"
-" let g:jedi#usages_command = "<leader>n"
-" let g:jedi#rename_command = "<leader>r"
-" let g:jedi#completions_command = "<C-N>"
-
-
 """"""""""""""""""""""""""""""""""""""" 
 " docstring的配置参数
 "               自动插入docstring字符串
@@ -155,6 +99,18 @@ nmap <silent> <leader>ph <Plug>GitGutterPrevHunk
 
 
 
+
+""""""""""""""""""""""""""""""""""""""" 
+" --->>> YCM configure
+"
+""""""""""""""""""""""""""""""""""""""" 
+" Default ycm config
+let g:ycm_global_ycm_extra_conf = 
+            \'~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+" 设置python或者python3
+let g:ycm_python_binary_path="python"
+
+
 """"""""""""""""""""""""""""""""""""""" 
 " --->语法检查，syntastic的配置参数
 "       获取错误信息：Errors或者lopen
@@ -163,27 +119,37 @@ nmap <silent> <leader>ph <Plug>GitGutterPrevHunk
 "       每一个目录都有一份独有的bamboo.vim配置当前项目的语言配置
 "   
 """"""""""""""""""""""""""""""""""""""" 
-" " 必要配置1
-" " Conflicts withs powerline，so close
-" " set statusline+=%#warningmsg#
-" " set statusline+=%{SyntasticStatuslineFlag()}
-" " set statusline+=%*
-" " 必要配置2--错误标注（和SyntasticStatuslineFlag()配合）
-" let g:syntastic_error_symbol = 'EE'
-" let g:syntastic_style_error_symbol = 'E>'
-" let g:syntastic_warning_symbol = 'WW'
-" let g:syntastic_style_warning_symbol = 'W>'
-" let g:syntastic_always_populate_loc_list = 1
-" " 必要配置3
-" " 不需要手动调用 SyntasticSetTocList. 默认1
-" let g:syntastic_always_populate_loc_list = 1
-" " 自动拉起关闭错误窗口. 
-" " 0不自动. 1自动拉起关闭. 2 自动关闭. 3 自动拉起 默认2, 建议为1
-" let g:syntastic_auto_loc_list = 1
-" " 打开文件时做语法检查, 默认 0
-" let g:syntastic_check_on_open = 1
-" " 报错时做语法检查, 默认 1
-" let g:syntastic_check_on_wq = 0
+" 必要配置1，和powerline冲突，舍弃
+" Conflicts withs powerline，so close
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" 必要配置2--错误标注（和SyntasticStatuslineFlag()配合）
+let g:syntastic_error_symbol = 'EE'
+let g:syntastic_style_error_symbol = 'E>'
+let g:syntastic_warning_symbol = 'WW'
+let g:syntastic_style_warning_symbol = 'W>'
+" 必要配置3
+" 不需要手动调用 SyntasticSetTocList. 默认1
+let g:syntastic_always_populate_loc_list = 1
+" 自动拉起关闭错误窗口.
+" 0不自动. 1自动拉起关闭. 2 自动关闭. 3 自动拉起 默认2, 建议为1
+let g:syntastic_auto_loc_list = 1
+" 打开文件时做语法检查, 默认 0
+let g:syntastic_check_on_open = 1
+" 报错时做语法检查, 默认 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_python_checkers=['flake8', 'pylint']
+" 注意,flake8包含（pep8/pycodestyle-pep257/pyflakes三个checkers）
+let g:syntastic_python_flake8_args='--ignore=F401,E402,W291'
+" pylint 格式(新增msg_id，以便进行相应的warning排除)
+let g:syntastic_python_pylint_post_args = '--msg-template="{path}:{line}:{column}:{C}: {msg_id}[{symbol}] {msg}"'
+let g:syntastic_python_pylint_args='--disable=W0611,W0613,C0413,C0411,c0303'
+
+" shellcheckers and sh
+let g:syntastic_sh_checkers=['shellcheckers']
+
 
 """"""""""""""""""""""""""""""""""""""" 
 " vim-surround配置
@@ -495,7 +461,6 @@ let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
 """"""""""""""""""""""""""""""""""""""" 
 " 语法高亮
 syntax enable
-syntax on
 " 高亮命中的文本或者set nohlsearch
 set hlsearch
 " 临时取消高亮显示的开关按钮
