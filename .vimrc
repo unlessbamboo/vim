@@ -41,6 +41,19 @@ let g:ag_working_path_mode="r"
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
+" --> markdown
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" zshrc的配置                                               
+set shell=bash\ -i
+let g:instant_markdown_slow=1
+" 关闭自动开启浏览器的配置，使用命令:InstantMarkdownPreview
+let g:instant_markdown_autostart=0
+" 映射快捷键
+map <silent> <leader>imp :InstantMarkdownPreview<cr>
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> vim-json，对json文件进行语法高亮
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 
