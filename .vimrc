@@ -165,6 +165,8 @@ let g:ycm_global_ycm_extra_conf =
 let g:ycm_python_binary_path="python"
 " 关闭YCM自带的syntastci
 let g:ycm_show_diagnostics_ui = 0
+" GOTO
+nnoremap <leader>jd :YcmCompleter GoTo<cr>
 
 
 """"""""""""""""""""""""""""""""""""""" 
