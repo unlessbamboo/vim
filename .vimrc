@@ -163,7 +163,7 @@ let g:ycm_global_ycm_extra_conf =
             \'~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 " 设置python或者python3
 let g:ycm_python_binary_path="python"
-" 关闭YCM自带的syntastci
+" 关闭YCM自带的syntastic
 let g:ycm_show_diagnostics_ui = 0
 " GOTO
 nnoremap <leader>jd :YcmCompleter GoTo<cr>
@@ -208,16 +208,14 @@ let g:syntastic_python_pylint_args='--disable=W0611,W0613,C0413,C0411,c0303'
 " shellcheckers and sh
 let g:syntastic_sh_checkers=['shellcheckers']
 
-" c and c++
-let g:syntastci_c_checkers=['gcc']
-let g:syntastci_cpp_checkers=['gcc']
-
 
 " gcc/g++ 语句支持：help syntastic-checkers获取更多信息
+let g:syntastci_c_checkers=['gcc']
 " Check header files
 let g:syntastic_c_check_header = 1
-let b:syntastic_c_cflags = '-I/include'
-let g:syntastic_c_include_dirs = []
+let g:syntastic_c_auto_refresh_includes = 1
+let b:syntastic_c_cflags = '-I/usr/src/linux-headers-4.4.0-34/'
+let g:syntastic_c_include_dirs = ['/usr/src/linux-headers-4.4.0-34/include', 'include', 'header', 'linux']
 " let g:syntastic__compiler_options = ''
 " 增加config的查找路径，这些配置文件中包含CFLAGS或者include目录等信息
 " let g:syntastic_c_config_file = ''
@@ -228,17 +226,19 @@ let g:syntastic_c_include_dirs = []
 " C编译器
 let g:syntastic_c_compiler = "gcc"
 
-" g++
-let g:syntastic_cpp_check_header = 1
-let b:syntastic_cpp_cflags = '-I/include'
-" let g:syntastic_cpp_include_dirs = []                                                       
-" 编译器选项
-let g:syntastic_cpp_compiler_options = '-std=c++11'
-" Enable header files being re-checked on every file write.
-let g:syntastic_cpp_auto_refresh_includes = 1
-" let g:syntastic_cpp_remove_include_errors = 1
-" let g:syntastic_cpp_errorformat = "%f:%l%c: %trror: %m"
-let g:syntastic_cpp_compiler = "g++"
+" g++，和gcc混淆之后可能出现语法检查的各种错误信息
+" let g:syntastci_cpp_checkers=['gcc']
+" let g:syntastic_cpp_check_header = 1
+" let g:syntastic_cpp_auto_refresh_includes = 1
+" let b:syntastic_cpp_cflags = '-I/usr/src/linux-headers-4.4.0-34/'
+" let g:syntastic_cpp_include_dirs = ['/usr/src/linux-headers-4.4.0-34/include', 'include', 'header', 'linux']
+" " 编译器选项
+" let g:syntastic_cpp_compiler_options = '-std=c++11'
+" " Enable header files being re-checked on every file write.
+" let g:syntastic_cpp_auto_refresh_includes = 1
+" " let g:syntastic_cpp_remove_include_errors = 1
+" " let g:syntastic_cpp_errorformat = "%f:%l%c: %trror: %m"
+" let g:syntastic_cpp_compiler = "g++"
 
 
 
