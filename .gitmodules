@@ -56,3 +56,6 @@
 [submodule "bundle/vim-instant-markdown"]
 	path = bundle/vim-instant-markdown
 	url = https://github.com/suan/vim-instant-markdown.git
+[submodule "bundle/bash-support"]
+	path = bundle/bash-support
+	url = https://github.com/vim-scripts/bash-support.vim.git

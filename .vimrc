@@ -27,6 +27,19 @@ filetype plugin indent on
 syntax on
 
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" bash 支持设置
+"       1,函数注释快捷键：\cfu
+"       2,其他注释命令见：help bashsupport中bashsupport-usage-vim
+"       PS:更加详细的信息请见《印象笔记-vim-插件》笔记
+"           或帮助手册
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:BASH_AuthorName   = 'bamboo'
+let g:BASH_Email        = 'unlessbamboo@gmail.com'
+let g:BASH_Company      = 'BigUniverse'
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> vim-ag，内容搜索，替代ack.vim
 "       requirement：安装the_silver_searcher工具
