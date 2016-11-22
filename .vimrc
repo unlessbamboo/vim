@@ -541,6 +541,7 @@ nmap <silent> <F2> :NERDTreeToggle<cr>
 
 """"""""""""""""""""""""""""""""""""""""
 " ---> 文件缓冲区窗口插件-4-lookupfile配置
+"  PS: 依赖tags
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " 可执行文件：
 "   <https://github.com/unlessbamboo/grocery-shop/blob/master/bamboo/shell/filenametags>
