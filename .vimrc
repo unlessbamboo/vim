@@ -180,6 +180,7 @@ let g:ycm_python_binary_path="python"
 let g:ycm_show_diagnostics_ui = 0
 " GOTO
 nnoremap <leader>jd :YcmCompleter GoTo<cr>
+nnoremap <leader>gd :YcmCompleter GoToDeclaration<cr>
 
 
 """"""""""""""""""""""""""""""""""""""" 
@@ -515,51 +516,52 @@ nmap <silent> <F2> :NERDTreeToggle<cr>
 
 """"""""""""""""""""""""""""""""""""""""
 " ---> 文件缓冲区窗口插件-4-lookupfile配置
+"  PS:该插件依赖于tags
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " 可执行文件：
 "   <https://github.com/unlessbamboo/grocery-shop/blob/master/bamboo/shell/filenametags>
-nmap <silent> <leader>ft :!bash 
-            \ /home/bamboo/.local/bin/filenametags
-            \<cr>:source ~/.vimrc<cr>
-" 加载指定的tags文件，而不是默认的tags文件，增加查找性能
-if filereadable("./filenametags")
-    let g:LookupFile_TagExpr = '"./filenametags"'
-endif
-" 最少输入字符位数才开始查找匹配
-let g:LookupFile_MinPatLength = 3
-" 不保存上次查找的字符串
-let g:LookupFile_PreserveLastPattern = 0
-" 保存查找历史
-let g:LookupFile_PreservePatternHistory = 1 
-" 回车打开第一个匹配项目
-let g:LookupFile_AlwaysAcceptFirst = 1
-" 不允许创建不存在的文件
-let g:LookupFile_AllowNewFiles = 0
-" F5的功能，查找文件，映射LookupFile为,lk
-nmap <silent> <leader>luk :LUTags<cr>
-" 浏览缓冲区，列出缓冲区中所有文件，映射LUBufs为ll
-nmap <silent> <leader>lul :LUBufs<cr>
-" 浏览目录，查看该目录下所有文件，映射LUWalk为lw
-nmap <silent> <leader>luw :LUWalk<cr>
-" 默认设置忽略大小写查找, 重写该函数
-function! LookupFile_IgnoreCaseFunc(pattern)
-    let _tags = &tags
-    try
-        let &tags = eval(g:LookupFile_TagExpr)
-        let newpattern = '\c' . a:pattern
-        let tags = taglist(newpattern)
-    catch
-        echohl ErrorMsg | echo "Exception: " . v:exception | echohl NONE
-        return ""
-    finally
-        let &tags = _tags
-    endtry
-
-    " Show the matches for what is typed so far.
-    let files = map(tags, 'v:val["filename"]')
-    return files
-endfunction
-let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
+" nmap <silent> <leader>ft :!bash 
+"             \ /home/bamboo/.local/bin/filenametags
+"             \<cr>:source ~/.vimrc<cr>
+" " 加载指定的tags文件，而不是默认的tags文件，增加查找性能
+" if filereadable("./filenametags")
+"     let g:LookupFile_TagExpr = '"./filenametags"'
+" endif
+" " 最少输入字符位数才开始查找匹配
+" let g:LookupFile_MinPatLength = 3
+" " 不保存上次查找的字符串
+" let g:LookupFile_PreserveLastPattern = 0
+" " 保存查找历史
+" let g:LookupFile_PreservePatternHistory = 1 
+" " 回车打开第一个匹配项目
+" let g:LookupFile_AlwaysAcceptFirst = 1
+" " 不允许创建不存在的文件
+" let g:LookupFile_AllowNewFiles = 0
+" " F5的功能，查找文件，映射LookupFile为,lk
+" nmap <silent> <leader>luk :LUTags<cr>
+" " 浏览缓冲区，列出缓冲区中所有文件，映射LUBufs为ll
+" nmap <silent> <leader>lul :LUBufs<cr>
+" " 浏览目录，查看该目录下所有文件，映射LUWalk为lw
+" nmap <silent> <leader>luw :LUWalk<cr>
+" " 默认设置忽略大小写查找, 重写该函数
+" function! LookupFile_IgnoreCaseFunc(pattern)
+"     let _tags = &tags
+"     try
+"         let &tags = eval(g:LookupFile_TagExpr)
+"         let newpattern = '\c' . a:pattern
+"         let tags = taglist(newpattern)
+"     catch
+"         echohl ErrorMsg | echo "Exception: " . v:exception | echohl NONE
+"         return ""
+"     finally
+"         let &tags = _tags
+"     endtry
+" 
+"     " Show the matches for what is typed so far.
+"     let files = map(tags, 'v:val["filename"]')
+"     return files
+" endfunction
+" let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
 
 
 
