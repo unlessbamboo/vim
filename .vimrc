@@ -143,12 +143,12 @@ let g:syntastic_style_warning_symbol = 'W>'
 let g:syntastic_always_populate_loc_list = 1
 " 自动拉起关闭错误窗口.
 " 0不自动. 1自动拉起关闭. 2 自动关闭. 3 自动拉起 默认2, 建议为1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 2
 " 打开文件时做语法检查, 默认 0
 let g:syntastic_check_on_open = 1
 " 报错时做语法检查, 默认 1
 let g:syntastic_check_on_wq = 0
-
+" 请提前安装pylint和flake8
 let g:syntastic_python_checkers=['flake8', 'pylint']
 " 注意,flake8包含（pep8/pycodestyle-pep257/pyflakes三个checkers）
 let g:syntastic_python_flake8_args='--ignore=F401,E402,W291'
