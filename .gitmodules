@@ -54,13 +54,7 @@
     url = https://github.com/vim-scripts/a.vim.git
 [submodule "bundle/ag.vim"]
     path = bundle/ag.vim
-    url = https://github.com/vim-scripts/ag.vim.git
-[submodule "bundle/bash-support"]
-    path = bundle/bash-support
-    url = https://github.com/vim-scripts/bash-support.git
-[submodule "bundle/calendar"]
-    path = bundle/calendar
-    url = https://github.com/vim-scripts/calendar.git
+    url = https://github.com/rking/ag.vim.git
 [submodule "bundle/vim-gitgutter"]
     path = bundle/vim-gitgutter
     url = https://github.com/vim-scripts/vim-gitgutter.git
