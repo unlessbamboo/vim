@@ -190,6 +190,8 @@ let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
 "                   2014年 09月 17日 星期三 21:16:07 CST taglist的设置
 " PS:为了退出缓冲区时退出vim，在taglist.vim中设置winbufnr的值
 """""""""""""""""""""""""""""""""""""""
+" 配置ctags路径
+let Tlist_Ctags_Cmd="/usr/local/bin/ctags"
 " 在剩余多少窗口时退出缓存
 let Tlist_Exit_OnlyWindow=1
 " 单一窗口显示的文件数
