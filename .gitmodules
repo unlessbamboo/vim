@@ -49,9 +49,6 @@
 [submodule "bundle/a.vim"]
     path = bundle/a.vim
     url = https://github.com/vim-scripts/a.vim.git
-[submodule "bundle/ag.vim"]
-	path = bundle/ag.vim
-	url = https://github.com/rking/ag.vim.git
 [submodule "bundle/bash-support.vim"]
 	path = bundle/bash-support.vim
 	url = https://github.com/Big-universe-group/bash-support.vim.git
