@@ -328,8 +328,18 @@ set cursorline
 "       后期一键自动化安装的时候容易，现在配置很麻烦
 """"""""""""""""""""""""""""""""""""""" 
 " 找到powerline插件位置，当然也可以放在vim目录下面
-" set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim/
-set rtp+=~/.local/lib/python3.4/site-packages/powerline/bindings/vim/
+let s:python2_ubuntu="~/.local/lib/python2.7/site-packages/powerline/bindings/vim/"
+let s:python3_ubuntu="~/.local/lib/python3.4/site-packages/powerline/bindings/vim/"
+let s:python2_mac="~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim/"
+if exists(s:python2_ubuntu)
+    set rtp+=python2_ubuntu
+endif
+if exists(s:python3_ubuntu)
+    set rtp+=python3_ubuntu
+endif
+if exists(s:python2_mac)
+    set rtp+=python2_mac
+endif
 " 添加新的字体
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
 set laststatus=2
