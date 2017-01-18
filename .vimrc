@@ -49,7 +49,7 @@ let g:ag_working_path_mode="r"
 " ---> markdown
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 "zshrc的配置                                               
-set shell=bash\ -i
+" set shell=bash\ -i
 let g:instant_markdown_slow=1
 " 关闭自动开启浏览器的配置，使用命令:InstantMarkdownPreview
 let g:instant_markdown_autostart=0
@@ -218,7 +218,7 @@ imap <F8> <ESC>:!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp"
             \ -o -name "*.java" -o -name "*.py" 
             \ >cscope.files<CR><CR>:!cscope -Rbq<CR>:cs reset<CR><CR>
 if has("cscope")
-  set csprg=/usr/bin/cscope
+  set csprg=/usr/local/bin/cscope
   set csto=1
   set cst
   set nocsverb
