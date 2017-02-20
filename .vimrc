@@ -165,7 +165,7 @@ let g:syntastic_sh_checkers=['shellcheckers']
 " :lne, :lp
 noremap <leader>ln :lne<CR>
 " 添加自定义的库文件位置
-let $PYTHONPATH='/Users/bamboo/Public/iLifeDiary/iLifeDiary/'
+let $PYTHONPATH='/Users/bamboo/Public/iLifeDiary/iLifeDiary/:/Users/zhengbifeng/Public/iLifeDiary/iLifeDiary'
 
 
 """"""""""""""""""""""""""""""""""""""" 
