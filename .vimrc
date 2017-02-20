@@ -147,7 +147,7 @@ let g:syntastic_style_warning_symbol = 'W>'
 let g:syntastic_always_populate_loc_list = 1
 " 自动拉起或者关闭错误窗口.
 " 0不自动. 1自动拉起关闭. 2 自动关闭. 3 自动拉起 默认2, 建议为1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 2
 " 打开文件时做语法检查, 默认 0
 let g:syntastic_check_on_open = 1
 " 报错时做语法检查, 默认 1
