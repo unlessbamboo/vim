@@ -53,6 +53,8 @@ let g:ag_working_path_mode="r"
 " ---> vim-instant-markdown
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 "zshrc的配置                                               
+" 该配置会导致suspend现象发生，-i表示加载整个interactive配置
+ "set shell=bash\ -i                                         
 let g:instant_markdown_slow=1                               
 " 关闭自动开启浏览器的配置，使用命令:InstantMarkdownPreview                                                   
 let g:instant_markdown_autostart=0                         

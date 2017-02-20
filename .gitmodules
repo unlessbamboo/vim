@@ -10,6 +10,7 @@
 [submodule "bundle/winmanager"]
 	path = bundle/winmanager
 	url = https://github.com/vim-scripts/winmanager.git
+    ignore = dirty
 [submodule "bundle/bufexplorer"]
 	path = bundle/bufexplorer
 	url = https://github.com/jlanzarotta/bufexplorer.git
@@ -19,6 +20,7 @@
 [submodule "bundle/lookupfile"]
 	path = bundle/lookupfile
 	url = https://github.com/vim-scripts/lookupfile.git
+    ignore = dirty
 [submodule "bundle/nerdtree"]
 	path = bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
@@ -28,6 +30,7 @@
 [submodule "bundle/taglist"]
 	path = bundle/taglist
 	url = https://github.com/vim-scripts/taglist.vim.git
+    ignore = dirty
 [submodule "bundle/vim-surround"]
 	path = bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
@@ -49,15 +52,16 @@
 [submodule "bundle/a.vim"]
     path = bundle/a.vim
     url = https://github.com/vim-scripts/a.vim.git
-[submodule "bundle/ag.vim"]
-	path = bundle/ag.vim
-	url = https://github.com/rking/ag.vim.git
 [submodule "bundle/bash-support.vim"]
 	path = bundle/bash-support.vim
 	url = https://github.com/Big-universe-group/bash-support.vim.git
+    ignore = dirty
 [submodule "bundle/vim-gitgutter"]
 	path = bundle/vim-gitgutter
 	url = https://github.com/vim-scripts/vim-gitgutter.git
 [submodule "bundle/YouCompleteMe"]
 	path = bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule "bundle/ag.vim"]
+	path = bundle/ag.vim
+	url = https://github.com/rking/ag.vim
