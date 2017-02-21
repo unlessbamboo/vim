@@ -147,7 +147,7 @@ let g:syntastic_style_warning_symbol = 'W>'
 let g:syntastic_always_populate_loc_list = 1
 " 自动拉起或者关闭错误窗口.
 " 0不自动. 1自动拉起关闭. 2 自动关闭. 3 自动拉起 默认2, 建议为1
-let g:syntastic_auto_loc_list = 2
+let g:syntastic_auto_loc_list = 0
 " 打开文件时做语法检查, 默认 0
 let g:syntastic_check_on_open = 1
 " 报错时做语法检查, 默认 1
@@ -158,12 +158,13 @@ let g:syntastic_python_checkers=['flake8', 'pylint']
 let g:syntastic_python_flake8_args='--ignore=F401,E402,W291,w0232'
 " pylint 格式(新增msg_id，以便进行相应的warning排除)
 let g:syntastic_python_pylint_post_args = '--msg-template="{path}:{line}:{column}:{C}: {msg_id}[{symbol}] {msg}"'
-let g:syntastic_python_pylint_args='--disable=W0611,W0613,C0413,C0411,c0303,c0103,R0901,R0904,R0201,W0212,W0232,C0111,W1202,W0511,R0903,W0221'
+let g:syntastic_python_pylint_args='--disable=W0611,W0613,C0413,C0411,c0303,c0103,R0901,R0904,R0201,W0212,W0232,C0111,W1202,W0511,R0903,W0221,R0913,R0914,W1201,W0703'
 " shellcheckers and sh
 let g:syntastic_sh_checkers=['shellcheckers']
 " 错误跳转
 " :lne, :lp
 noremap <leader>ln :lne<CR>
+noremap <leader>lo :lclose<CR>
 " 添加自定义的库文件位置
 let $PYTHONPATH='/Users/bamboo/Public/iLifeDiary/iLifeDiary/:/Users/zhengbifeng/Public/iLifeDiary/iLifeDiary'
 
@@ -531,11 +532,14 @@ set completeopt=longest,menu
 " ---> 折叠配置
 """"""""""""""""""""""""""""""""""""""""""""""
 " 基于缩进的代码折叠
-" set foldmethod=indent
+set foldmethod=indent
 " 基于语法的代码折叠
-set foldmethod=syntax
+" set foldmethod=syntax
 " 启动时关闭代码折叠
 set nofoldenable
+" 映射
+nnoremap <space> za
+vnoremap <space> zf
 
 """"""""""""""""""""""""""""""""""""""" 
 "--->>>寄存器

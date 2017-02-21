@@ -34,9 +34,6 @@
 [submodule "bundle/vim-surround"]
 	path = bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
-; [submodule "bundle/ag.vim"]
-;     path = bundle/ag.vim
-;     url = https://github.com/rking/ag.vim.git
 [submodule "bundle/calendar"]
 	path = bundle/calendar
 	url = https://github.com/itchyny/calendar.vim.git
@@ -66,9 +63,6 @@
 [submodule "bundle/vim-python-pep8-indent"]
 	path = bundle/vim-python-pep8-indent
 	url = https://github.com/Vimjas/vim-python-pep8-indent.git
-[submodule "bundle/ag.vim"]
-    path = bundle/ag.vim
-	url = https://github.com/rking/ag.vim.git
 [submodule "bundle/a.vim"]
     path = bundle/a.vim
 	url = https://github.com/vim-scripts/a.vim.git
