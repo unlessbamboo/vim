@@ -537,7 +537,7 @@ set foldmethod=indent
 " set foldmethod=syntax
 " 启动时关闭代码折叠
 set nofoldenable
-" 映射
+" 映射(使用空格键进行反复操作)
 nnoremap <space> za
 vnoremap <space> zf
 
