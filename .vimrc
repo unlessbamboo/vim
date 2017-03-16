@@ -132,11 +132,6 @@ nnoremap <leader>jd :YcmCompleter GoTo<cr>
 "       每一个目录都有一份独有的bamboo.vim配置当前项目的语言配置
 "   
 """"""""""""""""""""""""""""""""""""""" 
-" 必要配置1，和powerline冲突，舍弃
-" Conflicts withs powerline，so close
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
 " 必要配置2--错误标注（和SyntasticStatuslineFlag()配合）
 let g:syntastic_error_symbol = 'EE'
 let g:syntastic_style_error_symbol = 'E>'
@@ -147,7 +142,7 @@ let g:syntastic_style_warning_symbol = 'W>'
 let g:syntastic_always_populate_loc_list = 1
 " 自动拉起或者关闭错误窗口.
 " 0不自动. 1自动拉起关闭. 2 自动关闭. 3 自动拉起 默认2, 建议为1
-let g:syntastic_auto_loc_list = 0
+let g:syntastic_auto_loc_list = 1
 " 打开文件时做语法检查, 默认 0
 let g:syntastic_check_on_open = 1
 " 报错时做语法检查, 默认 1
@@ -167,6 +162,9 @@ noremap <leader>ln :lne<CR>
 noremap <leader>lo :lclose<CR>
 " 添加自定义的库文件位置
 let $PYTHONPATH='/Users/bamboo/Public/iLifeDiary/iLifeDiary/:/Users/zhengbifeng/Public/iLifeDiary/iLifeDiary'
+" syntastic过慢导致的问题（需要按两次才能取消哦，注意大写的E）
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 
 
 """"""""""""""""""""""""""""""""""""""" 
