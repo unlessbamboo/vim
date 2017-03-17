@@ -48,8 +48,6 @@ let g:ag_working_path_mode="r"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> markdown
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
-"zshrc的配置                                               
-" set shell=bash\ -i
 let g:instant_markdown_slow=1
 " 关闭自动开启浏览器的配置，使用命令:InstantMarkdownPreview
 let g:instant_markdown_autostart=0
@@ -143,17 +141,16 @@ let g:syntastic_always_populate_loc_list = 1
 " 自动拉起或者关闭错误窗口.
 " 0不自动. 1自动拉起关闭. 2 自动关闭. 3 自动拉起 默认2, 建议为1
 let g:syntastic_auto_loc_list = 1
-" 打开文件时做语法检查, 默认 0
-let g:syntastic_check_on_open = 0
-" 报错时做语法检查, 默认 1
-let g:syntastic_check_on_wq = 1
 " 请提前安装pylint和flake8
 let g:syntastic_python_checkers=['flake8', 'pylint']
 " 注意,flake8包含（pep8/pycodestyle-pep257/pyflakes三个checkers）
 let g:syntastic_python_flake8_args='--ignore=F401,E402,W291,w0232'
 " pylint 格式(新增msg_id，以便进行相应的warning排除)
-let g:syntastic_python_pylint_post_args = '--msg-template="{path}:{line}:{column}:{C}: {msg_id}[{symbol}] {msg}"'
-let g:syntastic_python_pylint_args='--disable=W0611,W0613,C0413,C0411,c0303,c0103,R0901,R0904,R0201,W0212,W0232,C0111,W1202,W0511,R0903,W0221,R0913,R0914,W1201,W0703,R0912'
+let g:syntastic_python_pylint_post_args = 
+            \'--msg-template="{path}:{line}:{column}:{C}: {msg_id}[{symbol}] {msg}"'
+" 在disable中添加，该文件使用命令：pylint --generate-rcfile > .pylintrc生成
+" 使用pylint可以对代码进行评分检查
+let g:syntastic_python_pylint_args='--rcfile=~/.vim/.pylintrc'
 " shellcheckers and sh
 let g:syntastic_sh_checkers=['shellcheckers']
 " 错误跳转
