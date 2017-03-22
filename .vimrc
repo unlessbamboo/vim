@@ -498,6 +498,8 @@ set hlsearch
 noremap <silent><F3> :nohlsearch<Bar>:echo<CR>
 "突出高亮显示当前行
 set cursorline
+" 插入时间
+nnoremap <leader>date "=strftime("%Y-%m-%d %T")<CR>P
 
 " 设置黑色背景，保证告警文本的效果能够更加显著
 set background=dark
