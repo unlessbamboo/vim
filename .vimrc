@@ -213,11 +213,14 @@ let g:NERDTrimTrailingWhitespace=1
 " ---> 标签配置1——tags的配置
 """"""""""""""""""""""""""""""""""""""""""""""
 " 生成tags的命令
-map <F8> :!ctags --exclude=jj
+map <F8> :!ctags
             \ --languages=c,c++,python,java,php,sh -R 
+            \ --exclude=@/Users/zhengbifeng/.vim/.ctagsignore 
             \ --c++-kinds=+p --fields=+iaS --extra=+q .
             \ <CR><CR> :TlistUpdate<CR>
-imap <F8> <ESC>:!ctags  --languages=c,c++,python,java,php,sh,js -R 
+imap <F8> <ESC>:!ctags 
+            \ --languages=c,c++,python,java,php,sh,js -R 
+            \ --exclude=@/Users/zhengbifeng/.vim/.ctagsignore 
             \ --c++-kinds=+p --fields=+iaS --extra=+q .
             \ <CR><CR> :TlistUpdate<CR>
 
@@ -434,6 +437,9 @@ let NERDTreeShowBookmarks=1
 let NERDTreeMinimalUI=1
 " 删除文件时自动删除文件对应 buffer
 let NERDTreeAutoDeleteBuffer=1
+" exclude some files
+let NERDTreeIgnore = ['\.pyc$', 'migrations', 'log?', 'cscope.*', 'tags', 
+            \ 'static', 'media', 'doc', 'templates']
 " 启动或者隐藏NERDTree
 nmap <silent> <F2> :NERDTreeToggle<cr>
 
@@ -617,6 +623,10 @@ map <silent> <leader>wsv :mksession!<cr> :wviminfo vim.viminfo<cr>
 map <silent> <leader>rsv :source ./Session.vim<cr> :rviminfo vim.viminfo<cr>
 
 
+if $VIM_CRONTAB == "true"
+    set nobackup
+    set nowritebackup
+endif
 
 
 """"""""""""""""""""""""""""""""""""""""""""""

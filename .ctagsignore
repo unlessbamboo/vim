@@ -1,0 +1,9 @@
+migrations
+*.pyc
+logs
+cscope.*
+tags
+static
+media
+doc
+templates
