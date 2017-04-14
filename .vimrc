@@ -154,6 +154,10 @@ let g:syntastic_python_pylint_post_args =
 let g:syntastic_python_pylint_args='--disable=W0611,W0613,C0413,C0411,c0303,c0103,R0901,R0904,R0201,W0212,W0232,C0111,W1202,W0511,R0903,W0221,R0913,R0914,W1201,W0703,R0912'
 " shellcheckers and sh
 let g:syntastic_sh_checkers=['shellcheckers']
+" pyflake8，见.vim/.flake8，并创建软连接:ln -sf ~/.vim/.flake8
+" ~/.config/flake8
+" python代码最长长度
+let g:syntastic_python_pylint_post_args='--max-line-length=120'
 " 错误跳转
 " :lne, :lp
 noremap <leader>ln :lne<CR>
