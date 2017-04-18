@@ -150,8 +150,7 @@ let g:syntastic_python_pylint_post_args =
             \'--msg-template="{path}:{line}:{column}:{C}: {msg_id}[{symbol}] {msg}"'
 " 在disable中添加，该文件使用命令：pylint --generate-rcfile > .pylintrc生成
 " 使用pylint可以对代码进行评分检查
-" let g:syntastic_python_pylint_args='--rcfile=~/.vim/.pylintrc'
-let g:syntastic_python_pylint_args='--disable=W0611,W0613,C0413,C0411,c0303,c0103,R0901,R0904,R0201,W0212,W0232,C0111,W1202,W0511,R0903,W0221,R0913,R0914,W1201,W0703,R0912'
+let g:syntastic_python_pylint_args='--rcfile=~/.vim/.pylintrc'
 " shellcheckers and sh
 let g:syntastic_sh_checkers=['shellcheckers']
 " pyflake8，见.vim/.flake8，并创建软连接:ln -sf ~/.vim/.flake8
