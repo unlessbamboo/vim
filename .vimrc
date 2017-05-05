@@ -509,7 +509,7 @@ noremap <silent><F3> :nohlsearch<Bar>:echo<CR>
 "突出高亮显示当前行
 set cursorline
 " 插入时间
-nnoremap <leader>date "=strftime("%Y-%m-%d %T")<CR>P
+nnoremap <leader>date "=strftime("%Y-%m-%d %T")<CR>p
 
 " 设置黑色背景，保证告警文本的效果能够更加显著
 set background=dark
@@ -623,6 +623,14 @@ nmap <silent><leader>kw <C-w>k
 nmap <silent><leader>jw <C-w>j
 " 移动窗口，左右移动
 nmap <silent><leader>rw <C-w><C-r>
+
+" 所有窗口登高等宽
+nmap <silent><leader>=w <C-w>=
+" 高度-N 
+nmap <silent><leader>s- :resize -5<CR>
+nmap <silent><leader>s+ :resize +5<CR>
+nmap <silent><leader>v- :vertical resize -5<CR>
+nmap <silent><leader>v+ :vertical resize +5<CR>
 
 """""""""""""""""""""""""""""""""""""""
 "  --->>> session的保存和读取
