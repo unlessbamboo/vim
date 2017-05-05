@@ -138,25 +138,18 @@ let g:syntastic_style_warning_symbol = 'W>'
 " 必要配置3
 " 不需要手动调用 SyntasticSetTocList. 默认1
 let g:syntastic_always_populate_loc_list = 1
-" 自动拉起或者关闭错误窗口.
 " 0不自动. 1自动拉起关闭. 2 自动关闭. 3 自动拉起 默认2, 建议为1
 let g:syntastic_auto_loc_list = 1
+
 " 请提前安装pylint和flake8
-let g:syntastic_python_checkers=['flake8', 'pylint']
 " 注意,flake8包含（pep8/pycodestyle-pep257/pyflakes三个checkers）
-let g:syntastic_python_flake8_args='--ignore=F401,E402,W291,w0232'
-" pylint 格式(新增msg_id，以便进行相应的warning排除)
-let g:syntastic_python_pylint_post_args = 
-            \'--msg-template="{path}:{line}:{column}:{C}: {msg_id}[{symbol}] {msg}"'
-" 在disable中添加，该文件使用命令：pylint --generate-rcfile > .pylintrc生成
+" pyflake8，见.vim/.flake8，并创建软连接:ln -sf ~/.vim/.flake8 ~/.config/flake8
+let g:syntastic_python_checkers=['flake8', 'pylint']
 " 使用pylint可以对代码进行评分检查
 let g:syntastic_python_pylint_args='--rcfile=~/.vim/.pylintrc'
 " shellcheckers and sh
 let g:syntastic_sh_checkers=['shellcheckers']
-" pyflake8，见.vim/.flake8，并创建软连接:ln -sf ~/.vim/.flake8
-" ~/.config/flake8
-" python代码最长长度
-let g:syntastic_python_pylint_post_args='--max-line-length=120'
+
 " 错误跳转
 " :lne, :lp
 noremap <leader>ln :lne<CR>
