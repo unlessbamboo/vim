@@ -42,17 +42,37 @@ let g:ag_working_path_mode="r"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> vim-json，对json文件进行语法高亮
+"      json format and check
+"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <silent> <leader>json :%!python -m json.tool<cr>
+vnoremap <leader>json :'<,'>!python -m json.tool<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ---> markdown
+" ---> vim-instant-markdown
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:instant_markdown_slow=1
 " 关闭自动开启浏览器的配置，使用命令:InstantMarkdownPreview
 let g:instant_markdown_autostart=0
 " 映射快捷键
 map <silent> <leader>imp :InstantMarkdownPreview<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ---> vim-markdown
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" disable the folding configuration: set foldenable
+" let g:vim_markdown_folding_disabled = 1
+" To enable conceal use Vim's standard conceal configuration
+" 此时文档中看不到```vim配置信息
+set conceallevel=2
+" Allow for the TOC window to auto-fix
+let g:vim_markdown_toc_autofit = 1
+" Folding level
+let g:vim_markdown_folding_level = 6
+" fold style
+" let g:vim_markdown_folding_style_pythonic = 1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -139,7 +159,8 @@ let g:syntastic_style_warning_symbol = 'W>'
 " 不需要手动调用 SyntasticSetTocList. 默认1
 let g:syntastic_always_populate_loc_list = 1
 " 0不自动. 1自动拉起关闭. 2 自动关闭. 3 自动拉起 默认2, 建议为1
-let g:syntastic_auto_loc_list = 1
+" 设置为1，会影响其他插件，抛出E924(help E924)错误，使用lopen来开启错误信息
+let g:syntastic_auto_loc_list = 0
 
 " 请提前安装pylint和flake8
 " 注意,flake8包含（pep8/pycodestyle-pep257/pyflakes三个checkers）
@@ -174,8 +195,6 @@ nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 "       见印象笔记中的说明
 """"""""""""""""""""""""""""""""""""""" 
 " 没有特殊的配置，不要文档中的custom configure
-
-
 
 
 """""""""""""""""""""""""""""""""""""""注释模块"""""""""""""""""""""""""""""""
@@ -230,21 +249,21 @@ imap <F9> <ESC>:!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp"
             \ -o -name "*.java" -o -name "*.py" 
             \ >cscope.files<CR><CR>:!cscope -Rbq<CR>:cs reset<CR><CR>
 if has("cscope")
-  set csprg=/usr/local/bin/cscope
-  set csto=1
-  set cst
-  set nocsverb
-  " add any database in current directory
-  if filereadable("cscope.out")
-      cs add cscope.out
-  else
-      let cscope_file=findfile("cscope.out", ".;") 
-      let cscope_pre=matchstr(cscope_file, ".*/")
-      if !empty(cscope_file) && filereadable(cscope_file)
-          exe "cs add" cscope_file cscope_pre
-      endif
-  endif
-  set csverb
+    set csprg=/usr/local/bin/cscope
+    set csto=1
+    set cst
+    set nocsverb
+    " add any database in current directory
+    if filereadable("cscope.out")
+        cs add cscope.out
+    else
+        let cscope_file=findfile("cscope.out", ".;") 
+        let cscope_pre=matchstr(cscope_file, ".*/")
+        if !empty(cscope_file) && filereadable(cscope_file)
+            exe "cs add" cscope_file cscope_pre
+        endif
+    endif
+    set csverb
 endif
 " 可以手动输入:cs f s stringA
 nmap <C-@>s :cs find s <C-R>=expand("<cword>")<CR><CR>
@@ -302,9 +321,9 @@ let g:rehash256=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" 背景（dark/light）
 "if has('gui_running')
-    "set background=dark
+"set background=dark
 "else
-    "set background=light
+"set background=light
 "endif
 "" 256支持
 "let g:solarized_termcolors=256
@@ -497,8 +516,8 @@ let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
 syntax enable
 " 高亮命中的文本或者set nohlsearch
 set hlsearch
-" 临时取消高亮显示的开关按钮
-noremap <silent><F3> :nohlsearch<Bar>:echo<CR>
+" 临时取消高亮F3显示的开关按钮
+noremap <silent> <leader>hl :nohlsearch<Bar>:echo<CR>
 "突出高亮显示当前行
 set cursorline
 " 插入时间
@@ -523,8 +542,8 @@ set guifont=Monaco:h20
 " 鼠标设置
 set mouse=a
 " noremap <silent> <F4> :let &mouse = (&mouse == 'a' ? 'v' : 'a')<CR>
-" paste设置
-set pastetoggle=<F7>
+" paste设置，不适用F7，而是采用,+p
+set pastetoggle=<leader>+p
 " 保存所有文件
 nmap <silent><leader>wa :wa<cr>
 " 仅仅在下拉菜单中显示匹配项目，自动插入所有匹配项目的相同文本
@@ -534,10 +553,11 @@ set completeopt=longest,menu
 " ---> 折叠配置
 """"""""""""""""""""""""""""""""""""""""""""""
 " 基于缩进的代码折叠
-set foldmethod=indent
+" set foldmethod=indent
 " 基于语法的代码折叠
-" set foldmethod=syntax
-" 启动时关闭代码折叠
+set foldmethod=syntax
+" 启动时开启或者关闭折叠
+" set foldenable
 set nofoldenable
 set foldlevelstart=99
 " 映射(使用空格键进行反复操作)
