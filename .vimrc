@@ -176,7 +176,8 @@ let g:syntastic_sh_checkers=['shellcheckers']
 " 错误跳转
 " :lne, :lp
 noremap <leader>ln :lne<CR>
-noremap <leader>lo :lclose<CR>
+noremap <leader>lco :lclose<CR>
+noremap <leader>lop :Errors<CR>
 noremap <silent> <F4> :let g:syntastic_auto_loc_list = (
             \g:syntastic_auto_loc_list == '0' ? '1' : '0')<CR>
 " 添加自定义的库文件位置
@@ -555,9 +556,9 @@ set completeopt=longest,menu
 " ---> 折叠配置
 """"""""""""""""""""""""""""""""""""""""""""""
 " 基于缩进的代码折叠
-" set foldmethod=indent
+set foldmethod=indent
 " 基于语法的代码折叠
-set foldmethod=syntax
+" set foldmethod=syntax
 " 启动时开启或者关闭折叠
 " set foldenable
 set nofoldenable
@@ -642,10 +643,10 @@ nmap <silent><leader>rw <C-w><C-r>
 " 所有窗口登高等宽
 nmap <silent><leader>=w <C-w>=
 " 高度-N 
-nmap <silent><leader>s- :resize -5<CR>
-nmap <silent><leader>s+ :resize +5<CR>
-nmap <silent><leader>v- :vertical resize -5<CR>
-nmap <silent><leader>v+ :vertical resize +5<CR>
+nmap <silent><leader>s_ :resize -20<CR>
+nmap <silent><leader>s+ :resize +20<CR>
+nmap <silent><leader>v_ :vertical resize -20<CR>
+nmap <silent><leader>v+ :vertical resize +20<CR>
 
 """""""""""""""""""""""""""""""""""""""
 "  --->>> session的保存和读取
