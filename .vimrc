@@ -73,6 +73,10 @@ let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_folding_level = 6
 " fold style
 " let g:vim_markdown_folding_style_pythonic = 1
+" Heder level handle
+" :HeaderDecrease, :HeaderIncrease
+" TOC
+map <silent> <leader>toc :Toc<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
