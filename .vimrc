@@ -174,8 +174,9 @@ let g:syntastic_sh_checkers=['shellcheckers']
 " 错误跳转
 " :lne, :lp
 noremap <leader>ln :lne<CR>
-noremap <leader>lco :lclose<CR>
-noremap <leader>lop :Errors<CR>
+noremap <leader>lp :lp<CR>
+noremap <leader>lc :lclose<CR>
+noremap <leader>le :Errors<CR>
 noremap <silent> <F4> :let g:syntastic_auto_loc_list = (
             \g:syntastic_auto_loc_list == '0' ? '1' : '0')<CR>
 " 添加自定义的库文件位置
