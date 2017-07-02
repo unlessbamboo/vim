@@ -143,6 +143,8 @@ let g:ycm_python_binary_path="python"
 let g:ycm_complete_in_strings = 2
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"
+let g:ycm_key_invoke_completion = ''
 nnoremap <leader>jd :YcmCompleter GoTo<cr>
 
 
