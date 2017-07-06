@@ -664,6 +664,13 @@ map <silent> <leader>wsv :mksession!<cr> :wviminfo vim.viminfo<cr>
 map <silent> <leader>rsv :source ./Session.vim<cr> :rviminfo vim.viminfo<cr>
 
 
+"""""""""""""""""""""""""""""""""""""""
+"  --->>> html设置
+"""""""""""""""""""""""""""""""""""""""
+nmap <silent> <leader>hml :!open % <CR>
+
+
+
 if $VIM_CRONTAB == "true"
     set nobackup
     set nowritebackup
