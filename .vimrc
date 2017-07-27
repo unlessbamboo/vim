@@ -238,12 +238,12 @@ let g:NERDTrimTrailingWhitespace=1
 " 生成tags的命令
 map <F8> :!ctags
             \ --languages=c,c++,python,java,php,sh -R 
-            \ --exclude=@/Users/zhengbifeng/.vim/.ctagsignore 
+            \ --exclude=@$HOME/.vim/.ctagsignore 
             \ --c++-kinds=+p --fields=+iaS --extra=+q .
             \ <CR><CR> :TlistUpdate<CR>
 imap <F8> <ESC>:!ctags 
             \ --languages=c,c++,python,java,php,sh,js -R 
-            \ --exclude=@/Users/zhengbifeng/.vim/.ctagsignore 
+            \ --exclude=@$HOME/.vim/.ctagsignore 
             \ --c++-kinds=+p --fields=+iaS --extra=+q .
             \ <CR><CR> :TlistUpdate<CR>
 
