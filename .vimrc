@@ -652,6 +652,8 @@ nmap <silent><leader>s_ :resize -20<CR>
 nmap <silent><leader>s+ :resize +20<CR>
 nmap <silent><leader>v_ :vertical resize -20<CR>
 nmap <silent><leader>v+ :vertical resize +20<CR>
+" preview window close
+nmap <silent><leader>pc :pc<CR>
 
 """""""""""""""""""""""""""""""""""""""
 "  --->>> session的保存和读取
