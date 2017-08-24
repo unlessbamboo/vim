@@ -516,6 +516,15 @@ endfunction
 let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
 
 
+""""""""""""""""""""""""""""""""""""""" 
+" ---> 文件基本操作
+""""""""""""""""""""""""""""""""""""""" 
+" 1 重命名文件，使用插件rename，该方法有很多缺陷
+" saveas <new file> : will move a file from its location to CWD.
+" 2 使用Explore
+noremap <silent> <leader>sa :Explore<CR>
+
+
 
 """"""""""""""""""""""""""""""""""""""" 
 "---->>>>正常的基础命令
@@ -627,6 +636,7 @@ if $VIM_CRONTAB == "true"
     set nobackup
     set nowritebackup
 endif
+
 
 """""""""""""""""""""""""""""""""""""""
 " --->>>窗口切割映射键和跳转快捷键
