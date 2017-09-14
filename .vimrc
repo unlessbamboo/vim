@@ -521,7 +521,7 @@ let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
 """"""""""""""""""""""""""""""""""""""" 
 " 1 重命名文件，使用插件rename，该方法有很多缺陷
 " saveas <new file> : will move a file from its location to CWD.
-" 2 使用Explore
+" 2 使用Explore, 之后使用 R-- 重命名, D--删除文件
 noremap <silent> <leader>sa :Explore<CR>
 
 
