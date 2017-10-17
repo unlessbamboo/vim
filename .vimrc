@@ -38,6 +38,8 @@ syntax on
 "let g:ag_prg="<...> --vimgrep"
 " 查找，从项目根目录开始
 let g:ag_working_path_mode="r"
+" 执行路径
+set runtimepath^=~/.vim/bundle/ag.vim
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -462,7 +464,7 @@ let NERDTreeMinimalUI=1
 let NERDTreeAutoDeleteBuffer=1
 " exclude some files
 let NERDTreeIgnore = ['\.pyc$', 'migrations', 'log?', 'cscope.*', 'tags', 
-            \ 'static', 'media', 'doc', 'templates']
+            \ 'media', 'doc']
 " 启动或者隐藏NERDTree
 nmap <silent> <F2> :NERDTreeToggle<cr>
 
