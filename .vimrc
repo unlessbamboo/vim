@@ -179,6 +179,11 @@ let g:syntastic_python_pylint_args='--rcfile=~/.vim/.pylintrc'
 " shellcheckers and sh
 let g:syntastic_sh_checkers=['shellcheckers']
 
+" HTML
+let g:syntastic_html_tidy_ignore_errors = [
+            \ '<span> proprietary attribute'
+            \]
+
 " 错误跳转
 " :lne, :lp
 noremap <leader>ln :lne<CR>
@@ -190,7 +195,8 @@ noremap <silent> <F4> :let g:syntastic_auto_loc_list = (
 " 添加自定义的库文件位置
 let $PYTHONPATH='/Users/bamboo/Public/iLifeDiary/iLifeDiary/:/Users/zhengbifeng/Public/iLifeDiary/iLifeDiary'
 " syntastic过慢导致的问题（需要按两次才能取消哦，注意大写的E）
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+" 关闭html错误检查
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': ['html'] }
 nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 
 

@@ -1,9 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/Users/zhengbifeng'
-let g:netrw_dirhist_2='/Users/zhengbifeng/Public/story/ilifediary-app/settings'
-let g:netrw_dirhist_3='/Users/zhengbifeng/Public/swapi/starwars'
-let g:netrw_dirhist_4='/Users/zhengbifeng/Public/swapi/starwars/fixtures'
-let g:netrw_dirhist_5='/Users/zhengbifeng/Public/swapi/starwars/migrations'
-let g:netrw_dirhist_6='/private/tmp'
-let g:netrw_dirhist_7='/Users/zhengbifeng/Public/iLifeDiary/iLifeDiary/apps'
+let g:netrw_dirhist_cnt =0
