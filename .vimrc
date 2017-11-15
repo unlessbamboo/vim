@@ -159,45 +159,57 @@ nnoremap <leader>jd :YcmCompleter GoTo<cr>
 "   
 """"""""""""""""""""""""""""""""""""""" 
 " 必要配置2--错误标注（和SyntasticStatuslineFlag()配合）
-let g:syntastic_error_symbol = 'EE'
-let g:syntastic_style_error_symbol = 'E>'
-let g:syntastic_warning_symbol = 'WW'
-let g:syntastic_style_warning_symbol = 'W>'
+" let g:syntastic_error_symbol = 'EE'
+" let g:syntastic_style_error_symbol = 'E>'
+" let g:syntastic_warning_symbol = 'WW'
+" let g:syntastic_style_warning_symbol = 'W>'
 " 必要配置3
 " 不需要手动调用 SyntasticSetTocList. 默认1
-let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_always_populate_loc_list = 1
 " 0不自动. 1自动拉起关闭. 2 自动关闭. 3 自动拉起 默认2, 建议为1
 " 设置为1，会影响其他插件，抛出E924(help E924)错误，使用lopen来开启错误信息
-let g:syntastic_auto_loc_list = 0
+" let g:syntastic_auto_loc_list = 0
 
 " 请提前安装pylint和flake8
 " 注意,flake8包含（pep8/pycodestyle-pep257/pyflakes三个checkers）
 " pyflake8，见.vim/.flake8，并创建软连接:ln -sf ~/.vim/.flake8 ~/.config/flake8
-let g:syntastic_python_checkers=['flake8', 'pylint']
+" let g:syntastic_python_checkers=['flake8', 'pylint']
 " 使用pylint可以对代码进行评分检查
-let g:syntastic_python_pylint_args='--rcfile=~/.vim/.pylintrc'
+" let g:syntastic_python_pylint_args='--rcfile=~/.vim/.pylintrc'
 " shellcheckers and sh
-let g:syntastic_sh_checkers=['shellcheckers']
+" let g:syntastic_sh_checkers=['shellcheckers']
 
 " HTML
-let g:syntastic_html_tidy_ignore_errors = [
-            \ '<span> proprietary attribute'
-            \]
+" let g:syntastic_html_tidy_ignore_errors = [
+"            \ '<span> proprietary attribute'
+"            \]
 
 " 错误跳转
 " :lne, :lp
-noremap <leader>ln :lne<CR>
-noremap <leader>lp :lp<CR>
-noremap <leader>lc :lclose<CR>
-noremap <leader>le :Errors<CR>
-noremap <silent> <F4> :let g:syntastic_auto_loc_list = (
-            \g:syntastic_auto_loc_list == '0' ? '1' : '0')<CR>
-" 添加自定义的库文件位置
-let $PYTHONPATH='/Users/bamboo/Public/iLifeDiary/iLifeDiary/:/Users/zhengbifeng/Public/iLifeDiary/iLifeDiary'
+" noremap <leader>ln :lne<CR>
+" noremap <leader>lp :lp<CR>
+" noremap <leader>lc :lclose<CR>
+" noremap <leader>le :Errors<CR>
+" noremap <silent> <F4> :let g:syntastic_auto_loc_list = (
+"             \g:syntastic_auto_loc_list == '0' ? '1' : '0')<CR>
 " syntastic过慢导致的问题（需要按两次才能取消哦，注意大写的E）
 " 关闭html错误检查
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': ['html'] }
-nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+" let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': ['html'] }
+" nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""
+" 插件: ale
+" 功能: 异步代码检查插件
+"""""""""""""""""""""""""""""""""""""""
+" use quickfix list instead of the loclist
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+" let g:ale_open_list = 1
+" let g:ale_keep_list_window_open = 1
+noremap <leader>le :let g:ale_open_list = 1<CR>
+            \:let g:ale_keep_list_window_open = 1 <CR>
+
 
 
 """"""""""""""""""""""""""""""""""""""" 
@@ -398,8 +410,13 @@ let g:Powerline_colorscheme='solarized256'
 
 """"""""""""""""""""""""""""""""""""""" 
 " ---> 日常模块1——quickfix分析
+"  
 """"""""""""""""""""""""""""""""""""""" 
-" 快捷键设置暂时没有
+" Quickfix document
+noremap <leader>ln :lne<CR>
+noremap <leader>lp :lp<CR>
+noremap <leader>lc :cclose<CR>
+noremap <leader>lo :cwindow<CR>
 
 
 """"""""""""""""""""""""""""""""""""""" 
@@ -713,6 +730,8 @@ endif
 "           3，现在一般用LookupFile来代替find命令，见上面的说明
 "       
 """"""""""""""""""""""""""""""""""""""""""""""
+" 添加自定义的库文件位置
+" let $PYTHONPATH='/Users/bamboo/Public/iLifeDiary/iLifeDiary/:/Users/zhengbifeng/Public/iLifeDiary/iLifeDiary'
 if filereadable("bamboo.vim")
     source bamboo.vim
 endif

@@ -45,9 +45,6 @@
 	path = bundle/vim-pydocstring
 	url = https://github.com/heavenshell/vim-pydocstring.git
     ignore = dirty
-[submodule "bundle/syntastic"]
-	path = bundle/syntastic
-	url = https://github.com/scrooloose/syntastic.git
 [submodule "bundle/YouCompleteMe"]
 	path = bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
