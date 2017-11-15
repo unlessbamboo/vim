@@ -205,10 +205,14 @@ nnoremap <leader>jd :YcmCompleter GoTo<cr>
 " use quickfix list instead of the loclist
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
-" let g:ale_open_list = 1
-" let g:ale_keep_list_window_open = 1
-noremap <leader>le :let g:ale_open_list = 1<CR>
-            \:let g:ale_keep_list_window_open = 1 <CR>
+let g:ale_open_list = 1
+let g:ale_keep_list_window_open = 1
+
+" help ale-python 信息
+" 指定pylintrc位置
+let g:ale_python_pylint_options = '--rcfile ~/.vim/.pylintrc'
+" 启用virtualenv
+let g:ale_python_pylint_use_global = 1
 
 
 
@@ -731,7 +735,7 @@ endif
 "       
 """"""""""""""""""""""""""""""""""""""""""""""
 " 添加自定义的库文件位置
-" let $PYTHONPATH='/Users/bamboo/Public/iLifeDiary/iLifeDiary/:/Users/zhengbifeng/Public/iLifeDiary/iLifeDiary'
+let $PYTHONPATH='/Users/bamboo/Public/iLifeDiary/iLifeDiary/:/Users/zhengbifeng/Public/iLifeDiary/iLifeDiary'
 if filereadable("bamboo.vim")
     source bamboo.vim
 endif
