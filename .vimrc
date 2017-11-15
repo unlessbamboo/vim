@@ -206,7 +206,7 @@ nnoremap <leader>jd :YcmCompleter GoTo<cr>
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 let g:ale_open_list = 1
-let g:ale_keep_list_window_open = 1
+let g:ale_keep_list_window_open = 0
 
 " help ale-python 信息
 " 指定pylintrc位置
@@ -735,7 +735,7 @@ endif
 "       
 """"""""""""""""""""""""""""""""""""""""""""""
 " 添加自定义的库文件位置
-let $PYTHONPATH='/Users/bamboo/Public/iLifeDiary/iLifeDiary/:/Users/zhengbifeng/Public/iLifeDiary/iLifeDiary'
+" let $PYTHONPATH='/Users/bamboo/Public/iLifeDiary/iLifeDiary/:/Users/zhengbifeng/Public/iLifeDiary/iLifeDiary'
 if filereadable("bamboo.vim")
     source bamboo.vim
 endif
