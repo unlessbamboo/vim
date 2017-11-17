@@ -185,10 +185,6 @@ nnoremap <leader>jd :YcmCompleter GoTo<cr>
 "            \]
 
 " 错误跳转
-" :lne, :lp
-" noremap <leader>ln :lne<CR>
-" noremap <leader>lp :lp<CR>
-" noremap <leader>lc :lclose<CR>
 " noremap <leader>le :Errors<CR>
 " noremap <silent> <F4> :let g:syntastic_auto_loc_list = (
 "             \g:syntastic_auto_loc_list == '0' ? '1' : '0')<CR>
@@ -213,6 +209,12 @@ let g:ale_keep_list_window_open = 0
 let g:ale_python_pylint_options = '--rcfile ~/.vim/.pylintrc'
 " 启用virtualenv
 let g:ale_python_pylint_use_global = 1
+
+" 错误移动
+noremap <leader>ef :ALEFirst<CR>
+noremap <leader>en :ALENext<CR>
+noremap <leader>el :ALELast<CR>
+noremap <leader>ep :ALEPrevious<CR>
 
 
 
