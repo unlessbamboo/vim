@@ -53,13 +53,19 @@ vnoremap <leader>json :'<,'>!python -m json.tool<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> jsbeautify: 对css,javascript, html进行格式化
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <c-f> :call JsBeautify()<cr>
-" 自动格式化(可以配置vnormap)
+" map <c-f> :call JsBeautify()<cr>
+" 映射(可以配置vnormap)
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
 autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
 autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+" 自动格式化
+autocmd FileType javascript :call JsBeautify()
+autocmd FileType json :call JsonBeautify()
+autocmd FileType jsx :call JsxBeautify()
+autocmd FileType html :call HtmlBeautify()
+autocmd FileType css :call CSSBeautify()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
