@@ -50,6 +50,17 @@ set runtimepath^=~/.vim/bundle/ag.vim
 map <silent> <leader>json :%!python -m json.tool<cr>
 vnoremap <leader>json :'<,'>!python -m json.tool<cr>
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ---> jsbeautify: 对css,javascript, html进行格式化
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <c-f> :call JsBeautify()<cr>
+" 自动格式化(可以配置vnormap)
+autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
+autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
+autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> vim-instant-markdown
@@ -716,7 +727,9 @@ autocmd FileType html setlocal ts=2 sts=2 sw=2
 autocmd FileType htmldjango setlocal ts=2 sts=2 sw=2
 autocmd FileType css setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
-" Emmet-vim
+"""""""""""""""""""""""""""""""""""""""
+"  --->>> Emmet-vim
+"""""""""""""""""""""""""""""""""""""""
 " html基本框架
 " imap <silent> <leader>html5 :html:5<C-r>,
 

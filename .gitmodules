@@ -76,3 +76,6 @@
 	path = bundle/ag.vim
 	url = https://github.com/rking/ag.vim.git
     ignore = dirty
+[submodule "bundle/vim-jsbeautify"]
+	path = bundle/vim-jsbeautify
+	url = https://github.com/maksimr/vim-jsbeautify.git

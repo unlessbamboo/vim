@@ -1,0 +1,32 @@
+;.editorconfig
+;javascript, css, html format
+
+root = true
+
+[**.js]
+; path to optional external js beautifier
+path=~/.vim/bundle/js-beautify/js/lib/beautify.js
+; Javascript interpreter to be invoked by default 'node'
+bin=node
+indent_style = space
+indent_size = 2
+
+[**.json]
+indent_style = space
+indent_size = 4
+
+[**.jsx]
+e4x = true
+indent_style = space
+indent_size = 2
+
+[**.css]
+path=~/.vim/bundle/js-beautify/js/lib/beautify-css.js
+indent_style = space
+indent_size = 2
+
+[**.html]
+indent_style = space
+indent_size = 4
+max_char = 120
+brace_style = expand
