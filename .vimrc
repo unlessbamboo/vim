@@ -265,10 +265,8 @@ let g:NERDDefaultAlign='left'
 let g:NERDAltDelims_java=1
 " Add your own custom formats or override the defaults
 let g:NERDCustomDelimiters={ 'c': { 'left': '/**', 'right':'*/'} }
-" Allow commenting and inverting(反转) empty lines 
-" (userful when commenting a region)，注释空行
+" 注释空行
 let g:NERDCommentEmptyLines=1
-" Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace=1
 
 
