@@ -727,9 +727,9 @@ map <silent> <leader>rsv :source ./Session.vim<cr> :rviminfo vim.viminfo<cr>
 "  --->>> html设置
 """""""""""""""""""""""""""""""""""""""
 nmap <silent> <leader>hml :!open % <CR>
-" html文件采用2个空格缩进方式
-autocmd FileType html setlocal ts=2 sts=2 sw=2
-autocmd FileType htmldjango setlocal ts=2 sts=2 sw=2
+" html文件采用4个空格缩进方式, 保持同.editorconfig同步
+autocmd FileType html setlocal ts=4 sts=4 sw=4
+autocmd FileType htmldjango setlocal ts=4 sts=4 sw=4
 autocmd FileType css setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 """""""""""""""""""""""""""""""""""""""
