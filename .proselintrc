@@ -1,0 +1,6 @@
+// 用于配置proselint, 需要链接到主目录
+{
+    "checks": {
+        "typography.symbols.curly_quotes": false
+    }
+}

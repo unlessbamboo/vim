@@ -215,6 +215,11 @@ nnoremap <leader>jd :YcmCompleter GoTo<cr>
 " 插件: ale
 " 功能: 异步代码检查插件
 """""""""""""""""""""""""""""""""""""""
+" 控制错误输出格式, 通过这个 linter找到确切的忽略错误的方式
+let g:airline#extensions#ale#enabled = 1
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 " use quickfix list instead of the loclist
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
@@ -226,6 +231,9 @@ let g:ale_keep_list_window_open = 0
 let g:ale_python_pylint_options = '--rcfile ~/.vim/.pylintrc'
 " 启用virtualenv
 let g:ale_python_pylint_use_global = 1
+
+" ale_html_tidy_options
+let g:ale_html_tidy_options = '--mute'
 
 " 错误移动
 noremap <leader>ef :ALEFirst<CR>
