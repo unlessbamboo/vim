@@ -219,7 +219,7 @@ nnoremap <leader>jd :YcmCompleter GoTo<cr>
 let g:airline#extensions#ale#enabled = 1
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_echo_msg_format = '%code: [%linter%] %%s [%severity%]'
 " use quickfix list instead of the loclist
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
@@ -232,8 +232,6 @@ let g:ale_python_pylint_options = '--rcfile ~/.vim/.pylintrc'
 " 启用virtualenv
 let g:ale_python_pylint_use_global = 1
 
-" ale_html_tidy_options
-let g:ale_html_tidy_options = '--mute'
 
 " 错误移动
 noremap <leader>ef :ALEFirst<CR>
