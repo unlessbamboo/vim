@@ -48,6 +48,7 @@
 [submodule "bundle/YouCompleteMe"]
 	path = bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
+    ignore = dirty
 [submodule "bundle/vim-instant-markdown"]
 	path = bundle/vim-instant-markdown
 	url = https://github.com/suan/vim-instant-markdown.git
