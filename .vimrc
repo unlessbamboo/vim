@@ -297,11 +297,11 @@ imap <F8> <ESC>:!ctags
 """""""""""""""""""""""""""""""""""""""""""""
 " ---> 标签配置2——cscope
 """""""""""""""""""""""""""""""""""""""""""""
-map <F9> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o 
-            \ -name "*.java" -o -name "*.py" 
+map <F9> :!find -L `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o 
+            \ -name "*.java" -o -name "*.py" -o -name "*.php"
             \ >cscope.files<CR><CR>:!cscope -Rbq<CR>:cs reset<CR><CR>
-imap <F9> <ESC>:!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" 
-            \ -o -name "*.java" -o -name "*.py" 
+imap <F9> <ESC>:!find -L `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" 
+            \ -o -name "*.java" -o -name "*.py" -o -name "*.php"
             \ >cscope.files<CR><CR>:!cscope -Rbq<CR>:cs reset<CR><CR>
 if has("cscope")
     set csprg=/usr/local/bin/cscope
