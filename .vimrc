@@ -175,25 +175,20 @@ nnoremap <leader>jd :YcmCompleter GoTo<cr>
 "       每一个目录都有一份独有的bamboo.vim配置当前项目的语言配置
 "   
 """"""""""""""""""""""""""""""""""""""" 
-" 必要配置2--错误标注（和SyntasticStatuslineFlag()配合）
+" 错误标注（和SyntasticStatuslineFlag()配合）
 " let g:syntastic_error_symbol = 'EE'
 " let g:syntastic_style_error_symbol = 'E>'
 " let g:syntastic_warning_symbol = 'WW'
 " let g:syntastic_style_warning_symbol = 'W>'
-" 必要配置3
-" 不需要手动调用 SyntasticSetTocList. 默认1
-" let g:syntastic_always_populate_loc_list = 1
+
 " 0不自动. 1自动拉起关闭. 2 自动关闭. 3 自动拉起 默认2, 建议为1
 " 设置为1，会影响其他插件，抛出E924(help E924)错误，使用lopen来开启错误信息
+" let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_auto_loc_list = 0
 
-" 请提前安装pylint和flake8
-" 注意,flake8包含（pep8/pycodestyle-pep257/pyflakes三个checkers）
-" pyflake8，见.vim/.flake8，并创建软连接:ln -sf ~/.vim/.flake8 ~/.config/flake8
+" pylint, flake8, shellcheckers
 " let g:syntastic_python_checkers=['flake8', 'pylint']
-" 使用pylint可以对代码进行评分检查
 " let g:syntastic_python_pylint_args='--rcfile=~/.vim/.pylintrc'
-" shellcheckers and sh
 " let g:syntastic_sh_checkers=['shellcheckers']
 
 " HTML
@@ -209,6 +204,7 @@ nnoremap <leader>jd :YcmCompleter GoTo<cr>
 " 关闭html错误检查
 " let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': ['html'] }
 " nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+
 
 
 """""""""""""""""""""""""""""""""""""""
@@ -245,6 +241,12 @@ noremap <leader>ep :ALEPrevious<CR>
 " 插件：Vimjas/vim-python-pep8-indent
 " 功能：基于pep8的自动缩进设置，非常棒
 """"""""""""""""""""""""""""""""""""""" 
+" flake8, 见.vim/.flake8，并创建软连接:ln -sf ~/.vim/.flake8 ~/.config/flake8
+" 自定义配置, 见github
+" let g:flake8_ignore = 'E701, E301'
+
+" pylint, 创建~/.vim/.pylintrc, 并通过pylint_options指定, 文件名可以任意取值
+
 
 
 """"""""""""""""""""""""""""""""""""""" 
