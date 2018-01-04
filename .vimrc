@@ -241,8 +241,8 @@ noremap <leader>ep :ALEPrevious<CR>
 " 插件：Vimjas/vim-python-pep8-indent
 " 功能：基于pep8的自动缩进设置，非常棒
 """"""""""""""""""""""""""""""""""""""" 
-" flake8, 见.vim/.flake8，并创建软连接:ln -sf ~/.vim/.flake8 ~/.config/flake8
-" 自定义配置, 见github
+" flake8, .vim/.flake8，并创建软连接:ln -sf ~/.vim/.flake8 ~/.config/flake8
+" 自定义配置, 见github以及印象笔记
 " let g:flake8_ignore = 'E701, E301'
 
 " pylint, 创建~/.vim/.pylintrc, 并通过pylint_options指定, 文件名可以任意取值
