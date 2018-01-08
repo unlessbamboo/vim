@@ -215,7 +215,7 @@ nnoremap <leader>jd :YcmCompleter GoTo<cr>
 let g:airline#extensions#ale#enabled = 1
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '%code: [%linter%] %%s [%severity%]'
+let g:ale_echo_msg_format = '%...code...%: [%linter%] %%s [%severity%]'
 " use quickfix list instead of the loclist
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
