@@ -577,6 +577,10 @@ let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
 " saveas <new file> : will move a file from its location to CWD.
 " 2 使用Explore, 之后使用 R-- 重命名, D--删除文件
 noremap <silent> <leader>sa :Explore<CR>
+" 3 复制当前文件名到剪贴板(cs-copy filename, cp-copy file path)
+"   关于expand, 见印象笔记
+noremap <silent> <leader>cf :let @+=expand("%")<CR>
+noremap <silent> <leader>cp :let @+=expand("%:p")<CR>
 
 
 
