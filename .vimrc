@@ -53,6 +53,7 @@ vnoremap <leader>json :'<,'>!python -m json.tool<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> jsbeautify: 对css,javascript, html进行格式化
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:editorconfig_Beautifier = '~/.vim/.editorconfig'
 " map <c-f> :call JsBeautify()<cr>
 " 映射(可以配置vnormap)
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
@@ -227,6 +228,8 @@ let g:ale_keep_list_window_open = 0
 let g:ale_python_pylint_options = '--rcfile ~/.vim/.pylintrc'
 " 启用virtualenv
 let g:ale_python_pylint_use_global = 1
+" tidy
+let g:ale_html_tidy_options = '-q -e -language en -config ~/.vim/.tidy.conf'
 
 
 " 错误移动
@@ -736,14 +739,15 @@ map <silent> <leader>rsv :source ./Session.vim<cr> :rviminfo vim.viminfo<cr>
 
 
 """""""""""""""""""""""""""""""""""""""
-"  --->>> html设置
+"  --->>> html设置, 确保放在基本配置的后面, 避免被覆盖
 """""""""""""""""""""""""""""""""""""""
 nmap <silent> <leader>hml :!open % <CR>
 " html文件采用4个空格缩进方式, 保持同.editorconfig同步
 autocmd FileType html setlocal ts=4 sts=4 sw=4
 autocmd FileType htmldjango setlocal ts=4 sts=4 sw=4
 autocmd FileType css setlocal ts=2 sts=2 sw=2
-autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+autocmd FileType ruby setlocal ts=2 sts=2 sw=2
+autocmd FileType javascript setlocal ts=2 sts=2 sw=2
 """""""""""""""""""""""""""""""""""""""
 "  --->>> Emmet-vim
 """""""""""""""""""""""""""""""""""""""
