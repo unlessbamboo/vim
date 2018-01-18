@@ -1,0 +1,1 @@
+Colorizer-.vmb: call delete('/Users/bamboo/.vim/plugin/ColorizerPlugin.vim')|call delete('/Users/bamboo/.vim/doc/Colorizer.txt')|call delete('/Users/bamboo/.vim/autoload/Colorizer.vim')

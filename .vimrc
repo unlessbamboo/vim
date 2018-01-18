@@ -437,6 +437,16 @@ set laststatus=2
 " 主题风格
 let g:Powerline_colorscheme='solarized256'
 
+""""""""""""""""""""""""""""""""""""""" 
+"--->>配色配置5
+" Colorizer 高亮html/css中的颜色代码
+""""""""""""""""""""""""""""""""""""""" 
+" 自动开启, 编辑vimrc太过卡顿, 采用映射, 人工开启
+" let g:colorizer_auto_color = 1
+noremap <silent> <leader>color :let g:colorizer_auto_color = 1<CR>
+let g:colorizer_auto_filetype='css,html'
+let g:colorizer_skip_comments = 1
+let g:colorizer_auto_map = 1
 
 
 
