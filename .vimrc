@@ -230,6 +230,7 @@ let g:ale_python_pylint_options = '--rcfile ~/.vim/.pylintrc'
 let g:ale_python_pylint_use_global = 1
 " tidy
 let g:ale_html_tidy_options = '-q -e -language en -config ~/.vim/.tidy.conf'
+" 禁用某些插件, 目前只能使用白名单(ale_linters, ale_linters_explicit)
 
 
 " 错误移动
