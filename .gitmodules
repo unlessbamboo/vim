@@ -34,9 +34,6 @@
 [submodule "bundle/vim-surround"]
 	path = bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
-[submodule "bundle/vim-gitgutter"]
-	path = bundle/vim-gitgutter
-	url = git://github.com/airblade/vim-gitgutter.git
 [submodule "bundle/bash-support.vim"]
 	path = bundle/bash-support.vim
 	url = https://github.com/vim-scripts/bash-support.vim.git
@@ -87,3 +84,6 @@
 	path = bundle/Colorizer
 	url = https://github.com/chrisbra/Colorizer.git
     ignore = dirty
+[submodule "bundle/vim-gitgutter"]
+	path = bundle/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
