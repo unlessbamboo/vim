@@ -87,3 +87,6 @@
 	path = bundle/Colorizer
 	url = https://github.com/chrisbra/Colorizer.git
     ignore = dirty
+[submodule "bundle/vimcdoc"]
+	path = bundle/vimcdoc
+	url = https://github.com/yianwillis/vimcdoc.git

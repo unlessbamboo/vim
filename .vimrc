@@ -219,8 +219,8 @@ let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '%...code...%: [%linter%] %%s [%severity%]'
 " use quickfix list instead of the loclist
 let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
-let g:ale_open_list = 1
+let g:ale_set_quickfix = 0
+let g:ale_open_list = 0
 let g:ale_keep_list_window_open = 0
 
 " help ale-python 信息
@@ -731,10 +731,11 @@ nmap <silent><leader>rw <C-w><C-r>
 " 所有窗口登高等宽
 nmap <silent><leader>=w <C-w>=
 " 高度-N 
-nmap <silent><leader>s_ :resize -20<CR>
-nmap <silent><leader>s+ :resize +20<CR>
-nmap <silent><leader>v_ :vertical resize -20<CR>
-nmap <silent><leader>v+ :vertical resize +20<CR>
+nmap <silent><leader>s_ :resize -10<CR>
+nmap <silent><leader>s+ :resize +10<CR>
+" 宽度
+nmap <silent><leader>v_ :vertical resize -10<CR>
+nmap <silent><leader>v+ :vertical resize +10<CR>
 " preview window close
 nmap <silent><leader>pc :pc<CR>
 
@@ -765,11 +766,34 @@ autocmd FileType javascript setlocal ts=2 sts=2 sw=2
 " html基本框架
 " imap <silent> <leader>html5 :html:5<C-r>,
 
-
-
 if $VIM_CRONTAB == "true"
     set nobackup
     set nowritebackup
+endif
+
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" ---> 大文件
+""""""""""""""""""""""""""""""""""""""""""""""
+" Protect large files from sources and other overhead.
+" Files become read only
+if !exists("my_auto_commands_loaded")
+  let my_auto_commands_loaded = 1
+  " Large files are > 10M
+  " Set options:
+  " eventignore+=FileType (no syntax highlighting etc
+  " assumes FileType always on)
+  " noswapfile (save copy of file)
+  " bufhidden=unload (save memory when other file is viewed)
+  " buftype=nowrite (file is read-only)
+  " undolevels=-1 (no undo possible)
+  let g:LargeFile = 1024 * 1024 * 10
+  augroup LargeFile
+    autocmd BufReadPre * let f=expand("<afile>") | if getfsize(f) > g:LargeFile 
+                \| set eventignore+=FileType 
+                \| setlocal noswapfile bufhidden=unload buftype=nowrite undolevels=-1
+                \| else | set eventignore-=FileType | endif
+  augroup END
 endif
 
 
