@@ -255,7 +255,8 @@ noremap <leader>ep :ALEPrevious<CR>
 
 """"""""""""""""""""""""""""""""""""""" 
 " vim-surround配置
-"       见印象笔记中的说明
+"       见help surround
+"       主页: https://github.com/tpope/vim-surround
 """"""""""""""""""""""""""""""""""""""" 
 " 没有特殊的配置，不要文档中的custom configure
 
@@ -610,7 +611,8 @@ noremap <silent> <leader>hl :nohlsearch<Bar>:echo<CR>
 "突出高亮显示当前行
 set cursorline
 " 插入时间
-nnoremap <leader>date "=strftime("%Y-%m-%d %T")<CR>p
+nnoremap <leader>date "=strftime("%Y-%m-%d")<CR>p
+nnoremap <leader>time "=strftime("%Y-%m-%d %T")<CR>p
 
 " 设置黑色背景，保证告警文本的效果能够更加显著
 set background=dark
