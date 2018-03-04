@@ -54,19 +54,19 @@ vnoremap <leader>json :'<,'>!python -m json.tool<cr>
 " ---> jsbeautify: 对css,javascript, html进行格式化
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:editorconfig_Beautifier = '~/.vim/.editorconfig'
-" map <c-f> :call JsBeautify()<cr>
+map <c-f> :call JsBeautify()<cr>
 " 映射(可以配置vnormap)
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
 autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
 autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
-" 自动格式化
-autocmd FileType javascript :call JsBeautify()
-autocmd FileType json :call JsonBeautify()
-autocmd FileType jsx :call JsxBeautify()
-autocmd FileType html :call HtmlBeautify()
-autocmd FileType css :call CSSBeautify()
+" 自动格式化, 关闭自动格式化(会导致其他问题)
+" autocmd FileType javascript :call JsBeautify()
+" autocmd FileType json :call JsonBeautify()
+" autocmd FileType jsx :call JsxBeautify()
+" autocmd FileType html :call HtmlBeautify()
+" autocmd FileType css :call CSSBeautify()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
