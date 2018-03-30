@@ -733,11 +733,11 @@ nmap <silent><leader>rw <C-w><C-r>
 " 所有窗口登高等宽
 nmap <silent><leader>=w <C-w>=
 " 高度-N 
-nmap <silent><leader>s_ :resize -10<CR>
-nmap <silent><leader>s+ :resize +10<CR>
+nmap <silent><leader>s_ :resize -20<CR>
+nmap <silent><leader>s+ :resize +20<CR>
 " 宽度
-nmap <silent><leader>v_ :vertical resize -10<CR>
-nmap <silent><leader>v+ :vertical resize +10<CR>
+nmap <silent><leader>v_ :vertical resize -20<CR>
+nmap <silent><leader>v+ :vertical resize +20<CR>
 " preview window close
 nmap <silent><leader>pc :pc<CR>
 
