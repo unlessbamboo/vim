@@ -32,7 +32,7 @@ unsafe-load-any-extension=no
 # A comma-separated list of package or module names from where C extensions may
 # be loaded. Extensions are loading into the active Python interpreter and may
 # run arbitrary code
-extension-pkg-whitelist=
+extension-pkg-whitelist=lxml
 
 # Allow optimization of some AST trees. This will activate a peephole AST
 # optimizer, which will apply various small optimizations. For instance, it can
@@ -65,7 +65,7 @@ confidence=
 # --enable=similarities". If you want to run only the classes checker, but have
 # no Warning level messages displayed, use"--disable=all --enable=classes
 # --disable=W"
-disable=missing-docstring,invalid-name,no-init,protected-access,no-self-use,unused-argument,broad-except,logging-format-interpolation,too-many-return-statements,too-many-locals,too-many-instance-attributes,too-few-public-methods,too-many-arguments,too-many-function-args,too-many-public-methods,fixme,too-many-branches,too-many-statements,too-many-boolean-expressions,old-style-class,too-many-nested-blocks,arguments-differ,attribute-defined-outside-init,too-many-ancestors,unused-import,super-init-not-called,no-else-return,wrong-import-position,unused-variable,method-hidden,line-too-long
+disable=missing-docstring,invalid-name,no-init,protected-access,no-self-use,unused-argument,broad-except,logging-format-interpolation,too-many-return-statements,too-many-locals,too-many-instance-attributes,too-few-public-methods,too-many-arguments,too-many-function-args,too-many-public-methods,fixme,too-many-branches,too-many-statements,too-many-boolean-expressions,old-style-class,too-many-nested-blocks,arguments-differ,attribute-defined-outside-init,too-many-ancestors,unused-import,super-init-not-called,no-else-return,wrong-import-position,unused-variable,method-hidden,line-too-long,inconsistent-return-statements
 
 [REPORTS]
 
