@@ -6,10 +6,6 @@
 	path = bundle/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
     ignore = dirty
-[submodule "taglist"]
-	path = taglist
-	url = https://github.com/vim-scripts/taglist.vim.git
-    ignore = dirty
 [submodule "bundle/winmanager"]
 	path = bundle/winmanager
 	url = https://github.com/vim-scripts/winmanager.git
@@ -101,4 +97,8 @@
 [submodule "bundle/YouCompleteMe"]
 	path = bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
+    ignore = dirty
+[submodule "bundle/taglist.vim"]
+	path = bundle/taglist.vim
+	url = https://github.com/vim-scripts/taglist.vim.git
     ignore = dirty
