@@ -227,7 +227,7 @@ let g:ale_keep_list_window_open = 0
 " 指定pylintrc位置
 let g:ale_python_pylint_options = '--rcfile ~/.vim/.pylintrc'
 " 启用virtualenv
-let g:ale_python_pylint_use_global = 1
+let g:ale_python_pylint_use_global = 0
 " tidy
 let g:ale_html_tidy_options = '-q -e -language en -config ~/.vim/.tidy.conf'
 " 禁用某些插件, 目前只能使用白名单(ale_linters, ale_linters_explicit)
@@ -639,6 +639,12 @@ set pastetoggle=<leader>+p
 nmap <silent><leader>wa :wa<cr>
 " 仅仅在下拉菜单中显示匹配项目，自动插入所有匹配项目的相同文本
 set completeopt=longest,menu
+
+" 映射文件移动命令
+nmap <silent><leader>mo3 :30%
+nmap <silent><leader>mo5 :50%
+nmap <silent><leader>mo8 :80%
+
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " ---> 折叠配置
