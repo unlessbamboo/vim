@@ -641,9 +641,9 @@ nmap <silent><leader>wa :wa<cr>
 set completeopt=longest,menu
 
 " 映射文件移动命令
-nmap <silent><leader>mo3 :30%
-nmap <silent><leader>mo5 :50%
-nmap <silent><leader>mo8 :80%
+nmap <silent><leader>mo3 :30%<CR>
+nmap <silent><leader>mo5 :50%<CR>
+nmap <silent><leader>mo8 :80%<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""
