@@ -69,6 +69,14 @@ autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 " autocmd FileType css :call CSSBeautify()
 
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ---> filetype
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" set dockerfile if find *Dockerfile
+autocmd BufNewFile,BufRead *Dockerfile set filetype=dockerfile
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> vim-instant-markdown
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -232,12 +240,17 @@ let g:ale_python_pylint_use_global = 0
 let g:ale_html_tidy_options = '-q -e -language en -config ~/.vim/.tidy.conf'
 " 禁用某些插件, 目前只能使用白名单(ale_linters, ale_linters_explicit)
 
-
 " 错误移动
 noremap <leader>ef :ALEFirst<CR>
 noremap <leader>en :ALENext<CR>
 noremap <leader>el :ALELast<CR>
 noremap <leader>ep :ALEPrevious<CR>
+" 关闭自动打开错误quickfix
+" noremap <leader>ec :call BambooDisableAleQuickfix() <CR>
+" function BambooDisableAleQuickfix()
+"     let g:ale_set_quickfix = 0
+"     let g:ale_open_list = 0
+" endfunc
 
 
 
