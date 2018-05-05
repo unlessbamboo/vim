@@ -270,6 +270,7 @@ noremap <leader>ep :ALEPrevious<CR>
 " vim-surround配置
 "       见help surround
 "       主页: https://github.com/tpope/vim-surround
+" 单引号/双引号/标签的快速操作
 """"""""""""""""""""""""""""""""""""""" 
 " 没有特殊的配置，不要文档中的custom configure
 
@@ -341,14 +342,18 @@ if has("cscope")
     set csverb
 endif
 " 可以手动输入:cs f s stringA
-nmap <C-@>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <C-@>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+" 查找该符号所有出现的地方
+nmap <leader>css :cs find s <C-R>=expand("<cword>")<CR><CR>
+" 查找该符号定义的地方
+nmap <leader>csg :cs find g <C-R>=expand("<cword>")<CR><CR>
+" 查找调用该符号的函数
+nmap <leader>csc :cs find c <C-R>=expand("<cword>")<CR><CR>
+" 查找该字符串, 比cs find s更加全面
+nmap <leader>cst :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>cse :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>csf :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <leader>csi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <leader>csd :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 """""""""""""""""""""""""""""""""""""""""
 " ---> 标签配置3
