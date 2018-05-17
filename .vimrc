@@ -614,6 +614,7 @@ noremap <silent> <leader>sa :Explore<CR>
 "   关于expand, 见印象笔记
 noremap <silent> <leader>cf :let @+=expand("%")<CR>
 noremap <silent> <leader>cp :let @+=expand("%:p")<CR>
+noremap <silent> <leader>ct :let @+=expand("%:t")<CR>
 
 
 
