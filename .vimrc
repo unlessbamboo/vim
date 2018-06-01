@@ -629,7 +629,7 @@ set hlsearch
 noremap <silent> <leader>hl :nohlsearch<Bar>:echo<CR>
 "突出高亮显示当前行
 set cursorline
-" 插入时间
+" 插入时间, 使用UTC时间来表示
 nnoremap <leader>date "=strftime("%Y-%m-%d")<CR>p
 nnoremap <leader>time "=strftime("%Y-%m-%d %T")<CR>p
 
