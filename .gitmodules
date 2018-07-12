@@ -90,10 +90,6 @@
 	path = bundle/vimcdoc
 	url = https://github.com/yianwillis/vimcdoc.git
     ignore = dirty
-[submodule "bundle/vim-gitgutter"]
-	path = bundle/vim-gitgutter
-	url = https://github.com/airblade/vim-gitgutter.git
-    ignore = dirty
 [submodule "bundle/YouCompleteMe"]
 	path = bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
