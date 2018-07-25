@@ -787,6 +787,15 @@ autocmd FileType htmldjango setlocal ts=4 sts=4 sw=4
 autocmd FileType css setlocal ts=2 sts=2 sw=2
 autocmd FileType ruby setlocal ts=2 sts=2 sw=2
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2
+
+
+"""""""""""""""""""""""""""""""""""""""
+"  --->>> xml
+"""""""""""""""""""""""""""""""""""""""
+" 使用xmllint对选择的文本自动进行xml, 之后执行==G就能格式化
+au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
+
+
 """""""""""""""""""""""""""""""""""""""
 "  --->>> Emmet-vim
 """""""""""""""""""""""""""""""""""""""
