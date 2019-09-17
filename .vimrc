@@ -175,6 +175,9 @@ let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extr
 let g:ycm_key_invoke_completion = ''
 nnoremap <leader>jd :YcmCompleter GoTo<cr>
 
+" java eclim
+let g:EclimCompletionMethod = 'omnifunc'
+
 
 """"""""""""""""""""""""""""""""""""""" 
 " --->语法检查，syntastic的配置参数
@@ -658,6 +661,7 @@ set pastetoggle=<leader>+p
 nmap <silent><leader>wa :wa<cr>
 " 仅仅在下拉菜单中显示匹配项目，自动插入所有匹配项目的相同文本
 set completeopt=longest,menu
+set nocompatible
 
 " 映射文件移动命令
 nmap <silent><leader>mo3 30%
