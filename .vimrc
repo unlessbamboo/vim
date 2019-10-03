@@ -47,7 +47,7 @@ set runtimepath^=~/.vim/bundle/ag.vim
 "      json format and check
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <silent> <leader>json :%!python -m json.tool<cr>
+map  <leader>json :%!python -m json.tool<cr>
 vnoremap <leader>json :'<,'>!python -m json.tool<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -84,7 +84,7 @@ let g:instant_markdown_slow=1
 " 关闭自动开启浏览器的配置，使用命令:InstantMarkdownPreview
 let g:instant_markdown_autostart=0
 " 映射快捷键
-map <silent> <leader>imp :InstantMarkdownPreview<cr>
+map  <leader>imp :InstantMarkdownPreview<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -104,7 +104,7 @@ let g:vim_markdown_folding_level = 6
 " Heder level handle
 " :HeaderDecrease, :HeaderIncrease
 " TOC
-map <silent> <leader>toc :Toc<cr>
+map  <leader>toc :Toc<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -124,8 +124,8 @@ let g:BASH_Company      = 'BigUniverse'
 """"""""""""""""""""""""""""""""""""""" 
 " 设置拓展
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
-"nmap <silent> <C-_> <Plug>(pydocstring)
-nmap <silent> <leader>py :Pydocstring<cr>
+"nmap  <C-_> <Plug>(pydocstring)
+nmap  <leader>py :Pydocstring<cr>
 
 
 
@@ -141,19 +141,19 @@ nmap <silent> <leader>py :Pydocstring<cr>
 "           用于git，功能待挖掘
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 关闭或者启动gitgutter，默认开启
-map <silent> <leader>gg :GitGutterToggle<cr>
+map  <leader>gg :GitGutterToggle<cr>
 " 关闭或者启动gitgutter signs，默认开启
-map <silent> <leader>gs :GitGutterSignsToggle<cr>
+map  <leader>gs :GitGutterSignsToggle<cr>
 " 关闭或者启动高亮，默认开启
-map <silent> <leader>gh :GitGutterLineHighlightsToggle<cr>
+map  <leader>gh :GitGutterLineHighlightsToggle<cr>
 " 设置文件发生更改后出现提示的延时时间（定时器）,默认为4s，设置为250ms
 set updatetime=250
 " To keep your Vim snappy（短小精悍），最大更改为500，默认值
 let g:gitgutter_max_signs = 500
 
 " 跳到下一个或者上一个hunk
-nmap <silent> <leader>nh <Plug>GitGutterNextHunk
-nmap <silent> <leader>ph <Plug>GitGutterPrevHunk
+nmap  <leader>nh <Plug>GitGutterNextHunk
+nmap  <leader>ph <Plug>GitGutterPrevHunk
 " stage或者undo hunk，取消修改
 "   <leader>hs
 "   <leader>hu
@@ -210,7 +210,7 @@ let g:EclimCompletionMethod = 'omnifunc'
 
 " 错误跳转
 " noremap <leader>le :Errors<CR>
-" noremap <silent> <F4> :let g:syntastic_auto_loc_list = (
+" noremap  <F4> :let g:syntastic_auto_loc_list = (
 "             \g:syntastic_auto_loc_list == '0' ? '1' : '0')<CR>
 " syntastic过慢导致的问题（需要按两次才能取消哦，注意大写的E）
 " 关闭html错误检查
@@ -373,7 +373,7 @@ let Tlist_Use_Right_Window=0
 " 非当前文件，函数列表折叠隐藏，1为隐藏
 let Tlist_File_Fold_Auto_Close=0
 " 打开/关闭taglist窗口，不过被winmanager替代，见文件缓冲区插件2说明
-" map <silent> <F6> :TlistToggle<cr>
+" map  <F6> :TlistToggle<cr>
 " 自动加载
 autocmd BufWritePost *.* :TlistUpdate
 
@@ -466,7 +466,7 @@ let g:Powerline_colorscheme='solarized256'
 """"""""""""""""""""""""""""""""""""""" 
 " 自动开启, 编辑vimrc太过卡顿, 采用映射, 人工开启
 " let g:colorizer_auto_color = 1
-noremap <silent> <leader>color :let g:colorizer_auto_color = 1<CR>
+noremap  <leader>color :let g:colorizer_auto_color = 1<CR>
 let g:colorizer_auto_filetype='css,html'
 let g:colorizer_skip_comments = 1
 let g:colorizer_auto_map = 1
@@ -529,11 +529,11 @@ let g:AutoOpenWinManager=0
 " 设置宽度
 let g:winMaagerWidth=30
 " goto first explorer window
-map <silent> <leader>ff :FirstExplorerWindow<cr>
+map  <leader>ff :FirstExplorerWindow<cr>
 " goto bottom explorer window
-map <silent> <leader>bb :BottomExplorerWindow<cr>
+map  <leader>bb :BottomExplorerWindow<cr>
 " reload
-nmap <silent> <F6> :WMToggle<cr>
+nmap  <F6> :WMToggle<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> 文件缓冲区窗口插件-3-nerdtree 配置
@@ -554,7 +554,7 @@ let NERDTreeAutoDeleteBuffer=1
 let NERDTreeIgnore = ['\.pyc$', 'migrations', 'log?', 'cscope.*', 'tags', 
             \ 'media', 'doc']
 " 启动或者隐藏NERDTree
-nmap <silent> <F2> :NERDTreeToggle<cr>
+nmap  <F2> :NERDTreeToggle<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""
@@ -562,7 +562,7 @@ nmap <silent> <F2> :NERDTreeToggle<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " 可执行文件：
 "   <https://github.com/unlessbamboo/grocery-shop/blob/master/bamboo/shell/filenametags>
-nmap <silent> <leader>ft :!bash 
+nmap  <leader>ft :!bash 
             \ /home/bamboo/.local/bin/filenametags
             \<cr>:source ~/.vimrc<cr>
 " 加载指定的tags文件，而不是默认的tags文件，增加查找性能
@@ -580,11 +580,11 @@ let g:LookupFile_AlwaysAcceptFirst = 1
 " 不允许创建不存在的文件
 let g:LookupFile_AllowNewFiles = 0
 " F5的功能，查找文件，映射LookupFile为,lk
-nmap <silent> <leader>luk :LUTags<cr>
+nmap  <leader>luk :LUTags<cr>
 " 浏览缓冲区，列出缓冲区中所有文件，映射LUBufs为ll
-nmap <silent> <leader>lul :LUBufs<cr>
+nmap  <leader>lul :LUBufs<cr>
 " 浏览目录，查看该目录下所有文件，映射LUWalk为lw
-nmap <silent> <leader>luw :LUWalk<cr>
+nmap  <leader>luw :LUWalk<cr>
 " 默认设置忽略大小写查找, 重写该函数
 function! LookupFile_IgnoreCaseFunc(pattern)
     let _tags = &tags
@@ -612,12 +612,12 @@ let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
 " 1 重命名文件，使用插件rename，该方法有很多缺陷
 " saveas <new file> : will move a file from its location to CWD.
 " 2 使用Explore, 之后使用 R-- 重命名, D--删除文件
-noremap <silent> <leader>sa :Explore<CR>
+noremap  <leader>sa :Explore<CR>
 " 3 复制当前文件名到剪贴板(cs-copy filename, cp-copy file path)
 "   关于expand, 见印象笔记
-noremap <silent> <leader>cf :let @+=expand("%")<CR>
-noremap <silent> <leader>cp :let @+=expand("%:p")<CR>
-noremap <silent> <leader>ct :let @+=expand("%:t")<CR>
+noremap  <leader>cf :let @+=expand("%")<CR>
+noremap  <leader>cp :let @+=expand("%:p")<CR>
+noremap  <leader>ct :let @+=expand("%:t")<CR>
 
 
 
@@ -629,7 +629,7 @@ syntax enable
 " 高亮命中的文本或者set nohlsearch
 set hlsearch
 " 临时取消高亮F3显示的开关按钮
-noremap <silent> <leader>hl :nohlsearch<Bar>:echo<CR>
+noremap  <leader>hl :nohlsearch<Bar>:echo<CR>
 "突出高亮显示当前行
 set cursorline
 " 插入时间, 使用UTC时间来表示
@@ -654,19 +654,19 @@ set incsearch
 set guifont=Monaco:h20
 " 鼠标设置
 set mouse=a
-" noremap <silent> <F4> :let &mouse = (&mouse == 'a' ? 'v' : 'a')<CR>
+" noremap  <F4> :let &mouse = (&mouse == 'a' ? 'v' : 'a')<CR>
 " paste设置，不适用F7，而是采用,+p
 set pastetoggle=<leader>+p
 " 保存所有文件
-nmap <silent><leader>wa :wa<cr>
+nmap <leader>wa :wa<cr>
 " 仅仅在下拉菜单中显示匹配项目，自动插入所有匹配项目的相同文本
 set completeopt=longest,menu
 set nocompatible
 
 " 映射文件移动命令
-nmap <silent><leader>mo3 30%
-nmap <silent><leader>mo5 50%
-nmap <silent><leader>mo8 80%
+nmap <leader>mo3 30%
+nmap <leader>mo5 50%
+nmap <leader>mo8 80%
 
 
 """"""""""""""""""""""""""""""""""""""""""""""
@@ -689,15 +689,15 @@ vnoremap <space> zf
 "   vim-repeat: 重复第三方插件的宏命令
 """"""""""""""""""""""""""""""""""""""" 
 " 宏快捷键：@a寄存器变为<leader>h寄存器
-nmap <silent><leader>h @
+nmap <leader>h @
 
 """"""""""""""""""""""""""""""""""""""" 
 "--->>>vimrc的重载
 """"""""""""""""""""""""""""""""""""""" 
 " Fast reloading of the .vimrc
-map <silent> <leader>ss :source ~/.vimrc<cr>
+map  <leader>ss :source ~/.vimrc<cr>
 " Fast editing of .vimrc
-map <silent> <leader>ee :e ~/.vimrc<cr>
+map  <leader>ee :e ~/.vimrc<cr>
 " When .vimrc is edited, reload it
 autocmd! bufwritepost .vimrc source ~/.vimrc
 
@@ -746,29 +746,29 @@ endif
 " --->>>窗口切割映射键和跳转快捷键
 """""""""""""""""""""""""""""""""""""""
 " 切割
-nmap <silent><leader>vs :vs<cr>
-nmap <silent><leader>sp :sp<cr>
+nmap <leader>vs :vs<cr>
+nmap <leader>sp :sp<cr>
 " 左边窗口，请熟练使用，确保不适用<c-w>按钮
-nmap <silent><leader>hw <C-w>h
+nmap <leader>hw <C-w>h
 " 右边窗口
-nmap <silent><leader>lw <C-w>l
+nmap <leader>lw <C-w>l
 " 上边窗口
-nmap <silent><leader>kw <C-w>k
+nmap <leader>kw <C-w>k
 " 下边窗口
-nmap <silent><leader>jw <C-w>j
+nmap <leader>jw <C-w>j
 " 移动窗口，左右移动
-nmap <silent><leader>rw <C-w><C-r>
+nmap <leader>rw <C-w><C-r>
 
 " 所有窗口登高等宽
-nmap <silent><leader>=w <C-w>=
+nmap <leader>=w <C-w>=
 " 高度-N 
-nmap <silent><leader>s_ :resize -20<CR>
-nmap <silent><leader>s+ :resize +20<CR>
+nmap <leader>s_ :resize -20<CR>
+nmap <leader>s+ :resize +20<CR>
 " 宽度
-nmap <silent><leader>v_ :vertical resize -20<CR>
-nmap <silent><leader>v+ :vertical resize +20<CR>
+nmap <leader>v_ :vertical resize -20<CR>
+nmap <leader>v+ :vertical resize +20<CR>
 " preview window close
-nmap <silent><leader>pc :pc<CR>
+nmap <leader>pc :pc<CR>
 
 """""""""""""""""""""""""""""""""""""""
 "  --->>> session的保存和读取
@@ -777,14 +777,14 @@ nmap <silent><leader>pc :pc<CR>
 set sessionoptions-=curdir
 set sessionoptions+=sesdir
 " 保存/读取session和viminfo
-map <silent> <leader>wsv :mksession!<cr> :wviminfo vim.viminfo<cr>
-map <silent> <leader>rsv :source ./Session.vim<cr> :rviminfo vim.viminfo<cr>
+map  <leader>wsv :mksession!<cr> :wviminfo vim.viminfo<cr>
+map  <leader>rsv :source ./Session.vim<cr> :rviminfo vim.viminfo<cr>
 
 
 """""""""""""""""""""""""""""""""""""""
 "  --->>> html设置, 确保放在基本配置的后面, 避免被覆盖
 """""""""""""""""""""""""""""""""""""""
-nmap <silent> <leader>hml :!open % <CR>
+nmap  <leader>hml :!open % <CR>
 " html文件采用4个空格缩进方式, 保持同.editorconfig同步
 autocmd FileType html setlocal ts=4 sts=4 sw=4
 autocmd FileType htmldjango setlocal ts=4 sts=4 sw=4
@@ -804,7 +804,7 @@ au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 "  --->>> Emmet-vim
 """""""""""""""""""""""""""""""""""""""
 " html基本框架
-" imap <silent> <leader>html5 :html:5<C-r>,
+" imap  <leader>html5 :html:5<C-r>,
 
 if $VIM_CRONTAB == "true"
     set nobackup
