@@ -555,6 +555,8 @@ let NERDTreeIgnore = ['\.pyc$', 'migrations', 'log?', 'cscope.*', 'tags',
             \ 'media', 'doc']
 " 启动或者隐藏NERDTree
 nmap  <F2> :NERDTreeToggle<cr>
+" 刷新目录树
+nmap  <F3> :NERDTree<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""
