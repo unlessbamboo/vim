@@ -769,7 +769,7 @@ nmap <leader>s+ :resize +20<CR>
 " 宽度
 nmap <leader>v_ :vertical resize -20<CR>
 nmap <leader>v+ :vertical resize +20<CR>
-" preview window close
+" preview window close(类似<F5>的功能)
 nmap <leader>pc :pc<CR>
 
 """""""""""""""""""""""""""""""""""""""
