@@ -164,10 +164,12 @@ nmap  <leader>ph <Plug>GitGutterPrevHunk
 
 """"""""""""""""""""""""""""""""""""""" 
 " --->>> YCM configure
-"
+"  1. 首先必须在 Python3.6 下进行编译(使用pyenv安装)
+"  2. 如果需要安装python3开发环境, 请指定python路径为python3.6,
+"       使用系统自带的 Python3.8 无法进行跳转操作
+"  3. 在项目目录下.ycm_extra_conf.py指定python interpreter好像没用功
 """"""""""""""""""""""""""""""""""""""" 
-" 设置python或者python3(最好在项目下自己创建.ycm_extra_conf.py文件)
-let g:ycm_python_binary_path="python"
+let g:ycm_python_binary_path = "python"
 let g:ycm_complete_in_strings = 2
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_add_preview_to_completeopt = 1
