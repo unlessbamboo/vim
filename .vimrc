@@ -166,12 +166,12 @@ nmap  <leader>ph <Plug>GitGutterPrevHunk
 " --->>> YCM configure
 "
 """"""""""""""""""""""""""""""""""""""" 
-" 设置python或者python3
+" 设置python或者python3(最好在项目下自己创建.ycm_extra_conf.py文件)
 let g:ycm_python_binary_path="python"
 let g:ycm_complete_in_strings = 2
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"
+" let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_key_invoke_completion = ''
 nnoremap <leader>jd :YcmCompleter GoTo<cr>
 
@@ -235,13 +235,14 @@ let g:ale_open_list = 1
 let g:ale_keep_list_window_open = 0
 
 " help ale-python 信息
-" 指定pylintrc位置
-let g:ale_python_pylint_options = '--rcfile ~/.vim/.pylintrc'
+" 指定pylintrc位置(最好每一个项目下面自己保留一份配置)
+" let g:ale_python_pylint_options = '--rcfile ~/.vim/.pylintrc'
 " 启用virtualenv
-let g:ale_python_pylint_use_global = 0
+let g:ale_python_pylint_use_global = 1
 " tidy
 let g:ale_html_tidy_options = '-q -e -language en -config ~/.vim/.tidy.conf'
 " 禁用某些插件, 目前只能使用白名单(ale_linters, ale_linters_explicit)
+" let b:ale_linters = {'javascript': ['eslint'], 'html': ['tidy']}
 
 " 错误移动
 noremap <leader>ef :ALEFirst<CR>
@@ -551,7 +552,7 @@ let NERDTreeMinimalUI=1
 " 删除文件时自动删除文件对应 buffer
 let NERDTreeAutoDeleteBuffer=1
 " exclude some files
-let NERDTreeIgnore = ['\.pyc$', 'migrations', 'log?', 'cscope.*', 'tags', 
+let NERDTreeIgnore = ['\.pyc$', 'log?', 'cscope.*', 'tags', 
             \ 'media', 'doc']
 " 启动或者隐藏NERDTree
 nmap  <F2> :NERDTreeToggle<cr>
