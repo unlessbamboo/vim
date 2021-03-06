@@ -181,49 +181,10 @@ nnoremap <leader>jd :YcmCompleter GoTo<cr>
 let g:EclimCompletionMethod = 'omnifunc'
 
 
-""""""""""""""""""""""""""""""""""""""" 
-" --->语法检查，syntastic的配置参数
-"       获取错误信息：Errors或者lopen
-"       错误间跳转：lne或者lp
-"     PS:关于c/c++/python等配置见印象笔记或者github wiki、帮助文档
-"       每一个目录都有一份独有的bamboo.vim配置当前项目的语言配置
-"   
-""""""""""""""""""""""""""""""""""""""" 
-" 错误标注（和SyntasticStatuslineFlag()配合）
-" let g:syntastic_error_symbol = 'EE'
-" let g:syntastic_style_error_symbol = 'E>'
-" let g:syntastic_warning_symbol = 'WW'
-" let g:syntastic_style_warning_symbol = 'W>'
-
-" 0不自动. 1自动拉起关闭. 2 自动关闭. 3 自动拉起 默认2, 建议为1
-" 设置为1，会影响其他插件，抛出E924(help E924)错误，使用lopen来开启错误信息
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 0
-
-" pylint, flake8, shellcheckers
-" let g:syntastic_python_checkers=['flake8', 'pylint']
-" let g:syntastic_python_pylint_args='--rcfile=~/.vim/.pylintrc'
-" let g:syntastic_sh_checkers=['shellcheckers']
-
-" HTML
-" let g:syntastic_html_tidy_ignore_errors = [
-"            \ '<span> proprietary attribute'
-"            \]
-
-" 错误跳转
-" noremap <leader>le :Errors<CR>
-" noremap  <F4> :let g:syntastic_auto_loc_list = (
-"             \g:syntastic_auto_loc_list == '0' ? '1' : '0')<CR>
-" syntastic过慢导致的问题（需要按两次才能取消哦，注意大写的E）
-" 关闭html错误检查
-" let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': ['html'] }
-" nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
-
-
-
 """""""""""""""""""""""""""""""""""""""
 " 插件: ale
 " 功能: 异步代码检查插件
+" PS: 在django项目中, 如果根目录存在settings.py文件, 则filetype异常
 """""""""""""""""""""""""""""""""""""""
 " 控制错误输出格式, 通过这个 linter找到确切的忽略错误的方式
 let g:airline#extensions#ale#enabled = 1
@@ -244,7 +205,7 @@ let g:ale_python_pylint_use_global = 1
 " tidy
 let g:ale_html_tidy_options = '-q -e -language en -config ~/.vim/.tidy.conf'
 " 禁用某些插件, 目前只能使用白名单(ale_linters, ale_linters_explicit)
-" let b:ale_linters = {'javascript': ['eslint'], 'html': ['tidy']}
+let b:ale_linters = {'javascript': ['eslint'], 'html': ['tidy']}
 
 " 错误移动
 noremap <leader>ef :ALEFirst<CR>
@@ -553,6 +514,7 @@ let NERDTreeShowBookmarks=1
 let NERDTreeMinimalUI=1
 " 删除文件时自动删除文件对应 buffer
 let NERDTreeAutoDeleteBuffer=1
+let NERDTreeWinSize = 25
 " exclude some files
 let NERDTreeIgnore = ['\.pyc$', 'log?', 'cscope.*', 'tags', 
             \ 'media', 'doc']
