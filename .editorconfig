@@ -10,7 +10,7 @@ path=~/.vim/bundle/vim-jsbeautify/plugin/lib/js/lib/beautify.js
 ; Javascript interpreter to be invoked by default 'node'
 bin=node
 indent_style = space
-indent_size = 2
+indent_size = 4
 
 [**.json]
 indent_style = space
@@ -19,12 +19,12 @@ indent_size = 4
 [**.jsx]
 e4x = true
 indent_style = space
-indent_size = 2
+indent_size = 4
 
 [**.css]
 path=~/.vim/bundle/vim-jsbeautify/plugin/lib/js/lib/beautify-css.js
 indent_style = space
-indent_size = 2
+indent_size = 4
 
 [**.html]
 indent_style = space

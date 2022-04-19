@@ -52,6 +52,8 @@ vnoremap <leader>json :'<,'>!python -m json.tool<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> jsbeautify: 对css,javascript, html进行格式化
+"  默认配置文件: .editorconfig
+"  配置: 指定换行空格等信息
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:editorconfig_Beautifier = '~/.vim/.editorconfig'
 map <c-f> :call JsBeautify()<cr>
@@ -168,6 +170,7 @@ nmap  <leader>ph <Plug>GitGutterPrevHunk
 "  2. 如果需要安装python3开发环境, 请指定python路径为python3.6,
 "       使用系统自带的 Python3.8 无法进行跳转操作
 "  3. 在项目目录下.ycm_extra_conf.py指定python interpreter好像没用功
+"  4. YCM调动omnifunc来进行补全工作
 """"""""""""""""""""""""""""""""""""""" 
 let g:ycm_python_binary_path = "python"
 let g:ycm_complete_in_strings = 2
@@ -175,10 +178,21 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_add_preview_to_completeopt = 1
 " let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_key_invoke_completion = ''
+" css/html自动补全: 四空格起始的行, 冒号加空格的行情况
+let g:ycm_semantic_triggers = {
+    \   'css': [ 're!^\s{4}', 're!:\s+'],
+    \   'html': [ '</' ],
+    \ }
 nnoremap <leader>jd :YcmCompleter GoTo<cr>
 
 " java eclim
 let g:EclimCompletionMethod = 'omnifunc'
+" 关闭函数preview windows
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+" 关闭打开的preview windows: (类似<F5>的功能)
+noremap <leader>pc :pclose<CR>
+nmap <leader>pc :pc<CR>
 
 
 """""""""""""""""""""""""""""""""""""""
@@ -200,6 +214,7 @@ let g:ale_keep_list_window_open = 0
 " help ale-python 信息
 " 指定pylintrc位置(最好每一个项目下面自己保留一份配置)
 " let g:ale_python_pylint_options = '--rcfile ~/.vim/.pylintrc'
+" 如果希望对某个文件不检查, 在指定文件开头设置: pylint: skip-file
 " 启用virtualenv
 let g:ale_python_pylint_use_global = 1
 " tidy
@@ -734,8 +749,6 @@ nmap <leader>s+ :resize +20<CR>
 " 宽度
 nmap <leader>v_ :vertical resize -20<CR>
 nmap <leader>v+ :vertical resize +20<CR>
-" preview window close(类似<F5>的功能)
-nmap <leader>pc :pc<CR>
 
 """""""""""""""""""""""""""""""""""""""
 "  --->>> session的保存和读取
@@ -769,14 +782,17 @@ au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 
 """""""""""""""""""""""""""""""""""""""
 "  --->>> Emmet-vim
+" emmet快捷输入方式:
+"   输入某些命令(input模式) + ctrl_y + ,
 """""""""""""""""""""""""""""""""""""""
 " html基本框架
-" imap  <leader>html5 :html:5<C-r>,
-
 if $VIM_CRONTAB == "true"
     set nobackup
     set nowritebackup
 endif
+" HTML注释
+autocmd filetype *html* imap <c-_> <c-y>/
+autocmd filetype *html* map <c-_> <c-y>/
 
 
 """"""""""""""""""""""""""""""""""""""""""""""
