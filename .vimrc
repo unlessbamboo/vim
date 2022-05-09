@@ -819,6 +819,14 @@ if !exists("my_auto_commands_loaded")
   augroup END
 endif
 
+""""""""""""""""""""""""""""""""""""""""""""""""
+" wsl编码错误问题
+""""""""""""""""""""""""""""""""""""""""""""""""
+set encoding=utf-8
+set fileencoding=utf-8
+set termencoding=utf-8
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " --->>> bamboo.vim的配置(建议放在最后)
