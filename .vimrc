@@ -172,27 +172,48 @@ nmap  <leader>ph <Plug>GitGutterPrevHunk
 "  3. 在项目目录下.ycm_extra_conf.py指定python interpreter好像没用功
 "  4. YCM调动omnifunc来进行补全工作
 """"""""""""""""""""""""""""""""""""""" 
-let g:ycm_python_binary_path = "python"
-let g:ycm_complete_in_strings = 2
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_add_preview_to_completeopt = 1
+" let g:ycm_python_binary_path = "python"
+" let g:ycm_complete_in_strings = 2
+" let g:ycm_collect_identifiers_from_tags_files = 1
+" let g:ycm_add_preview_to_completeopt = 1
 " let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-let g:ycm_key_invoke_completion = ''
+" let g:ycm_key_invoke_completion = ''
 " css/html自动补全: 四空格起始的行, 冒号加空格的行情况
-let g:ycm_semantic_triggers = {
-    \   'css': [ 're!^\s{4}', 're!:\s+'],
-    \   'html': [ '</' ],
-    \ }
-nnoremap <leader>jd :YcmCompleter GoTo<cr>
+" let g:ycm_semantic_triggers = {
+"     \   'css': [ 're!^\s{4}', 're!:\s+'],
+"     \   'html': [ '</' ],
+"     \ }
+" nnoremap <leader>jd :YcmCompleter GoTo<cr>
 
 " java eclim
-let g:EclimCompletionMethod = 'omnifunc'
+" let g:EclimCompletionMethod = 'omnifunc'
 " 关闭函数preview windows
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
+" let g:ycm_autoclose_preview_window_after_insertion = 1
+" let g:ycm_autoclose_preview_window_after_completion = 1
 " 关闭打开的preview windows: (类似<F5>的功能)
-noremap <leader>pc :pclose<CR>
-nmap <leader>pc :pc<CR>
+" noremap <leader>pc :pclose<CR>
+" nmap <leader>pc :pc<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""
+" 插件: coc-nvim
+" LSP: 语言服务器协议, 支持编辑器或 IDE 中编程语言的丰富编辑功能: 
+"   在其自己的进程中运行库, 并使用进程间通信与之通信, 来回发送的消息形成协议
+" 相比viml和python插件, coc优势: 
+"   a. 优异的异步性能: 独立于vim的nodejs进程, viml和coc之间基于事件互相通信
+"   b. 性能优化: coc 提供了 document change 事件, 无需额外事件以及传输消耗即可实时获取所有 缓冲区内容
+"   c. 基于 javascript 社区的模块
+"   d. 使用 coc 提供的 API
+"   e. 统一化 vim 和 neovim 适配, coc 新版在传输层对于 vim 做了 neovim 接口的适配
+"   f. 更加可靠的代码
+"   g. 调试代码
+" 参考: https://zhuanlan.zhihu.com/p/65524706
+"""""""""""""""""""""""""""""""""""""""
+let g:coc_global_extensions = ['coc-json']
+if filereadable(expand("~/.vim/coc.vim"))
+    source ~/.vim/coc.vim
+endif
+
 
 
 """""""""""""""""""""""""""""""""""""""
@@ -212,9 +233,15 @@ let g:ale_open_list = 1
 let g:ale_keep_list_window_open = 0
 
 " help ale-python 信息
-" 指定pylintrc位置(最好每一个项目下面自己保留一份配置)
-" let g:ale_python_pylint_options = '--rcfile ~/.vim/.pylintrc'
+" 1. 指定pylintrc位置(最好每一个项目下面自己保留一份配置)
+" 对于每一个项目, 如果需要自定义配置, 则可以在bamboo.vim中增加如下配置
+"   let g:ale_python_pylint_options = '--rcfile expand("%:p:h")/.pylintrc'
+if !filereadable(".pylintrc")
+    let g:ale_python_pylint_options = '--rcfile ~/.vim/.pylintrc'
+endif
+
 " 如果希望对某个文件不检查, 在指定文件开头设置: pylint: skip-file
+" 如果希望对某个文件不检查flake8, 在文件开头: flake8: noqa
 " 启用virtualenv
 let g:ale_python_pylint_use_global = 1
 " tidy
@@ -233,7 +260,6 @@ noremap <leader>ep :ALEPrevious<CR>
 "     let g:ale_set_quickfix = 0
 "     let g:ale_open_list = 0
 " endfunc
-
 
 
 """"""""""""""""""""""""""""""""""""""" 
@@ -277,7 +303,6 @@ let g:NERDCustomDelimiters={ 'c': { 'left': '/**', 'right':'*/'} }
 " 注释空行
 let g:NERDCommentEmptyLines=1
 let g:NERDTrimTrailingWhitespace=1
-
 
 
 
@@ -839,8 +864,14 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 "           3，现在一般用LookupFile来代替find命令，见上面的说明
 "       
 """"""""""""""""""""""""""""""""""""""""""""""
-" 添加自定义的库文件位置
+" 添加自定义的库文件位置, 注意, 如果需要调试直接echo即可,
+" 每次wq都会重新加载vimrc文件, 会自动打印输出信息
 " let $PYTHONPATH='/Users/bamboo/Public/iLifeDiary/iLifeDiary/:/Users/zhengbifeng/Public/iLifeDiary/iLifeDiary'
+set verbosefile="~/.vim/vim.log"
 if filereadable("bamboo.vim")
     source bamboo.vim
+else
+    if filereadable(expand("~/.vim/bamboo.vim"))
+        source ~/.vim/bamboo.vim
+    endif
 endif
