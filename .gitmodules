@@ -90,10 +90,6 @@
 	path = bundle/vimcdoc
 	url = https://github.com/yianwillis/vimcdoc.git
     ignore = dirty
-[submodule "bundle/YouCompleteMe"]
-	path = bundle/YouCompleteMe
-	url = https://github.com/Valloric/YouCompleteMe.git
-    ignore = dirty
 [submodule "bundle/taglist.vim"]
 	path = bundle/taglist.vim
 	url = https://github.com/vim-scripts/taglist.vim.git
@@ -105,3 +101,6 @@
 [submodule "bundle/django-plus.vim"]
 	path = bundle/django-plus.vim
 	url = https://github.com/tweekmonster/django-plus.vim.git
+[submodule "pack/coc/start/coc.nvim"]
+	path = pack/coc/start/coc.nvim
+	url = https://github.com/neoclide/coc.nvim.git
