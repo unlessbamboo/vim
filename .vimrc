@@ -208,6 +208,10 @@ nmap  <leader>ph <Plug>GitGutterPrevHunk
 "   f. 更加可靠的代码
 "   g. 调试代码
 " 参考: https://zhuanlan.zhihu.com/p/65524706
+" 安装: 注意安装release分支
+" python注意: 
+"   1. 对于不同的虚拟环境, 运行: CocCommand -> python.setInterpreter
+"   2. 这些配置会保存到/Users/bamboounuse/.config/coc下而非项目目录下
 """""""""""""""""""""""""""""""""""""""
 let g:coc_global_extensions = ['coc-json']
 if filereadable(expand("~/.vim/coc.vim"))
