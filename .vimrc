@@ -71,6 +71,14 @@ autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 " autocmd FileType css :call CSSBeautify()
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ---> autojump, 整合autojump到vim中, 注意只能打开目录
+" 1. :J dir1
+" 2. :JumpStat  查看列表
+" 问题: 引入这个包之后会导致每次错误保存界面都有错乱显示, 暂弃用该功能,
+" 可以使用find + path来替代该功能, 后者麻烦点: set path=.,/user/include/,,
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> filetype
@@ -121,13 +129,15 @@ let g:BASH_Company      = 'BigUniverse'
 
 
 """"""""""""""""""""""""""""""""""""""" 
-" docstring的配置参数
-"               自动插入docstring字符串
+" docstring的配置参数: 自动插入docstring字符串
+" update: 2022-11-11: 升级docstring为2.0, 依赖doq, 需要在docstring项目根目录下执行: make install
 """"""""""""""""""""""""""""""""""""""" 
 " 设置拓展
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
 "nmap  <C-_> <Plug>(pydocstring)
 nmap  <leader>py :Pydocstring<cr>
+" 忽略__init__
+let g:pydocstring_ignore_init = 1
 
 
 
@@ -143,24 +153,29 @@ nmap  <leader>py :Pydocstring<cr>
 "           用于git，功能待挖掘
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 关闭或者启动gitgutter，默认开启
-map  <leader>gg :GitGutterToggle<cr>
+" map  <leader>gg :GitGutterToggle<cr>
 " 关闭或者启动gitgutter signs，默认开启
-map  <leader>gs :GitGutterSignsToggle<cr>
+" map  <leader>gs :GitGutterSignsToggle<cr>
 " 关闭或者启动高亮，默认开启
-map  <leader>gh :GitGutterLineHighlightsToggle<cr>
+" map  <leader>gh :GitGutterLineHighlightsToggle<cr>
 " 设置文件发生更改后出现提示的延时时间（定时器）,默认为4s，设置为250ms
-set updatetime=250
+" set updatetime=250
 " To keep your Vim snappy（短小精悍），最大更改为500，默认值
-let g:gitgutter_max_signs = 500
+" let g:gitgutter_max_signs = 500
 
 " 跳到下一个或者上一个hunk
-nmap  <leader>nh <Plug>GitGutterNextHunk
-nmap  <leader>ph <Plug>GitGutterPrevHunk
+" nmap  <leader>nh <Plug>GitGutterNextHunk
+" nmap  <leader>ph <Plug>GitGutterPrevHunk
 " stage或者undo hunk，取消修改
 "   <leader>hs
 "   <leader>hu
-" 其他命令，哎，git
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ---> 版本控制-3-vim-fugitive.vim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>gtd :Git diff<cr>
+" 查询当前行的所有提交记录
+map <leader>gtb :Git blame<cr>
 
 
 
@@ -210,13 +225,17 @@ nmap  <leader>ph <Plug>GitGutterPrevHunk
 " 参考: https://zhuanlan.zhihu.com/p/65524706
 " 安装: 注意安装release分支
 " python注意: 
-"   1. 对于不同的虚拟环境, 运行: CocCommand -> python.setInterpreter
+"   1. 对于不同的虚拟环境, 需要额外运行: 
+"           a. CocCommand -> python.setInterpreter
+"           b. 选择当前需要的python解释器
 "   2. 这些配置会保存到/Users/bamboounuse/.config/coc下而非项目目录下
 """""""""""""""""""""""""""""""""""""""
-let g:coc_global_extensions = ['coc-json']
-if filereadable(expand("~/.vim/coc.vim"))
-    source ~/.vim/coc.vim
-endif
+" let g:coc_global_extensions = ['coc-json']
+" if filereadable(expand("~/.vim/coc.vim"))
+"     source ~/.vim/coc.vim
+" endif
+" 不启用coc
+" let b:coc_enable=0
 
 
 
@@ -238,10 +257,13 @@ let g:ale_keep_list_window_open = 0
 
 " help ale-python 信息
 " 1. 指定pylintrc位置(最好每一个项目下面自己保留一份配置)
+" 2. 对于不同版本的pylintrc, 自己重新生成一份:  pylint --generate-rcfile > .pylintrc
 " 对于每一个项目, 如果需要自定义配置, 则可以在bamboo.vim中增加如下配置
-"   let g:ale_python_pylint_options = '--rcfile expand("%:p:h")/.pylintrc'
 if !filereadable(".pylintrc")
     let g:ale_python_pylint_options = '--rcfile ~/.vim/.pylintrc'
+else
+    " getcwd获取当前工作目录
+    let g:ale_python_pylint_options = '--rcfile '.getcwd().'/.pylintrc'
 endif
 
 " 如果希望对某个文件不检查, 在指定文件开头设置: pylint: skip-file
