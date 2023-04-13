@@ -28,63 +28,12 @@ syntax on
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ---> vim-ag，内容搜索，替代ack.vim
-"       requirement：安装the_silver_searcher工具
-"                   例如，ag -i 'pattern' path
-"       格式：
-"           Ag [options] {pattern} [{directory}]
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 自定义Ag路径
-"let g:ag_prg="<...> --vimgrep"
-" 查找，从项目根目录开始
-let g:ag_working_path_mode="r"
-" 执行路径
-set runtimepath^=~/.vim/bundle/ag.vim
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> vim-json，对json文件进行语法高亮
 "      json format and check
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 map  <leader>json :%!python -m json.tool<cr>
 vnoremap <leader>json :'<,'>!python -m json.tool<cr>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ---> jsbeautify: 对css,javascript, html进行格式化
-"  默认配置文件: .editorconfig
-"  配置: 指定换行空格等信息
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:editorconfig_Beautifier = '~/.vim/.editorconfig'
-map <c-f> :call JsBeautify()<cr>
-" 映射(可以配置vnormap)
-autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
-autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
-autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
-" 自动格式化, 关闭自动格式化(会导致其他问题)
-" autocmd FileType javascript :call JsBeautify()
-" autocmd FileType json :call JsonBeautify()
-" autocmd FileType jsx :call JsxBeautify()
-" autocmd FileType html :call HtmlBeautify()
-" autocmd FileType css :call CSSBeautify()
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ---> autojump, 整合autojump到vim中, 注意只能打开目录
-" 1. :J dir1
-" 2. :JumpStat  查看列表
-" 问题: 引入这个包之后会导致每次错误保存界面都有错乱显示, 暂弃用该功能,
-" 可以使用find + path来替代该功能, 后者麻烦点: set path=.,/user/include/,,
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ---> filetype
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" set dockerfile if find *Dockerfile
-autocmd BufNewFile,BufRead *Dockerfile set filetype=dockerfile
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -100,8 +49,6 @@ map  <leader>imp :InstantMarkdownPreview<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> vim-markdown
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
-" disable the folding configuration: set foldenable
-" let g:vim_markdown_folding_disabled = 1
 " To enable conceal use Vim's standard conceal configuration
 " 此时文档中看不到```vim配置信息
 set conceallevel=2
@@ -142,391 +89,6 @@ let g:pydocstring_ignore_init = 1
 let g:pydocstring_formatter = 'sphinx'
 " 自定义模板
 " let g:pydocstring_templates_path = '/path/to/custom/templates'
-
-
-
-"=======================版本控制=========================
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ---> 版本控制-1-vim-signify
-"           用于所有的版本控制
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 没有特别的配置
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ---> 版本控制-2-vim-gitgutter
-"           用于git，功能待挖掘
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 关闭或者启动gitgutter，默认开启
-" map  <leader>gg :GitGutterToggle<cr>
-" 关闭或者启动gitgutter signs，默认开启
-" map  <leader>gs :GitGutterSignsToggle<cr>
-" 关闭或者启动高亮，默认开启
-" map  <leader>gh :GitGutterLineHighlightsToggle<cr>
-" 设置文件发生更改后出现提示的延时时间（定时器）,默认为4s，设置为250ms
-" set updatetime=250
-" To keep your Vim snappy（短小精悍），最大更改为500，默认值
-" let g:gitgutter_max_signs = 500
-
-" 跳到下一个或者上一个hunk
-" nmap  <leader>nh <Plug>GitGutterNextHunk
-" nmap  <leader>ph <Plug>GitGutterPrevHunk
-" stage或者undo hunk，取消修改
-"   <leader>hs
-"   <leader>hu
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ---> 版本控制-3-vim-fugitive.vim
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>gtd :Git diff<cr>
-" 查询当前行的所有提交记录
-map <leader>gtb :Git blame<cr>
-
-
-
-""""""""""""""""""""""""""""""""""""""" 
-" --->>> YCM configure
-"  1. 首先必须在 Python3.6 下进行编译(使用pyenv安装)
-"  2. 如果需要安装python3开发环境, 请指定python路径为python3.6,
-"       使用系统自带的 Python3.8 无法进行跳转操作
-"  3. 在项目目录下.ycm_extra_conf.py指定python interpreter好像没用功
-"  4. YCM调动omnifunc来进行补全工作
-""""""""""""""""""""""""""""""""""""""" 
-" let g:ycm_python_binary_path = "python"
-" let g:ycm_complete_in_strings = 2
-" let g:ycm_collect_identifiers_from_tags_files = 1
-" let g:ycm_add_preview_to_completeopt = 1
-" let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-" let g:ycm_key_invoke_completion = ''
-" css/html自动补全: 四空格起始的行, 冒号加空格的行情况
-" let g:ycm_semantic_triggers = {
-"     \   'css': [ 're!^\s{4}', 're!:\s+'],
-"     \   'html': [ '</' ],
-"     \ }
-" nnoremap <leader>jd :YcmCompleter GoTo<cr>
-
-" java eclim
-" let g:EclimCompletionMethod = 'omnifunc'
-" 关闭函数preview windows
-" let g:ycm_autoclose_preview_window_after_insertion = 1
-" let g:ycm_autoclose_preview_window_after_completion = 1
-" 关闭打开的preview windows: (类似<F5>的功能)
-" noremap <leader>pc :pclose<CR>
-" nmap <leader>pc :pc<CR>
-
-
-"""""""""""""""""""""""""""""""""""""""
-" 插件: coc-nvim
-" LSP: 语言服务器协议, 支持编辑器或 IDE 中编程语言的丰富编辑功能: 
-"   在其自己的进程中运行库, 并使用进程间通信与之通信, 来回发送的消息形成协议
-" 相比viml和python插件, coc优势: 
-"   a. 优异的异步性能: 独立于vim的nodejs进程, viml和coc之间基于事件互相通信
-"   b. 性能优化: coc 提供了 document change 事件, 无需额外事件以及传输消耗即可实时获取所有 缓冲区内容
-"   c. 基于 javascript 社区的模块
-"   d. 使用 coc 提供的 API
-"   e. 统一化 vim 和 neovim 适配, coc 新版在传输层对于 vim 做了 neovim 接口的适配
-"   f. 更加可靠的代码
-"   g. 调试代码
-" 参考: https://zhuanlan.zhihu.com/p/65524706
-" 安装: 注意安装release分支
-" python注意: 
-"   1. 对于不同的虚拟环境, 需要额外运行: 
-"           a. CocCommand -> python.setInterpreter
-"           b. 选择当前需要的python解释器
-"   2. 这些配置会保存到/Users/bamboounuse/.config/coc下而非项目目录下
-"""""""""""""""""""""""""""""""""""""""
-" let g:coc_global_extensions = ['coc-json']
-" if filereadable(expand("~/.vim/coc.vim"))
-"     source ~/.vim/coc.vim
-" endif
-" 不启用coc
-" let b:coc_enable=0
-
-
-
-"""""""""""""""""""""""""""""""""""""""
-" 插件: ale
-" 功能: 异步代码检查插件
-" PS: 在django项目中, 如果根目录存在settings.py文件, 则filetype异常
-"""""""""""""""""""""""""""""""""""""""
-" 控制错误输出格式, 通过这个 linter找到确切的忽略错误的方式
-let g:airline#extensions#ale#enabled = 1
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '%...code...%: [%linter%] %%s [%severity%]'
-" use quickfix list instead of the loclist
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
-let g:ale_open_list = 0
-let g:ale_keep_list_window_open = 0
-
-" help ale-python 信息
-" 1. 指定pylintrc位置(最好每一个项目下面自己保留一份配置)
-" 2. 对于不同版本的pylintrc, 自己重新生成一份:  pylint --generate-rcfile > .pylintrc
-" 对于每一个项目, 如果需要自定义配置, 则可以在bamboo.vim中增加如下配置
-if !filereadable(".pylintrc")
-    let g:ale_python_pylint_options = '--rcfile ~/.vim/.pylintrc'
-else
-    " getcwd获取当前工作目录
-    let g:ale_python_pylint_options = '--rcfile '.getcwd().'/.pylintrc'
-endif
-
-" 如果希望对某个文件不检查, 在指定文件开头设置: pylint: skip-file
-" 如果希望对某个文件不检查flake8, 在文件开头: flake8: noqa
-" 启用virtualenv
-let g:ale_python_pylint_use_global = 1
-" tidy
-let g:ale_html_tidy_options = '-q -e -language en -config ~/.vim/.tidy.conf'
-" 禁用某些插件, 目前只能使用白名单(ale_linters, ale_linters_explicit)
-let b:ale_linters = {'javascript': ['eslint'], 'html': ['tidy']}
-
-" 错误移动
-noremap <leader>ef :ALEFirst<CR>
-noremap <leader>en :ALENext<CR>
-noremap <leader>el :ALELast<CR>
-noremap <leader>ep :ALEPrevious<CR>
-" 关闭自动打开错误quickfix
-" noremap <leader>ec :call BambooDisableAleQuickfix() <CR>
-" function BambooDisableAleQuickfix()
-"     let g:ale_set_quickfix = 0
-"     let g:ale_open_list = 0
-" endfunc
-
-
-""""""""""""""""""""""""""""""""""""""" 
-" 插件：Vimjas/vim-python-pep8-indent
-" 功能：基于pep8的自动缩进设置，非常棒
-""""""""""""""""""""""""""""""""""""""" 
-" flake8, .vim/.flake8，并创建软连接:ln -sf ~/.vim/.flake8 ~/.config/flake8
-" 自定义配置, 见github以及印象笔记
-" let g:flake8_ignore = 'E701, E301'
-
-" pylint, 创建~/.vim/.pylintrc, 并通过pylint_options指定, 文件名可以任意取值
-
-
-
-""""""""""""""""""""""""""""""""""""""" 
-" vim-surround配置
-"       见help surround
-"       主页: https://github.com/tpope/vim-surround
-" 单引号/双引号/标签的快速操作
-""""""""""""""""""""""""""""""""""""""" 
-" 没有特殊的配置，不要文档中的custom configure
-
-
-"""""""""""""""""""""""""""""""""""""""注释模块"""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""
-" --->> 注释模块1——nerdcommenter
-"""""""""""""""""""""""""""""""""""""""
-" for c++ style, change the '@' to '\'
-" Add space delims when comment
-let g:NERDSpaceDelims=1
-" User compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs=1
-" Align line-wise comment delimiters flush left instead of 
-" following code indentation
-" 终于找到这个了，还是得看官网---2016年 08月 15日 星期一 10:09:31 CST
-let g:NERDDefaultAlign='left'
-" set a language to use its alternate delimiters by default
-let g:NERDAltDelims_java=1
-" Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters={ 'c': { 'left': '/**', 'right':'*/'} }
-" 注释空行
-let g:NERDCommentEmptyLines=1
-let g:NERDTrimTrailingWhitespace=1
-
-
-
-""""""""""""""""""""""""""""""""""标签模块"""""""""""""""""""""""
-""""""""""""""""""""""""""""""""""""""""""""""
-" ---> 标签配置1——tags的配置
-""""""""""""""""""""""""""""""""""""""""""""""
-" 生成tags的命令
-map <F8> :!ctags
-            \ --languages=c,c++,python,java,php,sh -R 
-            \ --exclude=@$HOME/.vim/.ctagsignore 
-            \ --c++-kinds=+p --fields=+iaS --extra=+q .
-            \ <CR><CR> :TlistUpdate<CR>
-imap <F8> <ESC>:!ctags 
-            \ --languages=c,c++,python,java,php,sh,js -R 
-            \ --exclude=@$HOME/.vim/.ctagsignore 
-            \ --c++-kinds=+p --fields=+iaS --extra=+q .
-            \ <CR><CR> :TlistUpdate<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""
-" ---> 标签配置2——cscope
-"""""""""""""""""""""""""""""""""""""""""""""
-map <F9> :!find -L `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o 
-            \ -name "*.java" -o -name "*.py" -o -name "*.php"
-            \ >cscope.files<CR><CR>:!cscope -Rbq<CR>:cs reset<CR><CR>
-imap <F9> <ESC>:!find -L `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" 
-            \ -o -name "*.java" -o -name "*.py" -o -name "*.php"
-            \ >cscope.files<CR><CR>:!cscope -Rbq<CR>:cs reset<CR><CR>
-if has("cscope")
-    set csprg=/usr/local/bin/cscope
-    set csto=1
-    set cst
-    set nocsverb
-    " add any database in current directory
-    if filereadable("cscope.out")
-        cs add cscope.out
-    else
-        let cscope_file=findfile("cscope.out", ".;") 
-        let cscope_pre=matchstr(cscope_file, ".*/")
-        if !empty(cscope_file) && filereadable(cscope_file)
-            exe "cs add" cscope_file cscope_pre
-        endif
-    endif
-    set csverb
-endif
-" 可以手动输入:cs f s stringA
-" 查找该符号所有出现的地方
-nmap <leader>css :cs find s <C-R>=expand("<cword>")<CR><CR>
-" 查找该符号定义的地方
-nmap <leader>csg :cs find g <C-R>=expand("<cword>")<CR><CR>
-" 查找调用该符号的函数
-nmap <leader>csc :cs find c <C-R>=expand("<cword>")<CR><CR>
-" 查找该字符串, 比cs find s更加全面
-nmap <leader>cst :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <leader>cse :cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <leader>csf :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <leader>csi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <leader>csd :cs find d <C-R>=expand("<cword>")<CR><CR>
-
-"""""""""""""""""""""""""""""""""""""""""
-" ---> 标签配置3
-"   taglist的配置：vim跟随缓冲区退出，这里的文件数目不是根据窗口数哦，比如
-"                   打开vim（没有跟随文件）此时主编辑区不算是一个文件。
-"                   2014年 09月 17日 星期三 21:16:07 CST taglist的设置
-"""""""""""""""""""""""""""""""""""""""
-" 在剩余多少窗口时退出缓存
-let Tlist_Exit_OnlyWindow=1
-" 单一窗口显示的文件数
-let Tlist_Show_One_File=1
-" 窗口显示在右边或者左边，1为右边
-let Tlist_Use_Right_Window=0
-" 非当前文件，函数列表折叠隐藏，1为隐藏
-let Tlist_File_Fold_Auto_Close=0
-" 打开/关闭taglist窗口，不过被winmanager替代，见文件缓冲区插件2说明
-" map  <F6> :TlistToggle<cr>
-" 自动加载
-autocmd BufWritePost *.* :TlistUpdate
-
-
-
-
-"""""""""""""""""""""""""""配色模块"""""""""""""""""""""""""
-""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"----> 配色配置1
-"   molokai配色步骤:
-"               1，molokai.vim放入colors/目录下面
-"               2，molokai默认没有给对应元素配色
-"               3，配置都是自定义的，可以删除
-"
-""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 配色主题
-colorscheme molokai
-" 原始的monokai背景色
-let g:molokai_original=1
-" 256支持
-let g:rehash256=1
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"--->>配色配置2
-"   solarized配色步骤：
-"               1，vim-colors-solarized存入bundle目录下
-"               2，设置配色方案
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" 背景（dark/light）
-"if has('gui_running')
-"set background=dark
-"else
-"set background=light
-"endif
-"" 256支持
-"let g:solarized_termcolors=256
-"" 选择颜色主题solarized
-"colorscheme solarized
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"--->>配色配置3
-"       其他通用配置
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 匹配函数名，为函数名定义颜色做准备
-autocmd BufNewFile,BufRead * :syntax match cfunctions 
-            \"\<[a-zA-Z_][a-zA-Z_0-9]*\>[^()]*)("me=e-2
-autocmd BufNewFile,BufRead * :syntax match cfunctions 
-            \"\<[a-zA-Z_][a-zA-Z_0-9]*\>\s*("me=e-1
-" 给函数名加自定义颜色
-hi cfunctions ctermfg=8
-hi Type ctermfg=118 cterm=none 
-" 结构体配色
-hi Structure ctermfg=118 cterm=none
-" 宏配色修改
-"hi Macro ctermfg=161 cterm=bold
-hi PreCondit ctermfg=161 cterm=bold
-" 当前行的底色
-set cursorline
-
-""""""""""""""""""""""""""""""""""""""" 
-"--->>配色配置4
-"   powerline状态栏插件
-"       结合terminal的状态栏设置，涉及字体等信息，
-"       见印象笔记->vim->powerline安装
-"   PS:
-"       后期一键自动化安装的时候容易，现在配置很麻烦
-""""""""""""""""""""""""""""""""""""""" 
-" 找到powerline插件位置，当然也可以放在vim目录下面
-let s:python2_ubuntu="~/.local/lib/python2.7/site-packages/powerline/bindings/vim/"
-let s:python3_ubuntu="~/.local/lib/python3.4/site-packages/powerline/bindings/vim/"
-let s:python2_mac="~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim/"
-if exists(s:python2_ubuntu)
-    set rtp+=python2_ubuntu
-endif
-if exists(s:python3_ubuntu)
-    set rtp+=python3_ubuntu
-endif
-if exists(s:python2_mac)
-    set rtp+=python2_mac
-endif
-" 添加新的字体
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
-set laststatus=2
-" 主题风格
-let g:Powerline_colorscheme='solarized256'
-
-""""""""""""""""""""""""""""""""""""""" 
-"--->>配色配置5
-" Colorizer 高亮html/css中的颜色代码
-""""""""""""""""""""""""""""""""""""""" 
-" 自动开启, 编辑vimrc太过卡顿, 采用映射, 人工开启
-" let g:colorizer_auto_color = 1
-noremap  <leader>color :let g:colorizer_auto_color = 1<CR>
-let g:colorizer_auto_filetype='css,html'
-let g:colorizer_skip_comments = 1
-let g:colorizer_auto_map = 1
-
-
-
-""""""""""""""""""""""""""""""""""""""" 
-" ---> 日常模块1——quickfix分析
-"  
-""""""""""""""""""""""""""""""""""""""" 
-" Quickfix document
-noremap <leader>ln :lne<CR>
-noremap <leader>lp :lp<CR>
-noremap <leader>lc :cclose<CR>
-noremap <leader>lo :cwindow<CR>
-
-
-""""""""""""""""""""""""""""""""""""""" 
-" ---> 日常模块2——Calendar：
-""""""""""""""""""""""""""""""""""""""" 
-" 日期分隔符
-let g:calendar_date_separator = "-"
-" 打开日历时的视图
-let g:calendar_view = "day"
-" view布局，用于>切换时的布局
-let g:calendar_views = ['year', 'day', 'month', 'week', 'clock', 'days']
 
 
 """"""""""""""""""""""""文件缓冲区窗口模块""""""""""""""""""""""""
@@ -655,6 +217,9 @@ noremap  <leader>sa :Explore<CR>
 noremap  <leader>cf :let @+=expand("%")<CR>
 noremap  <leader>cp :let @+=expand("%:p")<CR>
 noremap  <leader>ct :let @+=expand("%:t")<CR>
+
+" set dockerfile if find *Dockerfile
+autocmd BufNewFile,BufRead *Dockerfile set filetype=dockerfile
 
 
 
@@ -904,4 +469,20 @@ else
     if filereadable(expand("~/.vim/bamboo.vim"))
         source ~/.vim/bamboo.vim
     endif
+endif
+" 插件配置集合
+if filereadable(expand("~/.vim/plugin/plugins.vim"))
+    source ~/.vim/plugin/plugins.vim
+endif
+" 配色模块
+if filereadable(expand("~/.vim/plugin/colors.vim"))
+    source ~/.vim/plugin/colors.vim
+endif
+" 版本控制模块
+if filereadable(expand("~/.vim/plugin/vcs.vim"))
+    source ~/.vim/plugin/vcs.vim
+endif
+" 老的弃用插件集合
+if filereadable(expand("~/.vim/plugin/old.vim"))
+    source ~/.vim/plugin/old.vim
 endif
