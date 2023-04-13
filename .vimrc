@@ -38,6 +38,7 @@ Plug 'mattn/emmet-vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'powerline/powerline'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
 
 " 代码检查
 Plug 'w0rp/ale'
