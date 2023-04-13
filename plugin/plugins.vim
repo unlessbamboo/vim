@@ -4,17 +4,18 @@
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> 1. jedi-vim
+" 注意, 需要进入该目录下执行: git submodule update --init --recursive
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 默认命令配置
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_command = "<leader>jd"
+let g:jedi#goto_assignments_command = "<leader>jg"
 let g:jedi#goto_stubs_command = "<leader>s"
-let g:jedi#goto_definitions_command = "<leader>jd"
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = "<leader>jk"
+let g:jedi#usages_command = "<leader>jn"
 let g:jedi#completions_command = "<C-Space>"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#rename_command_keep_name = "<leader>R"
+let g:jedi#rename_command = "<leader>jr"
+let g:jedi#rename_command_keep_name = "<leader>jR"
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -81,7 +82,7 @@ endif
 " 如果希望对某个文件不检查, 在指定文件开头设置: pylint: skip-file
 " 如果希望对某个文件不检查flake8, 在文件开头: flake8: noqa
 " 启用virtualenv
-let g:ale_python_pylint_use_global = 1
+let g:ale_python_pylint_use_global = 0
 " tidy
 let g:ale_html_tidy_options = '-q -e -language en -config ~/.vim/.tidy.conf'
 " 禁用某些插件, 目前只能使用白名单(ale_linters, ale_linters_explicit)

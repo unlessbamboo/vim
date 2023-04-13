@@ -85,3 +85,37 @@
 " 问题: 引入这个包之后会导致每次错误保存界面都有错乱显示, 暂弃用该功能,
 " 可以使用find + path来替代该功能, 后者麻烦点: set path=.,/user/include/,,
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+""""""""""""""""""""""""""""""""""""""" 
+" docstring的配置参数: 自动插入docstring字符串
+" update: 2022-11-11: 升级docstring为2.0, 依赖doq, 需要在docstring项目根目录下执行: make install
+""""""""""""""""""""""""""""""""""""""" 
+" nmap  <leader>py :Pydocstring<cr>
+" 忽略__init__
+" let g:pydocstring_ignore_init = 1
+" 支持: numpy, sphinx, google
+" let g:pydocstring_formatter = 'sphinx'
+" 自定义模板
+" let g:pydocstring_templates_path = '/path/to/custom/templates'
+
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" ---> 文件缓冲区窗口插件2
+"       winmanager的配置： 界面分隔,是否自动打开winmanager，
+"                       设置winmanger高度
+""""""""""""""""""""""""""""""""""""""""""""""
+" 设置显示方式或者界面分隔，左上角BE/FE共用一个窗口，右下角为taglist
+" 其中左上角BufExporer和FP的切换使用Ctrl + N
+let g:winManagerWindowLayout = "BufExplorer,FileExplorer|TagList"
+let g:defaultExplorer = 0
+" 自动打开winmanager
+let g:AutoOpenWinManager=0
+" 设置宽度
+let g:winMaagerWidth=30
+" goto first explorer window
+map  <leader>ff :FirstExplorerWindow<cr>
+" goto bottom explorer window
+map  <leader>bb :BottomExplorerWindow<cr>
+" reload
+nmap  <F6> :WMToggle<cr>

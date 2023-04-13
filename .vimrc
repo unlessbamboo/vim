@@ -8,19 +8,46 @@
 let mapleader = ","
 
 
-""""""""""""""""""""""""""""""""""""""" 
-"---->>>>vim-pathogen管理插件
-""""""""""""""""""""""""""""""""""""""" 
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-" 首先关闭文件检测
-filetype off
+" 2. 包管理工具: vim-plug, 命令
+"   PlugInstall 安装插件
+"   PlugUpdate  更新插件
+"   PlugClean   删除插件(需要重新加载vimrc配置文件)
+"   PlugStatus  插件状态
+"   PlugUpgrade 升级插件
+call plug#begin()
 
-" vim插件的存放位置，默认为.vim/bundle，可以不设置该项
-execute pathogen#infect()
-" 执行pathogen，虽然通过git来安装，但是还是需要pathogen管理
-call pathogen#infect()
-" 生成各个插件的文档(很重要)
-call pathogen#helptags()
+Plug 'vim-scripts/taglist.vim'
+Plug 'vim-scripts/winmanager'
+Plug 'vim-scripts/bash-support.vim'
+Plug 'vim-scripts/lookupfile'
+Plug 'vim-scripts/genutils'
+Plug 'scrooloose/nerdtree'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'scrooloose/nerdcommenter'
+Plug 'rking/ag.vim'
+Plug 'cespare/vim-toml'
+Plug 'yianwillis/vimcdoc'
+
+Plug 'chrisbra/Colorizer'
+Plug 'altercation/vim-colors-solarized'
+
+Plug 'maksimr/vim-jsbeautify'
+Plug 'ternjs/tern_for_vim'
+Plug 'tpope/vim-repeat'
+Plug 'mattn/emmet-vim'
+Plug 'plasticboy/vim-markdown'
+Plug 'powerline/powerline'
+Plug 'tpope/vim-surround'
+
+" 代码检查
+Plug 'w0rp/ale'
+" 若要临时禁用某个插件: Plug 'neoclide/coc.nvim', {'on': []}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" python
+Plug 'davidhalter/jedi-vim'
+
+call plug#end()
+
 
 " 自动检测文件类型，见印象笔记中说明
 filetype plugin indent on
@@ -75,22 +102,6 @@ let g:BASH_Email        = 'unlessbamboo@gmail.com'
 let g:BASH_Company      = 'BigUniverse'
 
 
-""""""""""""""""""""""""""""""""""""""" 
-" docstring的配置参数: 自动插入docstring字符串
-" update: 2022-11-11: 升级docstring为2.0, 依赖doq, 需要在docstring项目根目录下执行: make install
-""""""""""""""""""""""""""""""""""""""" 
-" 设置拓展
-autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
-"nmap  <C-_> <Plug>(pydocstring)
-nmap  <leader>py :Pydocstring<cr>
-" 忽略__init__
-let g:pydocstring_ignore_init = 1
-" 支持: numpy, sphinx, google
-let g:pydocstring_formatter = 'sphinx'
-" 自定义模板
-" let g:pydocstring_templates_path = '/path/to/custom/templates'
-
-
 """"""""""""""""""""""""文件缓冲区窗口模块""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""" 
 " ---> 文件缓冲区窗口插件1——BufExplorer
@@ -111,25 +122,6 @@ let g:bufExplorerSplitVertSize = 30
 let g:bufExplorerUseCurrentWindow=1  
 autocmd BufWinEnter \[Buf\ List\] setl nonumber
 
-""""""""""""""""""""""""""""""""""""""""""""""
-" ---> 文件缓冲区窗口插件2
-"       winmanager的配置： 界面分隔,是否自动打开winmanager，
-"                       设置winmanger高度
-""""""""""""""""""""""""""""""""""""""""""""""
-" 设置显示方式或者界面分隔，左上角BE/FE共用一个窗口，右下角为taglist
-" 其中左上角BufExporer和FP的切换使用Ctrl + N
-let g:winManagerWindowLayout = "BufExplorer,FileExplorer|TagList"
-let g:defaultExplorer = 0
-" 自动打开winmanager
-let g:AutoOpenWinManager=0
-" 设置宽度
-let g:winMaagerWidth=30
-" goto first explorer window
-map  <leader>ff :FirstExplorerWindow<cr>
-" goto bottom explorer window
-map  <leader>bb :BottomExplorerWindow<cr>
-" reload
-nmap  <F6> :WMToggle<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> 文件缓冲区窗口插件-3-nerdtree 配置
@@ -218,6 +210,8 @@ noremap  <leader>cf :let @+=expand("%")<CR>
 noremap  <leader>cp :let @+=expand("%:p")<CR>
 noremap  <leader>ct :let @+=expand("%:t")<CR>
 
+" 设置拓展
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
 " set dockerfile if find *Dockerfile
 autocmd BufNewFile,BufRead *Dockerfile set filetype=dockerfile
 
