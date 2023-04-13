@@ -38,10 +38,6 @@
 	path = bundle/bash-support.vim
 	url = https://github.com/vim-scripts/bash-support.vim.git
     ignore = dirty
-[submodule "bundle/vim-pydocstring"]
-	path = bundle/vim-pydocstring
-	url = https://github.com/heavenshell/vim-pydocstring.git
-    ignore = dirty
 [submodule "bundle/vim-instant-markdown"]
 	path = bundle/vim-instant-markdown
 	url = https://github.com/suan/vim-instant-markdown.git
