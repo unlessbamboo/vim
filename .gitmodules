@@ -107,3 +107,6 @@
 [submodule "pack/tpope/start/fugitive"]
 	path = pack/tpope/start/fugitive
 	url = https://tpope.io/vim/fugitive.git
+[submodule "bundle/jedi-vim"]
+	path = bundle/jedi-vim
+	url = https://github.com/davidhalter/jedi-vim.git

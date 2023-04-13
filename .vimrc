@@ -138,6 +138,10 @@ autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
 nmap  <leader>py :Pydocstring<cr>
 " 忽略__init__
 let g:pydocstring_ignore_init = 1
+" 支持: numpy, sphinx, google
+let g:pydocstring_formatter = 'sphinx'
+" 自定义模板
+" let g:pydocstring_templates_path = '/path/to/custom/templates'
 
 
 
@@ -252,7 +256,7 @@ let g:ale_echo_msg_format = '%...code...%: [%linter%] %%s [%severity%]'
 " use quickfix list instead of the loclist
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
-let g:ale_open_list = 1
+let g:ale_open_list = 0
 let g:ale_keep_list_window_open = 0
 
 " help ale-python 信息
