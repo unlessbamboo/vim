@@ -21,10 +21,12 @@ Plug 'vim-scripts/winmanager'
 Plug 'vim-scripts/bash-support.vim'
 " lookupfile: 用于在 vim 中快速查找文件的插件, 被fzf替代(弃用)
 " Plug 'vim-scripts/lookupfile'
-" 快速访问vim文档, 自动更新和下载vim文档
-Plug 'yianwillis/vimcdoc'
 Plug 'scrooloose/nerdtree'
 Plug 'jlanzarotta/bufexplorer'
+" 快速访问vim文档, 自动更新和下载vim文档
+Plug 'yianwillis/vimcdoc'
+" git
+Plug 'tpope/vim-fugitive'
 
 " 代码注释
 Plug 'scrooloose/nerdcommenter'
@@ -44,10 +46,6 @@ Plug 'cespare/vim-toml'
 Plug 'plasticboy/vim-markdown'
 
 " HTML, CSS, JS
-Plug 'tpope/vim-repeat'
-" Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
-Plug 'ternjs/tern_for_vim'
 Plug 'maksimr/vim-jsbeautify'
 Plug 'mattn/emmet-vim'
 
