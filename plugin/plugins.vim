@@ -28,27 +28,6 @@ nnoremap <leader>ff  :FZF<CR>
 nnoremap <leader>fp  :GFiles<CR>
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ---> 3. jsbeautify: 对css,javascript, html进行格式化
-"  默认配置文件: .editorconfig
-"  配置: 指定换行空格等信息
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:editorconfig_Beautifier = '~/.vim/.editorconfig'
-map <c-f> :call JsBeautify()<cr>
-" 映射(可以配置vnormap)
-autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
-autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
-autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
-" 自动格式化, 关闭自动格式化(会导致其他问题)
-" autocmd FileType javascript :call JsBeautify()
-" autocmd FileType json :call JsonBeautify()
-" autocmd FileType jsx :call JsxBeautify()
-" autocmd FileType html :call HtmlBeautify()
-" autocmd FileType css :call CSSBeautify()
-
-
 """""""""""""""""""""""""""""""""""""""
 " ---> 4. ale
 " 功能: 异步代码检查插件
@@ -82,7 +61,16 @@ endif
 let g:ale_python_pylint_use_global = 0
 " tidy
 let g:ale_html_tidy_options = '-q -e -language en -config ~/.vim/.tidy.conf'
+
 " 禁用某些插件, 目前只能使用白名单(ale_linters, ale_linters_explicit)
+"   安装: npm install -g eslint
+"   生成配置: 
+"       1. 先在某个目录下生成package.json, 再一步步生成: npm init; npm init @eslint/config
+"       2. 将生成的.eslintrc.js拷贝到全局, 再按照依赖: 
+"           npm install -g @typescript-eslint/eslint-plugin
+"           npm install -g @typescript-eslint/parser
+"           npm install -g eslint-plugin-vue
+"       3. 最终生成的eslintrc.js见用户根目录, 这仅仅是全局的
 let b:ale_linters = {'javascript': ['eslint'], 'html': ['tidy']}
 
 " 错误移动
@@ -214,21 +202,6 @@ let g:calendar_date_separator = "-"
 let g:calendar_view = "day"
 " view布局，用于>切换时的布局
 let g:calendar_views = ['year', 'day', 'month', 'week', 'clock', 'days']
-
-
-"""""""""""""""""""""""""""""""""""""""
-"  --->>> Emmet-vim
-" emmet快捷输入方式:
-"   输入某些命令(input模式) + ctrl_y + ,
-"""""""""""""""""""""""""""""""""""""""
-" html基本框架
-if $VIM_CRONTAB == "true"
-    set nobackup
-    set nowritebackup
-endif
-" HTML注释
-autocmd filetype *html* imap <c-_> <c-y>/
-autocmd filetype *html* map <c-_> <c-y>/
 
 
 """""""""""""""""""""""""""""""""""""""

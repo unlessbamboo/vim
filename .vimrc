@@ -32,6 +32,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdcommenter'
 " 代码片段
 Plug 'SirVer/ultisnips'
+" 代码格式化
+Plug 'sbdchd/neoformat'
 " 搜索
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -46,7 +48,6 @@ Plug 'cespare/vim-toml'
 Plug 'plasticboy/vim-markdown'
 
 " HTML, CSS, JS
-Plug 'maksimr/vim-jsbeautify'
 Plug 'mattn/emmet-vim'
 
 " 代码检查

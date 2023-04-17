@@ -286,3 +286,5 @@ if filereadable(expand("~/.vim/vim/old.vim"))
 endif
 " 配色模块
 source ~/.vim/plugin/colors.vim
+" 前端页面组件
+source ~/.vim/plugin/web.vim
