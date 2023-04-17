@@ -9,25 +9,6 @@ syntax on
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ---> vim-json，对json文件进行语法高亮
-"      json format and check
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map  <leader>json :%!python -m json.tool<cr>
-vnoremap <leader>json :'<,'>!python -m json.tool<cr>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ---> vim-instant-markdown
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:instant_markdown_slow=1
-" 关闭自动开启浏览器的配置，使用命令:InstantMarkdownPreview
-let g:instant_markdown_autostart=0
-" 映射快捷键
-map  <leader>imp :InstantMarkdownPreview<cr>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> vim-markdown
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " To enable conceal use Vim's standard conceal configuration
@@ -59,6 +40,7 @@ let g:BASH_Company      = 'BigUniverse'
 """"""""""""""""""""""""""""""""""""""" 
 "---->>>>正常的基础命令
 """"""""""""""""""""""""""""""""""""""" 
+" 代码补全: ctrl + n: 往下走, ctrl+p往上走
 " 语法高亮
 syntax enable
 " 高亮命中的文本或者set nohlsearch
