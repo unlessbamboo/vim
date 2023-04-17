@@ -127,12 +127,12 @@ map <F8> :!ctags
             \ --languages=c,c++,python,java,php,sh -R 
             \ --exclude=@$HOME/.vim/.ctagsignore 
             \ --c++-kinds=+p --fields=+iaS --extra=+q .
-            \ <CR><CR> :TlistUpdate<CR>
+            \ <CR>
 imap <F8> <ESC>:!ctags 
             \ --languages=c,c++,python,java,php,sh,js -R 
             \ --exclude=@$HOME/.vim/.ctagsignore 
             \ --c++-kinds=+p --fields=+iaS --extra=+q .
-            \ <CR><CR> :TlistUpdate<CR>
+            \ <CR>
 
 """""""""""""""""""""""""""""""""""""""""""""
 " ---> 标签配置2——cscope
@@ -180,18 +180,18 @@ nmap <leader>csd :cs find d <C-R>=expand("<cword>")<CR><CR>
 "                   打开vim（没有跟随文件）此时主编辑区不算是一个文件。
 "                   2014年 09月 17日 星期三 21:16:07 CST taglist的设置
 """""""""""""""""""""""""""""""""""""""
-" 在剩余多少窗口时退出缓存
-let Tlist_Exit_OnlyWindow=1
-" 单一窗口显示的文件数
-let Tlist_Show_One_File=1
-" 窗口显示在右边或者左边，1为右边
-let Tlist_Use_Right_Window=0
-" 非当前文件，函数列表折叠隐藏，1为隐藏
-let Tlist_File_Fold_Auto_Close=0
-" 打开/关闭taglist窗口，不过被winmanager替代，见文件缓冲区插件2说明
-" map  <F6> :TlistToggle<cr>
-" 自动加载
-autocmd BufWritePost *.* :TlistUpdate
+" " 在剩余多少窗口时退出缓存
+" let Tlist_Exit_OnlyWindow=1
+" " 单一窗口显示的文件数
+" let Tlist_Show_One_File=1
+" " 窗口显示在右边或者左边，1为右边
+" let Tlist_Use_Right_Window=0
+" " 非当前文件，函数列表折叠隐藏，1为隐藏
+" let Tlist_File_Fold_Auto_Close=0
+" " 打开/关闭taglist窗口，不过被winmanager替代，见文件缓冲区插件2说明
+" " map  <F6> :TlistToggle<cr>
+" " 自动加载
+" autocmd BufWritePost *.* :TlistUpdate
 
 
 """"""""""""""""""""""""""""""""""""""" 

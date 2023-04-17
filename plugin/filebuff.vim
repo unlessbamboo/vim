@@ -28,18 +28,18 @@ autocmd BufWinEnter \[Buf\ List\] setl nonumber
 """"""""""""""""""""""""""""""""""""""""""""""
 " 设置显示方式或者界面分隔，左上角BE/FE共用一个窗口，右下角为taglist
 " 其中左上角BufExporer和FP的切换使用Ctrl + N
-let g:winManagerWindowLayout = "BufExplorer,FileExplorer|TagList"
-let g:defaultExplorer = 0
-" 自动打开winmanager
-let g:AutoOpenWinManager=0
-" 设置宽度
-let g:winMaagerWidth=30
-" goto first explorer window
-map  <leader>ff :FirstExplorerWindow<cr>
-" goto bottom explorer window
-map  <leader>bb :BottomExplorerWindow<cr>
-" reload
-nmap  <F6> :WMToggle<cr>
+" let g:winManagerWindowLayout = "BufExplorer,FileExplorer|TagList"
+" let g:defaultExplorer = 0
+" " 自动打开winmanager
+" let g:AutoOpenWinManager=0
+" " 设置宽度
+" let g:winMaagerWidth=30
+" " goto first explorer window
+" map  <leader>ff :FirstExplorerWindow<cr>
+" " goto bottom explorer window
+" map  <leader>bb :BottomExplorerWindow<cr>
+" " reload
+" nmap  <F6> :WMToggle<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -70,50 +70,50 @@ nmap  <F3> :NERDTree<cr>
 """"""""""""""""""""""""""""""""""""""""
 " ---> 文件缓冲区窗口插件-4-lookupfile配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""
-" 可执行文件：
-"   <https://github.com/unlessbamboo/grocery-shop/blob/master/bamboo/shell/filenametags>
-nmap  <leader>ft :!bash 
-            \ /home/bamboo/.local/bin/filenametags
-            \<cr>:source ~/.vimrc<cr>
-" 加载指定的tags文件，而不是默认的tags文件，增加查找性能
-if filereadable("./filenametags")
-    let g:LookupFile_TagExpr = '"./filenametags"'
-endif
-" 最少输入字符位数才开始查找匹配
-let g:LookupFile_MinPatLength = 3
-" 不保存上次查找的字符串
-let g:LookupFile_PreserveLastPattern = 0
-" 保存查找历史
-let g:LookupFile_PreservePatternHistory = 1 
-" 回车打开第一个匹配项目
-let g:LookupFile_AlwaysAcceptFirst = 1
-" 不允许创建不存在的文件
-let g:LookupFile_AllowNewFiles = 0
-" F5的功能，查找文件，映射LookupFile为,lk
-nmap  <leader>luk :LUTags<cr>
-" 浏览缓冲区，列出缓冲区中所有文件，映射LUBufs为ll
-nmap  <leader>lul :LUBufs<cr>
-" 浏览目录，查看该目录下所有文件，映射LUWalk为lw
-nmap  <leader>luw :LUWalk<cr>
-" 默认设置忽略大小写查找, 重写该函数
-function! LookupFile_IgnoreCaseFunc(pattern)
-    let _tags = &tags
-    try
-        let &tags = eval(g:LookupFile_TagExpr)
-        let newpattern = '\c' . a:pattern
-        let tags = taglist(newpattern)
-    catch
-        echohl ErrorMsg | echo "Exception: " . v:exception | echohl NONE
-        return ""
-    finally
-        let &tags = _tags
-    endtry
-
-    " Show the matches for what is typed so far.
-    let files = map(tags, 'v:val["filename"]')
-    return files
-endfunction
-let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
+" " 可执行文件：
+" "   <https://github.com/unlessbamboo/grocery-shop/blob/master/bamboo/shell/filenametags>
+" nmap  <leader>ft :!bash
+"             \ /home/bamboo/.local/bin/filenametags
+"             \<cr>:source ~/.vimrc<cr>
+" " 加载指定的tags文件，而不是默认的tags文件，增加查找性能
+" if filereadable("./filenametags")
+"     let g:LookupFile_TagExpr = '"./filenametags"'
+" endif
+" " 最少输入字符位数才开始查找匹配
+" let g:LookupFile_MinPatLength = 3
+" " 不保存上次查找的字符串
+" let g:LookupFile_PreserveLastPattern = 0
+" " 保存查找历史
+" let g:LookupFile_PreservePatternHistory = 1
+" " 回车打开第一个匹配项目
+" let g:LookupFile_AlwaysAcceptFirst = 1
+" " 不允许创建不存在的文件
+" let g:LookupFile_AllowNewFiles = 0
+" " F5的功能，查找文件，映射LookupFile为,lk
+" nmap  <leader>luk :LUTags<cr>
+" " 浏览缓冲区，列出缓冲区中所有文件，映射LUBufs为ll
+" nmap  <leader>lul :LUBufs<cr>
+" " 浏览目录，查看该目录下所有文件，映射LUWalk为lw
+" nmap  <leader>luw :LUWalk<cr>
+" " 默认设置忽略大小写查找, 重写该函数
+" function! LookupFile_IgnoreCaseFunc(pattern)
+"     let _tags = &tags
+"     try
+"         let &tags = eval(g:LookupFile_TagExpr)
+"         let newpattern = '\c' . a:pattern
+"         let tags = taglist(newpattern)
+"     catch
+"         echohl ErrorMsg | echo "Exception: " . v:exception | echohl NONE
+"         return ""
+"     finally
+"         let &tags = _tags
+"     endtry
+"
+"     " Show the matches for what is typed so far.
+"     let files = map(tags, 'v:val["filename"]')
+"     return files
+" endfunction
+" let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
 
 
 """"""""""""""""""""""""""""""""""""""" 

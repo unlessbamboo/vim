@@ -13,14 +13,19 @@
 "   PlugUpgrade 升级插件
 call plug#begin()
 
-Plug 'vim-scripts/taglist.vim'
+" genutils: 通用的 Vim 工具函数库, 提供了许多常用的 Vim 脚本函数
+Plug 'vim-scripts/genutils'
+" taglist: 允许用户在一个侧边栏中查看当前文件的函数(弃用, 平常根本用不到)
+" Plug 'vim-scripts/taglist.vim'
 Plug 'vim-scripts/winmanager'
 Plug 'vim-scripts/bash-support.vim'
-Plug 'vim-scripts/lookupfile'
-Plug 'vim-scripts/genutils'
+" lookupfile: 用于在 vim 中快速查找文件的插件, 被fzf替代(弃用)
+" Plug 'vim-scripts/lookupfile'
+" 快速访问vim文档, 自动更新和下载vim文档
+Plug 'yianwillis/vimcdoc'
 Plug 'scrooloose/nerdtree'
 Plug 'jlanzarotta/bufexplorer'
-Plug 'yianwillis/vimcdoc'
+
 " 代码注释
 Plug 'scrooloose/nerdcommenter'
 " 搜索
@@ -30,15 +35,15 @@ Plug 'junegunn/fzf.vim'
 " 颜色
 Plug 'chrisbra/Colorizer'
 Plug 'altercation/vim-colors-solarized'
+Plug 'powerline/powerline'
 
 " 其他
 Plug 'cespare/vim-toml'
-Plug 'powerline/powerline'
 Plug 'plasticboy/vim-markdown'
 
 " HTML, CSS, JS
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'ternjs/tern_for_vim'
 Plug 'maksimr/vim-jsbeautify'
@@ -46,8 +51,6 @@ Plug 'mattn/emmet-vim'
 
 " 代码检查
 Plug 'w0rp/ale'
-" 若要临时禁用某个插件: Plug 'neoclide/coc.nvim', {'on': []}
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " python
 Plug 'Vimjas/vim-python-pep8-indent'
