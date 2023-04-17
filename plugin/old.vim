@@ -100,22 +100,14 @@
 " let g:pydocstring_templates_path = '/path/to/custom/templates'
 
 
-""""""""""""""""""""""""""""""""""""""""""""""
-" ---> 文件缓冲区窗口插件2
-"       winmanager的配置： 界面分隔,是否自动打开winmanager，
-"                       设置winmanger高度
-""""""""""""""""""""""""""""""""""""""""""""""
-" 设置显示方式或者界面分隔，左上角BE/FE共用一个窗口，右下角为taglist
-" 其中左上角BufExporer和FP的切换使用Ctrl + N
-let g:winManagerWindowLayout = "BufExplorer,FileExplorer|TagList"
-let g:defaultExplorer = 0
-" 自动打开winmanager
-let g:AutoOpenWinManager=0
-" 设置宽度
-let g:winMaagerWidth=30
-" goto first explorer window
-map  <leader>ff :FirstExplorerWindow<cr>
-" goto bottom explorer window
-map  <leader>bb :BottomExplorerWindow<cr>
-" reload
-nmap  <F6> :WMToggle<cr>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ---> 2. vim-ag，内容搜索，替代ack.vim
+"       requirement：安装the_silver_searcher工具
+"                   例如，ag -i 'pattern' path
+"       格式：
+"           Ag [options] {pattern} [{directory}]
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" " 查找，从项目根目录开始
+" let g:ag_working_path_mode="r"
+" " 执行路径
+" set runtimepath^=~/.vim/bundle/ag.vim

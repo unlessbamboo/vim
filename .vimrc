@@ -23,28 +23,37 @@ Plug 'vim-scripts/lookupfile'
 Plug 'vim-scripts/genutils'
 Plug 'scrooloose/nerdtree'
 Plug 'jlanzarotta/bufexplorer'
-Plug 'scrooloose/nerdcommenter'
-Plug 'rking/ag.vim'
-Plug 'cespare/vim-toml'
 Plug 'yianwillis/vimcdoc'
+" 代码注释
+Plug 'scrooloose/nerdcommenter'
+" 搜索
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
+" 颜色
 Plug 'chrisbra/Colorizer'
 Plug 'altercation/vim-colors-solarized'
 
-Plug 'maksimr/vim-jsbeautify'
-Plug 'ternjs/tern_for_vim'
-Plug 'tpope/vim-repeat'
-Plug 'mattn/emmet-vim'
-Plug 'plasticboy/vim-markdown'
+" 其他
+Plug 'cespare/vim-toml'
 Plug 'powerline/powerline'
+Plug 'plasticboy/vim-markdown'
+
+" HTML, CSS, JS
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
+Plug 'ternjs/tern_for_vim'
+Plug 'maksimr/vim-jsbeautify'
+Plug 'mattn/emmet-vim'
 
 " 代码检查
 Plug 'w0rp/ale'
 " 若要临时禁用某个插件: Plug 'neoclide/coc.nvim', {'on': []}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 " python
+Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'davidhalter/jedi-vim'
 
 call plug#end()
@@ -101,121 +110,6 @@ map  <leader>toc :Toc<cr>
 let g:BASH_AuthorName   = 'bamboo'
 let g:BASH_Email        = 'unlessbamboo@gmail.com'
 let g:BASH_Company      = 'BigUniverse'
-
-
-""""""""""""""""""""""""文件缓冲区窗口模块""""""""""""""""""""""""
-""""""""""""""""""""""""""""""""""""""" 
-" ---> 文件缓冲区窗口插件1——BufExplorer
-""""""""""""""""""""""""""""""""""""""" 
-" Do not show default help.
-let g:bufExplorerDefaultHelp=0       
-" Show relative paths.
-let g:bufExplorerShowRelativePath=1  
-" Sort by most recently used.
-let g:bufExplorerSortBy='mru'        
-" Split left.
-let g:bufExplorerSplitRight=0        
-" Split vertically.
-let g:bufExplorerSplitVertical=1     
-" Split width
-let g:bufExplorerSplitVertSize = 30  
-" Open in new window.
-let g:bufExplorerUseCurrentWindow=1  
-autocmd BufWinEnter \[Buf\ List\] setl nonumber
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ---> 文件缓冲区窗口插件-3-nerdtree 配置
-"           显示当前目录下的树形目录树，有时候有用
-"      PS: 建议结合lookupfile来使用
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 是否在vim启动的时候默认开启NERDTree
-" autocmd VimEnter * NERDTree
-" 窗口显示的位置，默认为左边
-" let NERDTreeWinPos='right'
-" 是否自动显示BookMarks
-let NERDTreeShowBookmarks=1
-" nerdtree 子窗口中不显示冗余帮助信息
-let NERDTreeMinimalUI=1
-" 删除文件时自动删除文件对应 buffer
-let NERDTreeAutoDeleteBuffer=1
-let NERDTreeWinSize = 25
-" exclude some files
-let NERDTreeIgnore = ['\.pyc$', 'log?', 'cscope.*', 'tags', 
-            \ 'media', 'doc']
-" 启动或者隐藏NERDTree
-nmap  <F2> :NERDTreeToggle<cr>
-" 刷新目录树
-nmap  <F3> :NERDTree<cr>
-
-
-""""""""""""""""""""""""""""""""""""""""
-" ---> 文件缓冲区窗口插件-4-lookupfile配置
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 可执行文件：
-"   <https://github.com/unlessbamboo/grocery-shop/blob/master/bamboo/shell/filenametags>
-nmap  <leader>ft :!bash 
-            \ /home/bamboo/.local/bin/filenametags
-            \<cr>:source ~/.vimrc<cr>
-" 加载指定的tags文件，而不是默认的tags文件，增加查找性能
-if filereadable("./filenametags")
-    let g:LookupFile_TagExpr = '"./filenametags"'
-endif
-" 最少输入字符位数才开始查找匹配
-let g:LookupFile_MinPatLength = 3
-" 不保存上次查找的字符串
-let g:LookupFile_PreserveLastPattern = 0
-" 保存查找历史
-let g:LookupFile_PreservePatternHistory = 1 
-" 回车打开第一个匹配项目
-let g:LookupFile_AlwaysAcceptFirst = 1
-" 不允许创建不存在的文件
-let g:LookupFile_AllowNewFiles = 0
-" F5的功能，查找文件，映射LookupFile为,lk
-nmap  <leader>luk :LUTags<cr>
-" 浏览缓冲区，列出缓冲区中所有文件，映射LUBufs为ll
-nmap  <leader>lul :LUBufs<cr>
-" 浏览目录，查看该目录下所有文件，映射LUWalk为lw
-nmap  <leader>luw :LUWalk<cr>
-" 默认设置忽略大小写查找, 重写该函数
-function! LookupFile_IgnoreCaseFunc(pattern)
-    let _tags = &tags
-    try
-        let &tags = eval(g:LookupFile_TagExpr)
-        let newpattern = '\c' . a:pattern
-        let tags = taglist(newpattern)
-    catch
-        echohl ErrorMsg | echo "Exception: " . v:exception | echohl NONE
-        return ""
-    finally
-        let &tags = _tags
-    endtry
-
-    " Show the matches for what is typed so far.
-    let files = map(tags, 'v:val["filename"]')
-    return files
-endfunction
-let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
-
-
-""""""""""""""""""""""""""""""""""""""" 
-" ---> 文件基本操作
-""""""""""""""""""""""""""""""""""""""" 
-" 1 重命名文件，使用插件rename，该方法有很多缺陷
-" saveas <new file> : will move a file from its location to CWD.
-" 2 使用Explore, 之后使用 R-- 重命名, D--删除文件
-noremap  <leader>sa :Explore<CR>
-" 3 复制当前文件名到剪贴板(cs-copy filename, cp-copy file path)
-"   关于expand, 见印象笔记
-noremap  <leader>cf :let @+=expand("%")<CR>
-noremap  <leader>cp :let @+=expand("%:p")<CR>
-noremap  <leader>ct :let @+=expand("%:t")<CR>
-
-" 设置拓展
-autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
-" set dockerfile if find *Dockerfile
-autocmd BufNewFile,BufRead *Dockerfile set filetype=dockerfile
-
 
 
 """"""""""""""""""""""""""""""""""""""" 
@@ -395,21 +289,6 @@ autocmd FileType javascript setlocal ts=2 sts=2 sw=2
 au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 
 
-"""""""""""""""""""""""""""""""""""""""
-"  --->>> Emmet-vim
-" emmet快捷输入方式:
-"   输入某些命令(input模式) + ctrl_y + ,
-"""""""""""""""""""""""""""""""""""""""
-" html基本框架
-if $VIM_CRONTAB == "true"
-    set nobackup
-    set nowritebackup
-endif
-" HTML注释
-autocmd filetype *html* imap <c-_> <c-y>/
-autocmd filetype *html* map <c-_> <c-y>/
-
-
 """"""""""""""""""""""""""""""""""""""""""""""
 " ---> 大文件
 """"""""""""""""""""""""""""""""""""""""""""""
@@ -465,19 +344,19 @@ else
         source ~/.vim/bamboo.vim
     endif
 endif
+" 文件缓冲区, 注意, 这些模块配置只能放到plugin目录下
+source ~/.vim/plugin/filebuff.vim
 " 插件配置集合
-if filereadable(expand("~/.vim/plugin/plugins.vim"))
+try
     source ~/.vim/plugin/plugins.vim
-endif
-" 配色模块
-if filereadable(expand("~/.vim/plugin/colors.vim"))
-    source ~/.vim/plugin/colors.vim
-endif
+catch
+    echo "导入plugins插件配置异常"
+endtry
 " 版本控制模块
-if filereadable(expand("~/.vim/plugin/vcs.vim"))
-    source ~/.vim/plugin/vcs.vim
-endif
+source ~/.vim/plugin/vcs.vim
 " 老的弃用插件集合
-if filereadable(expand("~/.vim/plugin/old.vim"))
+if filereadable(expand("~/.vim/vim/old.vim"))
     source ~/.vim/plugin/old.vim
 endif
+" 配色模块
+source ~/.vim/plugin/colors.vim

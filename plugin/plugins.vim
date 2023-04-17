@@ -8,9 +8,9 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 默认命令配置
 let g:jedi#goto_command = "<leader>jd"
-let g:jedi#goto_assignments_command = "<leader>jg"
-let g:jedi#goto_stubs_command = "<leader>s"
-let g:jedi#goto_definitions_command = ""
+let g:jedi#goto_assignments_command = ""
+let g:jedi#goto_stubs_command = "<leader>js"
+let g:jedi#goto_definitions_command = "<leader>jg"
 let g:jedi#documentation_command = "<leader>jk"
 let g:jedi#usages_command = "<leader>jn"
 let g:jedi#completions_command = "<C-Space>"
@@ -19,16 +19,13 @@ let g:jedi#rename_command_keep_name = "<leader>jR"
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ---> 2. vim-ag，内容搜索，替代ack.vim
-"       requirement：安装the_silver_searcher工具
-"                   例如，ag -i 'pattern' path
-"       格式：
-"           Ag [options] {pattern} [{directory}]
+" ---> 2. fzf.vim
+"  基于fzf命令, 功能非常强大, 这里仅仅用到一些常用的, 其他暂不使用
+"  参考: https://github.com/junegunn/fzf.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 查找，从项目根目录开始
-let g:ag_working_path_mode="r"
-" 执行路径
-set runtimepath^=~/.vim/bundle/ag.vim
+" 进入fzf交互界面
+nnoremap <leader>ff  :FZF<CR>
+nnoremap <leader>fp  :GFiles<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -217,3 +214,18 @@ let g:calendar_date_separator = "-"
 let g:calendar_view = "day"
 " view布局，用于>切换时的布局
 let g:calendar_views = ['year', 'day', 'month', 'week', 'clock', 'days']
+
+
+"""""""""""""""""""""""""""""""""""""""
+"  --->>> Emmet-vim
+" emmet快捷输入方式:
+"   输入某些命令(input模式) + ctrl_y + ,
+"""""""""""""""""""""""""""""""""""""""
+" html基本框架
+if $VIM_CRONTAB == "true"
+    set nobackup
+    set nowritebackup
+endif
+" HTML注释
+autocmd filetype *html* imap <c-_> <c-y>/
+autocmd filetype *html* map <c-_> <c-y>/

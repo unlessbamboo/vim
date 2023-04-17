@@ -3,9 +3,9 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 "----> 配色配置1
 "   molokai配色步骤:
-"               1，molokai.vim放入colors/目录下面
-"               2，molokai默认没有给对应元素配色
-"               3，配置都是自定义的，可以删除
+"      1，molokai.vim放入colors/目录下面
+"      2，molokai默认没有给对应元素配色
+"      3，配置都是自定义的，可以删除
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " 配色主题
@@ -37,12 +37,10 @@ let g:rehash256=1
 "       其他通用配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 匹配函数名，为函数名定义颜色做准备
-autocmd BufNewFile,BufRead * :syntax match cfunctions 
-            \"\<[a-zA-Z_][a-zA-Z_0-9]*\>[^()]*)("me=e-2
-autocmd BufNewFile,BufRead * :syntax match cfunctions 
-            \"\<[a-zA-Z_][a-zA-Z_0-9]*\>\s*("me=e-1
+autocmd BufNewFile,BufRead * :syntax match cfunctions "\<[a-zA-Z_][a-zA-Z_0-9]*\>[^()]*)("me=e-2
+autocmd BufNewFile,BufRead * :syntax match cfunctions "\<[a-zA-Z_][a-zA-Z_0-9]*\>\s*("me=e-1
 " 给函数名加自定义颜色
-hi cfunctions ctermfg=8
+hi cfunctions gui=NONE cterm=bold ctermfg=67
 hi Type ctermfg=118 cterm=none 
 " 结构体配色
 hi Structure ctermfg=118 cterm=none
