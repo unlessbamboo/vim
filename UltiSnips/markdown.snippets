@@ -1,0 +1,14 @@
+# markdown头部
+snippet sphead "bamboo markdown header" b
+---
+title: ${1:title}
+description: ${2:description}
+date: `!v strftime("%Y-%m-%d %H:%M:%S")`
+categories:
+  - ${4}
+
+---
+
+${0}
+endsnippet
+# vim:ft=snippets:

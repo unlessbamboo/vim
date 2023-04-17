@@ -28,6 +28,8 @@ Plug 'jlanzarotta/bufexplorer'
 
 " 代码注释
 Plug 'scrooloose/nerdcommenter'
+" 代码片段
+Plug 'SirVer/ultisnips'
 " 搜索
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'

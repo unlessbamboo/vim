@@ -1,0 +1,13 @@
+priority -70
+
+# 1. flask 日志记录
+snippet sppylog "python log for flask" b
+current_app.log(${1:content})
+endsnippet
+
+# html?
+snippet "([^\s]\w+)\.log" "console.log(postfix)" r
+console.log(`!p snip.rv = match.group(1)`)
+endsnippet
+
+# vim:ft=snippets:

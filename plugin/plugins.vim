@@ -229,3 +229,14 @@ endif
 " HTML注释
 autocmd filetype *html* imap <c-_> <c-y>/
 autocmd filetype *html* map <c-_> <c-y>/
+
+
+"""""""""""""""""""""""""""""""""""""""
+"  --->>> UltiSnips代码片段Engine插件
+"""""""""""""""""""""""""""""""""""""""
+let g:UltiSnipsExpandTrigger="<tab>"
+" 使用 tab 切换下一个触发点，shit+tab 上一个触发点
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+" 使用 UltiSnipsEdit 命令时垂直分割屏幕
+let g:UltiSnipsEditSplit="vertical"

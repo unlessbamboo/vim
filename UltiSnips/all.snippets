@@ -1,0 +1,25 @@
+priority -60
+
+
+#########
+# DATES #
+#########
+snippet spdate "YYYY-MM-DD" w
+`!v strftime("%Y-%m-%d")`
+endsnippet
+
+snippet spdatetime "YYYY-MM-DD hh:mm:ss" w
+`!v strftime("%Y-%m-%d %H:%M:%S")`
+endsnippet
+
+##########
+#  Misc  #
+##########
+snippet spuuid "Random UUID" w
+`!p if not snip.c: import uuid; snip.rv = str(uuid.uuid4())`
+endsnippet
+snippet sppylog "python log for flask" b
+current_app.log(${1:content})
+endsnippet
+
+# vim:ft=snippets:
