@@ -10,3 +10,6 @@ require("keybindings")
 require("plugins")
 
 -- 4. lsp配置
+
+-- 5. 选项配置
+require("options")
