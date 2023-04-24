@@ -201,11 +201,12 @@ map  <leader>rsv :source ./Session.vim<cr> :rviminfo vim.viminfo<cr>
 """""""""""""""""""""""""""""""""""""""
 nmap  <leader>hml :!open % <CR>
 " html文件采用4个空格缩进方式, 保持同.editorconfig同步
-autocmd FileType html setlocal ts=4 sts=4 sw=4
+autocmd FileType html setlocal ts=2 sts=2 sw=2
 autocmd FileType htmldjango setlocal ts=4 sts=4 sw=4
 autocmd FileType css setlocal ts=2 sts=2 sw=2
 autocmd FileType ruby setlocal ts=2 sts=2 sw=2
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2
+let g:html_indent_script1 = "zero"
 
 
 """""""""""""""""""""""""""""""""""""""

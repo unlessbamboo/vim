@@ -55,3 +55,9 @@ augroup fmt
 augroup END
 " 2. 指定python使用autopep8格式化(默认)
 let g:neoformat_enabled_python = ['autopep8']
+
+
+"""""""""""""""""""""""""""""""""""""""
+"  --->>> 说明: 
+"""""""""""""""""""""""""""""""""""""""
+" 1. 服务启动: npm i -g live-server, 之后通过命令: live-server .启动服务

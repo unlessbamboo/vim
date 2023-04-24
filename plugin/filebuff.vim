@@ -133,3 +133,13 @@ noremap  <leader>ct :let @+=expand("%:t")<CR>
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
 " set dockerfile if find *Dockerfile
 autocmd BufNewFile,BufRead *Dockerfile set filetype=dockerfile
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ---> 2. fzf.vim
+"  基于fzf命令, 功能非常强大, 这里仅仅用到一些常用的, 其他暂不使用
+"  参考: https://github.com/junegunn/fzf.vim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 进入fzf交互界面
+nnoremap <leader>ff  :FZF<CR>
+nnoremap <leader>fp  :GFiles<CR>

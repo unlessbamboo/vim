@@ -18,16 +18,6 @@ let g:jedi#rename_command = "<leader>jr"
 let g:jedi#rename_command_keep_name = "<leader>jR"
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ---> 2. fzf.vim
-"  基于fzf命令, 功能非常强大, 这里仅仅用到一些常用的, 其他暂不使用
-"  参考: https://github.com/junegunn/fzf.vim
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 进入fzf交互界面
-nnoremap <leader>ff  :FZF<CR>
-nnoremap <leader>fp  :GFiles<CR>
-
-
 """""""""""""""""""""""""""""""""""""""
 " ---> 4. ale
 " 功能: 异步代码检查插件
@@ -115,22 +105,21 @@ map <F8> :!ctags
             \ --languages=c,c++,python,java,php,sh -R 
             \ --exclude=@$HOME/.vim/.ctagsignore 
             \ --c++-kinds=+p --fields=+iaS --extra=+q .
-            \ <CR>
+            \ <CR><CR>
 imap <F8> <ESC>:!ctags 
             \ --languages=c,c++,python,java,php,sh,js -R 
             \ --exclude=@$HOME/.vim/.ctagsignore 
             \ --c++-kinds=+p --fields=+iaS --extra=+q .
-            \ <CR>
+            \ <CR><CR>
 
 """""""""""""""""""""""""""""""""""""""""""""
 " ---> 标签配置2——cscope
+"  问题1: 无法将find复杂命令成功移入vim中, 所以更改思路, 采用调脚本方式
+"  问题2: cs reset在neovim中不存在, 采用静默方式运行
 """""""""""""""""""""""""""""""""""""""""""""
-map <F9> :!find -L `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o 
-            \ -name "*.java" -o -name "*.py" -o -name "*.php"
-            \ >cscope.files<CR><CR>:!cscope -Rbq<CR>:cs reset<CR><CR>
-imap <F9> <ESC>:!find -L `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" 
-            \ -o -name "*.java" -o -name "*.py" -o -name "*.php"
-            \ >cscope.files<CR><CR>:!cscope -Rbq<CR>:cs reset<CR><CR>
+let g:cscope_ignored_dir = 'node_modules$\|dist$\|deploy$'
+map <F9> :!~/.vim/mycscope.sh<CR><CR>:!cscope -Rbq<CR><CR>:silent! cs reset<CR><CR>
+imap <F9> <ESC>:!~/.vim/mycscope.sh<CR><CR>:!cscope -Rbq<CR><CR>:silent!cs reset<CR><CR>
 if has("cscope")
     set csprg=/usr/local/bin/cscope
     set csto=1
@@ -207,9 +196,9 @@ let g:calendar_views = ['year', 'day', 'month', 'week', 'clock', 'days']
 """""""""""""""""""""""""""""""""""""""
 "  --->>> UltiSnips代码片段Engine插件
 """""""""""""""""""""""""""""""""""""""
-let g:UltiSnipsExpandTrigger="<tab>"
-" 使用 tab 切换下一个触发点，shit+tab 上一个触发点
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
-" 使用 UltiSnipsEdit 命令时垂直分割屏幕
-let g:UltiSnipsEditSplit="vertical"
+" let g:UltiSnipsExpandTrigger="<tab>"
+" " 使用 tab 切换下一个触发点，shit+tab 上一个触发点
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+" " 使用 UltiSnipsEdit 命令时垂直分割屏幕
+" let g:UltiSnipsEditSplit="vertical"
