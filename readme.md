@@ -1,4 +1,18 @@
 
+### 1 术语
+1. lsp
+LSP是Language Server Protocol的缩写, 它是一种为编辑器和IDE提供语言服务的协议. 它的目标是将语言智能与编辑器/IDE解耦, 使得多种编辑器/IDE可以共享一些通用的语言服务，从而减少语言实现的重复工作，加速语言实现的迭代速度，为开发者提供更好的开发体验。
+
+目前流行的lsp插件有: `coc.nvim, vim-lsp, LanguageClient-neovim`, 关于`coc.nvim`和`vim-lsp`的区别, 知乎上有如下说明:
+
++ 性能上因为 nvim-lsp 不需要远程通讯大概更好一点，不过主要取决于 language server
++ 稳定性上已有功能应该都比较稳定了
++ 使用体验上 coc.nvim 的补全和错误提示是直接提供的，上手相对容易，但是在定制方面因为coc.nvim 主要基于配置文件只提供了有限的设置，不如 nvim-lsp 那么灵活透明
+
+目前作者先使用`coc.nvim`.
+
+
+### 2 配置
 1. 目录结构
 
 功能: nvim基础配置
@@ -59,6 +73,31 @@ local opts = {
 -- 绑定
 vim.keymap.set('n', '<C-h>', '<C-w>h', opts)
 ```
+
+### 3 coc
+1. coc本身并不提供具体语言的补全功能，更多的只是提供了一个补全功能的平台，所以在安装完成后，我们需要安装具体的语言服务以支持对应的补全功能。 例如安装JSON相关插件
+
+```vim
+" 注意: coc-tsserver同时支持javascript和typescript
+CocInstall coc-json coc-html coc-css coc-tsserver
+```
+
+此时该插件会被安装到`~/.config/coc/extensions/node_modules/coc-json`目录下, 此时可以通过`CocList extensions`查看当前已经安装的coc插件. 另外, 可以通过[地址](https://www.npmjs.com/search?q=keywords:coc.nvim)获取当前支持的coc.nvim子插件. 
+
+1) coc自插件管理工具`coc-marketplace`(有点卡, 也不太全), 其命令如下:
+
+```vim
+" 1. 安装
+CocInstall coc-marketplace
+
+" 2. 管理
+CocList marketplace
+
+" 3. 搜索python相关, 然后选择即可管理
+CocList marketplace python
+```
+
+2) 通过coc.nvim官网的文档查看支持的插件: [coc.extensions](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions#implemented-coc-extensions)
 
 
 参考:

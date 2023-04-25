@@ -11,8 +11,15 @@ Plug 'vim-scripts/genutils'
 Plug 'scrooloose/nerdtree'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'yianwillis/vimcdoc'
+Plug 'tpope/vim-fugitive'
 " 代码注释
-Plug 'scrooloose/nerdcommenter'
+" Plug 'scrooloose/nerdcommenter'
+Plug 'numToStr/Comment.nvim'
+
+" 代码片段
+Plug 'SirVer/ultisnips'
+" 代码格式化
+Plug 'sbdchd/neoformat'
 " 搜索
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -26,21 +33,27 @@ Plug 'powerline/powerline'
 Plug 'cespare/vim-toml'
 Plug 'plasticboy/vim-markdown'
 
+" nvim专用-代码补全(被coc.nvim替代了, 见readme.md说明)
+" Plug 'neovim/nvim-lspconfig'
+" Plug 'hrsh7th/cmp-nvim-lsp'
+" Plug 'hrsh7th/cmp-buffer'
+" Plug 'hrsh7th/cmp-path'
+" Plug 'hrsh7th/cmp-cmdline'
+" Plug 'hrsh7th/nvim-cmp'
+
 " HTML, CSS, JS
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-fugitive'
-Plug 'ternjs/tern_for_vim'
-Plug 'maksimr/vim-jsbeautify'
 Plug 'mattn/emmet-vim'
 
 " 代码检查
 Plug 'w0rp/ale'
-" 若要临时禁用某个插件: Plug 'neoclide/coc.nvim', {'on': []}
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " python
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'davidhalter/jedi-vim'
+
+" lsp: 若要临时禁用某个插件: Plug 'neoclide/coc.nvim', {'on': []}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 
 call plug#end()
 

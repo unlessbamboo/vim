@@ -1,3 +1,12 @@
 {
-    // coc: 使用类似vscode的配置
+  // coc: 使用类似vscode的配置
+  "coc.preferences.formatOnSaveFiletypes": ["javascript"],
+
+  // coc-vetur配置: https://www.npmjs.com/package/coc-vetur
+  "vetur.ignoreProjectWarning": true,
+  "vetur.validation.script": false,
+  // 忽略特定的错误, 更改完需要: CocUpdate
+  // 另见https://juejin.cn/post/7077102548640858125, 更改jsconfig.json
+  "javascript.suggestionActions.enabled": false,
+  "typescript.suggestionActions.enabled": false
 }
