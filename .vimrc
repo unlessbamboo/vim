@@ -61,3 +61,5 @@ call plug#end()
 
 
 source ~/.vim/plugin/entrypoint.vim
+" vim而非nvim拥有的插件
+source ~/.vim/plugin/vimonly.vim

@@ -48,10 +48,10 @@ autocmd filetype *html* map <c-_> <c-y>/
 "  使用方法: 输入neoformat, 按空格, 然后tab选择需要格式化的工具, 比如prettier
 "  前提条件: 安装格式化工具, 例如prettier: npm install -g prettier
 """""""""""""""""""""""""""""""""""""""
-" 1. 自动保存
+" 1. 自动保存, silent!表示静默
 augroup fmt
   autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
+  autocmd BufWritePre * silent! undojoin | Neoformat
 augroup END
 " 2. 指定python使用autopep8格式化(默认)
 let g:neoformat_enabled_python = ['autopep8']
