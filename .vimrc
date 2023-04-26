@@ -39,8 +39,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " 颜色
-Plug 'chrisbra/Colorizer'
-Plug 'altercation/vim-colors-solarized'
+" Plug 'chrisbra/Colorizer'
+" Plug 'altercation/vim-colors-solarized'
 Plug 'powerline/powerline'
 
 " 其他
