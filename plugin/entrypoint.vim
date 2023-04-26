@@ -11,19 +11,19 @@ syntax on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> vim-markdown
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
-" To enable conceal use Vim's standard conceal configuration
-" 此时文档中看不到```vim配置信息
-set conceallevel=2
-" Allow for the TOC window to auto-fix
-let g:vim_markdown_toc_autofit = 1
-" Folding level
-let g:vim_markdown_folding_level = 6
-" fold style
-" let g:vim_markdown_folding_style_pythonic = 1
-" Heder level handle
-" :HeaderDecrease, :HeaderIncrease
-" TOC
-map  <leader>toc :Toc<cr>
+" " To enable conceal use Vim's standard conceal configuration
+" " 此时文档中看不到```vim配置信息
+" set conceallevel=2
+" " Allow for the TOC window to auto-fix
+" let g:vim_markdown_toc_autofit = 1
+" " Folding level
+" let g:vim_markdown_folding_level = 6
+" " fold style
+" " let g:vim_markdown_folding_style_pythonic = 1
+" " Heder level handle
+" " :HeaderDecrease, :HeaderIncrease
+" " TOC
+" map  <leader>toc :Toc<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""

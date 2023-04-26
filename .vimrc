@@ -45,7 +45,7 @@ Plug 'powerline/powerline'
 
 " 其他
 Plug 'cespare/vim-toml'
-Plug 'plasticboy/vim-markdown'
+" Plug 'plasticboy/vim-markdown'
 
 " HTML, CSS, JS
 Plug 'mattn/emmet-vim'
