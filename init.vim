@@ -25,13 +25,13 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " 颜色
-Plug 'chrisbra/Colorizer'
-Plug 'altercation/vim-colors-solarized'
+" Plug 'chrisbra/Colorizer'
+" Plug 'altercation/vim-colors-solarized'
 Plug 'powerline/powerline'
 
 " 其他
 Plug 'cespare/vim-toml'
-Plug 'plasticboy/vim-markdown'
+" Plug 'plasticboy/vim-markdown'
 
 " nvim专用-代码补全(被coc.nvim替代了, 见readme.md说明)
 " Plug 'neovim/nvim-lspconfig'

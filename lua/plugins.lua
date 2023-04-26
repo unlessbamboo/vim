@@ -2,4 +2,5 @@
 require("myplugins.mycomment")
 
 
--- coc插件配置
+-- 颜色配置
+-- require("myplugins.tokyonight")
