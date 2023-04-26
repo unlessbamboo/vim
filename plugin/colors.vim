@@ -36,19 +36,19 @@ let g:rehash256=1
 "--->>配色配置3
 "       其他通用配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 匹配函数名，为函数名定义颜色做准备
-autocmd BufNewFile,BufRead * :syntax match cfunctions "\<[a-zA-Z_][a-zA-Z_0-9]*\>[^()]*)("me=e-2
-autocmd BufNewFile,BufRead * :syntax match cfunctions "\<[a-zA-Z_][a-zA-Z_0-9]*\>\s*("me=e-1
-" 给函数名加自定义颜色
-hi cfunctions gui=NONE cterm=bold ctermfg=67
-hi Type ctermfg=118 cterm=none 
-" 结构体配色
-hi Structure ctermfg=118 cterm=none
-" 宏配色修改
-"hi Macro ctermfg=161 cterm=bold
-hi PreCondit ctermfg=161 cterm=bold
-" 当前行的底色
-set cursorline
+" " 匹配函数名，为函数名定义颜色做准备
+" autocmd BufNewFile,BufRead * :syntax match cfunctions "\<[a-zA-Z_][a-zA-Z_0-9]*\>[^()]*)("me=e-2
+" autocmd BufNewFile,BufRead * :syntax match cfunctions "\<[a-zA-Z_][a-zA-Z_0-9]*\>\s*("me=e-1
+" " 给函数名加自定义颜色
+" hi cfunctions gui=NONE cterm=bold ctermfg=67
+" hi Type ctermfg=118 cterm=none
+" " 结构体配色
+" hi Structure ctermfg=118 cterm=none
+" " 宏配色修改
+" "hi Macro ctermfg=161 cterm=bold
+" hi PreCondit ctermfg=161 cterm=bold
+" " 当前行的底色
+" set cursorline
 
 """"""""""""""""""""""""""""""""""""""" 
 "--->>配色配置4
