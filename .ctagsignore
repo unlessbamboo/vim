@@ -8,4 +8,5 @@ media
 doc
 templates
 node_modules
+deploy
 venv

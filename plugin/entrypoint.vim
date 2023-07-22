@@ -112,11 +112,15 @@ nmap <leader>h @
 "--->>>vimrc的重载
 """"""""""""""""""""""""""""""""""""""" 
 " Fast reloading of the .vimrc
-map  <leader>ss :source ~/.vimrc<cr>
+map  <leader>ss :source ~/.vim/plugin/entrypoint.vim<cr> :syntax sync fromstart<cr>
 " Fast editing of .vimrc
 map  <leader>ee :e ~/.vimrc<cr>
 " When .vimrc is edited, reload it
 autocmd! bufwritepost .vimrc source ~/.vimrc
+
+" 解决大文件无高亮的问题
+set redrawtime=5000
+
 
 """"""""""""""""""""""""""""""""""""""" 
 "--->>>制表符(tabstop)的操作：
@@ -271,21 +275,18 @@ else
         source ~/.vim/bamboo.vim
     endif
 endif
+
 " 文件缓冲区, 注意, 这些模块配置只能放到plugin目录下
 source ~/.vim/plugin/filebuff.vim
-" 插件配置集合
+
+" 插件相关
 try
     source ~/.vim/plugin/plugins.vim
 catch
     echo "导入plugins插件配置异常"
 endtry
-" 版本控制模块
-source ~/.vim/plugin/vcs.vim
-" 老的弃用插件集合
-if filereadable(expand("~/.vim/vim/old.vim"))
-    source ~/.vim/plugin/old.vim
-endif
+
 " 配色模块
-source ~/.vim/plugin/colors.vim
-" 前端页面组件
-source ~/.vim/plugin/web.vim
+if filereadable(expand("~/.vim/plugin/colors.vim"))
+    source ~/.vim/plugin/colors.vim
+endif

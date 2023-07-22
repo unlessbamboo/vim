@@ -1,9 +1,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 插件配置集合
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> 1. jedi-vim
+"  language: python
 " 注意, 需要进入该目录下执行: git submodule update --init --recursive
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 默认命令配置
@@ -80,16 +77,23 @@ noremap <leader>ep :ALEPrevious<CR>
 " ---> 标签配置1——tags的配置
 """"""""""""""""""""""""""""""""""""""""""""""
 " 生成tags的命令
-map <F8> :!ctags
-            \ --languages=c,c++,python,java,php,sh -R 
-            \ --exclude=@$HOME/.vim/.ctagsignore 
-            \ --c++-kinds=+p --fields=+iaS --extra=+q .
-            \ <CR><CR>
-imap <F8> <ESC>:!ctags 
-            \ --languages=c,c++,python,java,php,sh,js -R 
-            \ --exclude=@$HOME/.vim/.ctagsignore 
-            \ --c++-kinds=+p --fields=+iaS --extra=+q .
-            \ <CR><CR>
+" map <F8> :!ctags
+"             \ --languages=c,c++,python,java,php,sh,javascript,html -R
+"             \ --exclude=@$HOME/.vim/.ctagsignore
+"             \ --c++-kinds=+p --fields=+iaS --extra=+q .
+"             \ <CR><CR
+" imap <F8> <ESC>:!ctags
+"             \ --languages=c,c++,python,java,php,sh,js,javascript,html -R
+"             \ --exclude=@$HOME/.vim/.ctagsignore
+"             \ --c++-kinds=+p --fields=+iaS --extra=+q .
+"             \ <CR><CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" ---> 标签配置3——Universal tags的配置
+""""""""""""""""""""""""""""""""""""""""""""""
+imap <F8> <ESC>:!ctags --exclude=node_modules --exclude=deploy -R . <CR><CR>
+map <F8> :!ctags --exclude=node_modules --exclude=deploy -R . <CR><CR>
+
 
 """""""""""""""""""""""""""""""""""""""""""""
 " ---> 标签配置2——cscope
@@ -181,3 +185,138 @@ let g:calendar_views = ['year', 'day', 'month', 'week', 'clock', 'days']
 " let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 " " 使用 UltiSnipsEdit 命令时垂直分割屏幕
 " let g:UltiSnipsEditSplit="vertical"
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ---> 版本控制-3-vim-fugitive.vim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>gtd :Git diff<cr>
+" 查询当前行的所有提交记录
+map <leader>gtb :Git blame<cr>
+
+
+"=======================3. 颜色控制=========================
+" 配色模块
+" 2023-04-26 16:25:19: vim独有的molokai移动到vimonly.vim, nvim有一个新的配色
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"----> 配色配置1
+"   molokai配色步骤:
+"      1，molokai.vim放入colors/目录下面
+"      2，molokai默认没有给对应元素配色
+"      3，配置都是自定义的，可以删除
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 配色主题
+colorscheme molokai
+" 原始的monokai背景色
+let g:molokai_original=1
+" 256支持
+let g:rehash256=1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"--->>配色配置3
+"       其他通用配置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 匹配函数名，为函数名定义颜色做准备
+autocmd BufNewFile,BufRead * :syntax match cfunctions "\<[a-zA-Z_][a-zA-Z_0-9]*\>[^()]*)("me=e-2
+autocmd BufNewFile,BufRead * :syntax match cfunctions "\<[a-zA-Z_][a-zA-Z_0-9]*\>\s*("me=e-1
+" 给函数名加自定义颜色
+hi cfunctions gui=NONE cterm=bold ctermfg=67
+hi Type ctermfg=118 cterm=none
+" 结构体配色
+hi Structure ctermfg=118 cterm=none
+" 宏配色修改
+"hi Macro ctermfg=161 cterm=bold
+hi PreCondit ctermfg=161 cterm=bold
+" 当前行的底色
+set cursorline
+
+""""""""""""""""""""""""""""""""""""""" 
+"--->>配色配置4
+"   powerline状态栏插件
+"       结合terminal的状态栏设置，涉及字体等信息，
+"       见印象笔记->vim->powerline安装
+"   PS:
+"       后期一键自动化安装的时候容易，现在配置很麻烦
+""""""""""""""""""""""""""""""""""""""" 
+" " 找到powerline插件位置，当然也可以放在vim目录下面
+" let s:python2_ubuntu="~/.local/lib/python2.7/site-packages/powerline/bindings/vim/"
+" let s:python3_ubuntu="~/.local/lib/python3.4/site-packages/powerline/bindings/vim/"
+" let s:python2_mac="~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim/"
+" if exists(s:python2_ubuntu)
+"     set rtp+=python2_ubuntu
+" endif
+" if exists(s:python3_ubuntu)
+"     set rtp+=python3_ubuntu
+" endif
+" if exists(s:python2_mac)
+"     set rtp+=python2_mac
+" endif
+" " 添加新的字体
+" set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
+" set laststatus=2
+" " 主题风格
+" let g:Powerline_colorscheme='solarized256'
+
+
+"=======================4. 前端页面开发组件=========================
+"""""""""""""""""""""""""""""""""""""""
+"  --->>> Emmet-vim
+" emmet快捷输入方式:
+"   输入某些命令(input模式) + ctrl_y + ,
+"""""""""""""""""""""""""""""""""""""""
+" html基本框架
+if $VIM_CRONTAB == "true"
+    set nobackup
+    set nowritebackup
+endif
+" 设置初始leader, 例如
+"   1. 输入html:5, 然后按两下,,就会生成
+"   2. 输入div, 然后按两下,,就会自动生成<div></div>
+"   3. 输入div.name, 然后按两下,,就会生成<div class="name"></div>
+"   4. 输入div#id, 然后按两下会生成: <div id="id"></div>
+let g:user_emmet_leader_key="<leader>"
+" HTML注释
+autocmd filetype *html* imap <c-_> <c-y>/
+autocmd filetype *html* map <c-_> <c-y>/
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ---> jsbeautify: 对css,javascript, html进行格式化
+"  默认配置文件: .editorconfig
+"  配置: 指定换行空格等信息
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" let g:editorconfig_Beautifier = '~/.vim/.editorconfig'
+" map <c-f> :call JsBeautify()<cr>
+" " 映射(可以配置vnormap)
+" autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+" autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
+" autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
+" autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+" autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+" 自动格式化, 关闭自动格式化(会导致其他问题)
+" autocmd FileType javascript :call JsBeautify()
+" autocmd FileType json :call JsonBeautify()
+" autocmd FileType jsx :call JsxBeautify()
+" autocmd FileType html :call HtmlBeautify()
+" autocmd FileType css :call CSSBeautify()
+
+
+"""""""""""""""""""""""""""""""""""""""
+"  --->>> neoformat替代vim-jsbeautiful, 适配所有语言
+"  使用方法: 输入neoformat, 按空格, 然后tab选择需要格式化的工具, 比如prettier
+"  前提条件: 安装格式化工具, 例如prettier: npm install -g prettier
+"""""""""""""""""""""""""""""""""""""""
+" 1. 自动保存, silent!表示静默
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * silent! undojoin | Neoformat
+augroup END
+" 2. 指定python使用autopep8格式化(默认)
+let g:neoformat_enabled_python = ['autopep8']
+
+
+"""""""""""""""""""""""""""""""""""""""
+"  --->>> 说明: 
+"""""""""""""""""""""""""""""""""""""""
+" 1. 服务启动: npm i -g live-server, 之后通过命令: live-server .启动服务
