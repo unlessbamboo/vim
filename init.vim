@@ -51,7 +51,8 @@ Plug 'w0rp/ale'
 
 " python
 Plug 'Vimjas/vim-python-pep8-indent'
-Plug 'davidhalter/jedi-vim'
+" 使用coc-jedi替代, 仅仅适用于neovim
+" Plug 'davidhalter/jedi-vim'
 
 " go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -62,8 +63,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
-" 3. 导入vim中的老配置 
+" 导入vim中的老配置 
 source ~/.vim/plugin/entrypoint.vim
-
-" 3. 引用lua根文件
+" 引用lua根文件
 lua require("bamboo")

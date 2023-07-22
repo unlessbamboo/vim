@@ -14,6 +14,8 @@
         "htmldjango",
         "blade"
     ],
+    // jedi configure
+    "jedi.enable": true,
     // Language: 各种语言服务器配置, 其支持三种模式配置: module, executable, socket, 下面的go是第二种
     "languageserver": {
         "golang": {
