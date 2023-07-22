@@ -22,22 +22,6 @@
 
 "=======================1. 代码检查和跳转=========================
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ---> 1. jedi-vim
-"  language: python
-" 注意, 需要进入该目录下执行: git submodule update --init --recursive
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 默认命令配置
-let g:jedi#goto_command = "<leader>jd"
-let g:jedi#goto_assignments_command = ""
-let g:jedi#goto_stubs_command = "<leader>js"
-let g:jedi#goto_definitions_command = "<leader>jg"
-let g:jedi#documentation_command = "<leader>jk"
-let g:jedi#usages_command = "<leader>jn"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#rename_command = "<leader>jr"
-let g:jedi#rename_command_keep_name = "<leader>jR"
-
 
 """""""""""""""""""""""""""""""""""""""
 " ---> 2. ale
