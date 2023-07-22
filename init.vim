@@ -27,10 +27,12 @@ Plug 'junegunn/fzf.vim'
 " 颜色
 " Plug 'chrisbra/Colorizer'
 " Plug 'altercation/vim-colors-solarized'
+" Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'powerline/powerline'
 
 " 其他
 Plug 'cespare/vim-toml'
+Plug 'kevinoid/vim-jsonc'
 " Plug 'plasticboy/vim-markdown'
 
 " nvim专用-代码补全(被coc.nvim替代了, 见readme.md说明)
@@ -50,6 +52,9 @@ Plug 'w0rp/ale'
 " python
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'davidhalter/jedi-vim'
+
+" go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " lsp: 若要临时禁用某个插件: Plug 'neoclide/coc.nvim', {'on': []}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}

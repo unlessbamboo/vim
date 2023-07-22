@@ -1,6 +1,6 @@
 -- 插件管理
-require("myplugins.mycomment")
+require("mycomment")
 
 
 -- 颜色配置
--- require("myplugins.tokyonight")
+-- require("tokyonight")
