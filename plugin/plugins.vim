@@ -1,4 +1,28 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
+" --------------------------------
+" jedi-vim
+" ale
+"
+" --------------------------------
+" tags
+" cscope
+" taglist
+" quickfix
+" calendar
+" vim-fugitive: 版本控制
+"
+" --------------------------------
+"  配色
+"
+" --------------------------------
+" emmet-vim
+" UltiSnips
+" neoformat
+
+
+"=======================1. 代码检查和跳转=========================
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> 1. jedi-vim
 "  language: python
 " 注意, 需要进入该目录下执行: git submodule update --init --recursive
@@ -16,7 +40,7 @@ let g:jedi#rename_command_keep_name = "<leader>jR"
 
 
 """""""""""""""""""""""""""""""""""""""
-" ---> 4. ale
+" ---> 2. ale
 " 功能: 异步代码检查插件
 " PS: 在django项目中, 如果根目录存在settings.py文件, 则filetype异常
 """""""""""""""""""""""""""""""""""""""
@@ -73,6 +97,7 @@ noremap <leader>ep :ALEPrevious<CR>
 " endfunc
 
 
+"=======================2. 日常组件=========================
 """"""""""""""""""""""""""""""""""""""""""""""
 " ---> 标签配置1——tags的配置
 """"""""""""""""""""""""""""""""""""""""""""""
@@ -135,7 +160,7 @@ nmap <leader>csi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <leader>csd :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 """""""""""""""""""""""""""""""""""""""""
-" ---> 标签配置3
+" ---> 标签配置3: taglist
 "   taglist的配置：vim跟随缓冲区退出，这里的文件数目不是根据窗口数哦，比如
 "                   打开vim（没有跟随文件）此时主编辑区不算是一个文件。
 "                   2014年 09月 17日 星期三 21:16:07 CST taglist的设置
@@ -175,23 +200,14 @@ let g:calendar_view = "day"
 " view布局，用于>切换时的布局
 let g:calendar_views = ['year', 'day', 'month', 'week', 'clock', 'days']
 
-
-"""""""""""""""""""""""""""""""""""""""
-"  --->>> UltiSnips代码片段Engine插件
-"""""""""""""""""""""""""""""""""""""""
-" let g:UltiSnipsExpandTrigger="<tab>"
-" " 使用 tab 切换下一个触发点，shit+tab 上一个触发点
-" let g:UltiSnipsJumpForwardTrigger="<tab>"
-" let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
-" " 使用 UltiSnipsEdit 命令时垂直分割屏幕
-" let g:UltiSnipsEditSplit="vertical"
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ---> 版本控制-3-vim-fugitive.vim
+" ---> 日常模块-4-vim-fugitive.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>gtd :Git diff<cr>
 " 查询当前行的所有提交记录
 map <leader>gtb :Git blame<cr>
+
+
 
 
 "=======================3. 颜色控制=========================
@@ -259,6 +275,9 @@ set cursorline
 " let g:Powerline_colorscheme='solarized256'
 
 
+
+
+
 "=======================4. 前端页面开发组件=========================
 """""""""""""""""""""""""""""""""""""""
 "  --->>> Emmet-vim
@@ -279,6 +298,17 @@ let g:user_emmet_leader_key="<leader>"
 " HTML注释
 autocmd filetype *html* imap <c-_> <c-y>/
 autocmd filetype *html* map <c-_> <c-y>/
+
+
+"""""""""""""""""""""""""""""""""""""""
+"  --->>> UltiSnips代码片段Engine插件
+"""""""""""""""""""""""""""""""""""""""
+" let g:UltiSnipsExpandTrigger="<tab>"
+" " 使用 tab 切换下一个触发点，shit+tab 上一个触发点
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+" " 使用 UltiSnipsEdit 命令时垂直分割屏幕
+" let g:UltiSnipsEditSplit="vertical"
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
