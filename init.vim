@@ -12,9 +12,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'yianwillis/vimcdoc'
 Plug 'tpope/vim-fugitive'
-" 代码注释
-" Plug 'scrooloose/nerdcommenter'
-Plug 'numToStr/Comment.nvim'
 
 " 代码片段
 Plug 'SirVer/ultisnips'
@@ -59,6 +56,12 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " lsp: 若要临时禁用某个插件: Plug 'neoclide/coc.nvim', {'on': []}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" 代码注释, 注意, nvim-treesitter必须放在coc.nvim的后面, 否则会被覆盖掉的
+" Plug 'scrooloose/nerdcommenter'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" 注意, comment.nvim依赖上面的语言解析器
+Plug 'numToStr/Comment.nvim'
 
 
 call plug#end()
