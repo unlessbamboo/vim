@@ -5,19 +5,26 @@ let &packpath = &runtimepath
 " 2. 包管理(仅仅是nvim)
 call plug#begin()
 
+" 窗口管理
 Plug 'vim-scripts/winmanager'
+" bash支持
 Plug 'vim-scripts/bash-support.vim'
+" 通用工具
 Plug 'vim-scripts/genutils'
+" 浏览项目和树形插件
 Plug 'scrooloose/nerdtree'
+" 探索和切换缓冲区的插件
 Plug 'jlanzarotta/bufexplorer'
+" Vim 中文文档插件
 Plug 'yianwillis/vimcdoc'
+"  Vim 的 Git 插件
 Plug 'tpope/vim-fugitive'
 
 " 代码片段
 Plug 'SirVer/ultisnips'
-" 代码格式化
+" 代码格式化(保存的时候自动格式化等)
 Plug 'sbdchd/neoformat'
-" 搜索
+" 搜索: 强大的模糊搜索功能
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
@@ -45,6 +52,8 @@ Plug 'mattn/emmet-vim'
 
 " 代码检查
 Plug 'w0rp/ale'
+" python
+Plug 'psf/black', { 'branch': 'stable' }
 
 " python
 Plug 'Vimjas/vim-python-pep8-indent'
