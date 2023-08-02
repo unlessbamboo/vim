@@ -40,6 +40,11 @@ let g:ale_open_list = 0
 let g:ale_keep_list_window_open = 0
 
 " help ale-python 信息
+if filereadable("pyproject.toml")
+    " black
+    let g:ale_fixers = {'python': ['black']}
+endif
+
 " 1. 指定pylintrc位置(最好每一个项目下面自己保留一份配置)
 " 2. 对于不同版本的pylintrc, 自己重新生成一份:  pylint --generate-rcfile > .pylintrc
 " 对于每一个项目, 如果需要自定义配置, 则可以在bamboo.vim中增加如下配置
@@ -54,6 +59,7 @@ endif
 " 如果希望对某个文件不检查flake8, 在文件开头: flake8: noqa
 " 启用virtualenv
 let g:ale_python_pylint_use_global = 0
+
 " tidy
 let g:ale_html_tidy_options = '-q -e -language en -config ~/.vim/.tidy.conf'
 
@@ -108,40 +114,41 @@ map <F8> :!ctags --exclude=node_modules --exclude=deploy -R . <CR><CR>
 " ---> 标签配置2——cscope
 "  问题1: 无法将find复杂命令成功移入vim中, 所以更改思路, 采用调脚本方式
 "  问题2: cs reset在neovim中不存在, 采用静默方式运行
+"  使用fzf.vim替代 --- 2023-08-01
 """""""""""""""""""""""""""""""""""""""""""""
-let g:cscope_ignored_dir = 'node_modules$\|dist$\|deploy$'
-map <F9> :!~/.vim/mycscope.sh<CR><CR>:!cscope -Rbq<CR><CR>:silent! cs reset<CR><CR>
-imap <F9> <ESC>:!~/.vim/mycscope.sh<CR><CR>:!cscope -Rbq<CR><CR>:silent!cs reset<CR><CR>
-if has("cscope")
-    set csprg=/usr/local/bin/cscope
-    set csto=1
-    set cst
-    set nocsverb
-    " add any database in current directory
-    if filereadable("cscope.out")
-        cs add cscope.out
-    else
-        let cscope_file=findfile("cscope.out", ".;") 
-        let cscope_pre=matchstr(cscope_file, ".*/")
-        if !empty(cscope_file) && filereadable(cscope_file)
-            exe "cs add" cscope_file cscope_pre
-        endif
-    endif
-    set csverb
-endif
-" 可以手动输入:cs f s stringA
-" 查找该符号所有出现的地方
-nmap <leader>css :cs find s <C-R>=expand("<cword>")<CR><CR>
-" 查找该符号定义的地方
-nmap <leader>csg :cs find g <C-R>=expand("<cword>")<CR><CR>
-" 查找调用该符号的函数
-nmap <leader>csc :cs find c <C-R>=expand("<cword>")<CR><CR>
-" 查找该字符串, 比cs find s更加全面
-nmap <leader>cst :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <leader>cse :cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <leader>csf :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <leader>csi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <leader>csd :cs find d <C-R>=expand("<cword>")<CR><CR>
+" let g:cscope_ignored_dir = 'node_modules$\|dist$\|deploy$'
+" map <F9> :!~/.vim/mycscope.sh<CR><CR>:!cscope -Rbq<CR><CR>:silent! cs reset<CR><CR>
+" imap <F9> <ESC>:!~/.vim/mycscope.sh<CR><CR>:!cscope -Rbq<CR><CR>:silent!cs reset<CR><CR>
+" if has("cscope")
+"     set csprg=/usr/local/bin/cscope
+"     set csto=1
+"     set cst
+"     set nocsverb
+"     " add any database in current directory
+"     if filereadable("cscope.out")
+"         cs add cscope.out
+"     else
+"         let cscope_file=findfile("cscope.out", ".;") 
+"         let cscope_pre=matchstr(cscope_file, ".*/")
+"         if !empty(cscope_file) && filereadable(cscope_file)
+"             exe "cs add" cscope_file cscope_pre
+"         endif
+"     endif
+"     set csverb
+" endif
+" " 可以手动输入:cs f s stringA
+" " 查找该符号所有出现的地方
+" nmap <leader>css :cs find s <C-R>=expand("<cword>")<CR><CR>
+" " 查找该符号定义的地方
+" nmap <leader>csg :cs find g <C-R>=expand("<cword>")<CR><CR>
+" " 查找调用该符号的函数
+" nmap <leader>csc :cs find c <C-R>=expand("<cword>")<CR><CR>
+" " 查找该字符串, 比cs find s更加全面
+" nmap <leader>cst :cs find t <C-R>=expand("<cword>")<CR><CR>
+" nmap <leader>cse :cs find e <C-R>=expand("<cword>")<CR><CR>
+" nmap <leader>csf :cs find f <C-R>=expand("<cfile>")<CR><CR>
+" nmap <leader>csi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+" nmap <leader>csd :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 """""""""""""""""""""""""""""""""""""""""
 " ---> 标签配置3: taglist
@@ -320,6 +327,7 @@ autocmd filetype *html* map <c-_> <c-y>/
 "  --->>> neoformat替代vim-jsbeautiful, 适配所有语言
 "  使用方法: 输入neoformat, 按空格, 然后tab选择需要格式化的工具, 比如prettier
 "  前提条件: 安装格式化工具, 例如prettier: npm install -g prettier
+"  formatter
 """""""""""""""""""""""""""""""""""""""
 " 1. 自动保存, silent!表示静默
 augroup fmt
@@ -327,7 +335,13 @@ augroup fmt
   autocmd BufWritePre * silent! undojoin | Neoformat
 augroup END
 " 2. 指定python使用autopep8格式化(默认)
-let g:neoformat_enabled_python = ['autopep8']
+if filereadable("pyproject.toml")
+    let g:neoformat_enabled_python = ['black']
+else
+    let g:neoformat_enabled_python = ['autopep8']
+endif
+
+
 
 
 """""""""""""""""""""""""""""""""""""""

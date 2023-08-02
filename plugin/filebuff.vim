@@ -137,9 +137,19 @@ autocmd BufNewFile,BufRead *Dockerfile set filetype=dockerfile
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---> 2. fzf.vim
-"  基于fzf命令, 功能非常强大, 这里仅仅用到一些常用的, 其他暂不使用
+"  基于fzf命令, 功能非常强大, 这里仅仅用到一些常用的命令
 "  参考: https://github.com/junegunn/fzf.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 进入fzf交互界面
+" a. 文件搜索: 进入fzf交互界面
+" files(经常使用)
 nnoremap <leader>ff  :FZF<CR>
-nnoremap <leader>fp  :GFiles<CR>
+" git ls-files, 此时会自动跳转到当前版本控制的根目录, 若不在git下则该命令无效
+nnoremap <leader>fg  :GFiles<CR>
+" 在交互界面列出所有的buffers, 这个可比一个个的往下打开buffer好多了(请多使用)
+nnoremap <leader>fb :Buffers<CR>
+
+" b. 全文搜索(基于rg)
+nnoremap <leader>fs :Rg<CR>
+nnoremap <leader>css :Rg <C-R><C-W><CR>
+" tags, 但是速度很慢
+nnoremap <leader>ft :Tags<CR>
