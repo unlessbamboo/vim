@@ -1,6 +1,27 @@
-" 1. 原有vim配置
-set runtimepath^=~/.vim runtimepath+=~/.vim/after
+
+" 检测操作系统，设置家目录变量
+if has('win32') || has('win64')
+    let _sys_home_dir = $USERPROFILE
+else
+    let _sys_home_dir = $HOME
+endif
+
+
+" 1. 原有vim配置: 用来查找运行时文件（比如插件、颜色方案等）的目录列表
+if has('win32') || has('win64')
+    " Windows 系统
+    let home_dir = substitute($USERPROFILE, '\\', '/', 'g')
+    let vim_dir = home_dir.'/vimfiles'
+else
+    " Unix-like 系统
+    let vim_dir = '~/.vim'
+endif
+
+" 配置 runtimepath
+execute 'set runtimepath^='.vim_dir
+execute 'set runtimepath+='.vim_dir.'/after'
 let &packpath = &runtimepath
+
 
 " 2. 包管理(仅仅是nvim)
 call plug#begin()
@@ -79,11 +100,9 @@ call plug#end()
 
 " 导入vim中的老配置 
 if has('win32') || has('win64')
-    let win_home = $HOME . '\AppData\Local'
-
     " 构建 Windows 下的路径
-    let entrypoint_path = win_home . '\vim\plugin\entrypoint.vim'
-    let my_config_path = win_home . '\nvim\my.vim'
+    let entrypoint_path = _sys_home_dir. '\.vim\plugin\entrypoint.vim'
+    let my_config_path = _sys_home_dir . '\nvim\my.vim'
 else
     let entrypoint_path = $HOME . '/.vim/plugin/entrypoint.vim'
     let my_config_path = $HOME . '/.config/nvim/my.vim'
