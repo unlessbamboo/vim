@@ -1,0 +1,17 @@
+priority 40
+
+snippet spvbase "Vue / SFC base structure" b
+<template>
+	<div>
+	</div>
+</template>
+
+<script>
+export default {
+	name: '${1:`!v expand('%:t:r')`}'${0}
+}
+</script>
+
+<style scoped>
+</style>
+endsnippet

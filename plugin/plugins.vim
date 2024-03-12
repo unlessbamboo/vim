@@ -19,6 +19,13 @@
 " UltiSnips
 " neoformat
 
+" 检测操作系统，设置家目录变量
+if has('win32') || has('win64')
+    let _sys_home_dir = $USERPROFILE
+else
+    let _sys_home_dir = $HOME
+endif
+
 
 "=======================1. 代码检查和跳转=========================
 
@@ -27,6 +34,10 @@
 " ---> 2. ale
 " 功能: 异步代码检查插件
 " PS: 在django项目中, 如果根目录存在settings.py文件, 则filetype异常
+"
+" 忽略检查:
+"       > 对某个文件不检查, 在指定文件开头设置: pylint: skip-file
+"       > 对某个文件不检查flake8, 在文件开头: flake8: noqa
 """""""""""""""""""""""""""""""""""""""
 " 控制错误输出格式, 通过这个 linter找到确切的忽略错误的方式
 let g:airline#extensions#ale#enabled = 1
@@ -49,19 +60,16 @@ endif
 " 2. 对于不同版本的pylintrc, 自己重新生成一份:  pylint --generate-rcfile > .pylintrc
 " 对于每一个项目, 如果需要自定义配置, 则可以在bamboo.vim中增加如下配置
 if !filereadable(".pylintrc")
-    let g:ale_python_pylint_options = '--rcfile ~/.vim/.pylintrc'
+    let g:ale_python_pylint_options = '--rcfile '._sys_home_dir.'/.vim/.pylintrc'
 else
     " getcwd获取当前工作目录
     let g:ale_python_pylint_options = '--rcfile '.getcwd().'/.pylintrc'
 endif
-
-" 如果希望对某个文件不检查, 在指定文件开头设置: pylint: skip-file
-" 如果希望对某个文件不检查flake8, 在文件开头: flake8: noqa
 " 启用virtualenv
 let g:ale_python_pylint_use_global = 0
 
 " tidy
-let g:ale_html_tidy_options = '-q -e -language en -config ~/.vim/.tidy.conf'
+let g:ale_html_tidy_options = '-q -e -language en -config '._sys_home_dir.'/.vim/.tidy.conf'
 
 " 禁用某些插件, 目前只能使用白名单(ale_linters, ale_linters_explicit)
 "   安装: npm install -g eslint
@@ -72,7 +80,7 @@ let g:ale_html_tidy_options = '-q -e -language en -config ~/.vim/.tidy.conf'
 "           npm install -g @typescript-eslint/parser
 "           npm install -g eslint-plugin-vue
 "       3. 最终生成的eslintrc.js见用户根目录, 这仅仅是全局的
-let b:ale_linters = {'javascript': ['eslint'], 'html': ['tidy']}
+let b:ale_linters = {'javascript': ['eslint'], 'html': ['tidy'], 'go': ['gopls']}
 
 " 错误移动
 noremap <leader>ef :ALEFirst<CR>
@@ -293,11 +301,13 @@ autocmd filetype *html* map <c-_> <c-y>/
 
 """""""""""""""""""""""""""""""""""""""
 "  --->>> UltiSnips代码片段Engine插件
+" 使用: <key value> + <tabs>, 例如: spdate + <tabs> 会输入当前日期
+" 新增: 在UltiSnips目录下增加相关键值
 """""""""""""""""""""""""""""""""""""""
 " let g:UltiSnipsExpandTrigger="<tab>"
-" " 使用 tab 切换下一个触发点，shit+tab 上一个触发点
-" let g:UltiSnipsJumpForwardTrigger="<tab>"
-" let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+" 使用 tab 切换下一个触发点，shit+tab 上一个触发点
+let g:UltiSnipsJumpForwardTrigger="<c-n>"
+let g:UltiSnipsJumpBackwardTrigger="<c-p>"
 " " 使用 UltiSnipsEdit 命令时垂直分割屏幕
 " let g:UltiSnipsEditSplit="vertical"
 

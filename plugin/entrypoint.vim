@@ -264,29 +264,54 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 "           3，现在一般用LookupFile来代替find命令，见上面的说明
 "       
 """"""""""""""""""""""""""""""""""""""""""""""
-" 添加自定义的库文件位置, 注意, 如果需要调试直接echo即可,
-" 每次wq都会重新加载vimrc文件, 会自动打印输出信息
-" let $PYTHONPATH='/Users/bamboo/Public/iLifeDiary/iLifeDiary/:/Users/zhengbifeng/Public/iLifeDiary/iLifeDiary'
-set verbosefile="~/.vim/vim.log"
-if filereadable("bamboo.vim")
-    source bamboo.vim
-else
-    if filereadable(expand("~/.vim/bamboo.vim"))
-        source ~/.vim/bamboo.vim
+" 添加自定义的库文件位置, 注意, 如果需要调试直接echo即可, 每次wq都会重新加载vimrc文件, 会自动打印输出信息
+if has('win32') || has('win64')
+    if filereadable("bamboo.vim")
+        source bamboo.vim
+    else
+        let _default_bamboo_vim = $HOME . '/.vim/bamboo.vim'
+        if filereadable(_default_bamboo_vim)
+            execute 'source' _default_bamboo_vim
+        endif
     endif
-endif
 
-" 文件缓冲区, 注意, 这些模块配置只能放到plugin目录下
-source ~/.vim/plugin/filebuff.vim
+    let _filebuf = $HOME . '/.vim/plugin/filebuff.vim'
+    execute 'source' _filebuf
 
-" 插件相关
-try
-    source ~/.vim/plugin/plugins.vim
-catch
-    echo "导入plugins插件配置异常"
-endtry
+    try
+        let _plugin_path = $HOME . '/.vim/plugin/plugins.vim'
+        execute 'source' _plugin_path
+    catch
+        echo "导入plugins插件配置异常"
+    endtry
 
-" 配色模块
-if filereadable(expand("~/.vim/plugin/colors.vim"))
-    source ~/.vim/plugin/colors.vim
+    let colors_path = $HOME . '/.vim/plugin/colors.vim'
+    if filereadable(colors_path)
+        execute 'source' colors_path
+    endif
+
+else
+    set verbosefile="~/.vim/vim.log"
+    if filereadable("bamboo.vim")
+        source bamboo.vim
+    else
+        if filereadable(expand("~/.vim/bamboo.vim"))
+            source ~/.vim/bamboo.vim
+        endif
+    endif
+
+    " 文件缓冲区, 注意, 这些模块配置只能放到plugin目录下
+    source ~/.vim/plugin/filebuff.vim
+
+    " 插件相关
+    try
+        source ~/.vim/plugin/plugins.vim
+    catch
+        echo "导入plugins插件配置异常"
+    endtry
+
+    " 配色模块
+    if filereadable(expand("~/.vim/plugin/colors.vim"))
+        source ~/.vim/plugin/colors.vim
+    endif
 endif
