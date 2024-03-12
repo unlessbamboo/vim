@@ -20,7 +20,7 @@ Plug 'yianwillis/vimcdoc'
 "  Vim 的 Git 插件
 Plug 'tpope/vim-fugitive'
 
-" 代码片段
+" 代码片段(TODO: 使用coc-snippets), 目前所有代码片段都放在~/.vim/UltiSnips下
 Plug 'SirVer/ultisnips'
 " 代码格式化(保存的时候自动格式化等)
 Plug 'sbdchd/neoformat'
@@ -37,7 +37,9 @@ Plug 'powerline/powerline'
 " 其他
 Plug 'cespare/vim-toml'
 Plug 'kevinoid/vim-jsonc'
-" Plug 'plasticboy/vim-markdown'
+
+Plug 'godlygeek/tabular'
+Plug 'preservim/vim-markdown'
 
 " nvim专用-代码补全(被coc.nvim替代了, 见readme.md说明)
 " Plug 'neovim/nvim-lspconfig'
@@ -52,7 +54,7 @@ Plug 'mattn/emmet-vim'
 
 " 代码检查
 Plug 'w0rp/ale'
-" python
+" python代码格式化工具
 Plug 'psf/black', { 'branch': 'stable' }
 
 " python
@@ -76,6 +78,21 @@ Plug 'numToStr/Comment.nvim'
 call plug#end()
 
 " 导入vim中的老配置 
-source ~/.vim/plugin/entrypoint.vim
+if has('win32') || has('win64')
+    let win_home = $HOME . '\AppData\Local'
+
+    " 构建 Windows 下的路径
+    let entrypoint_path = win_home . '\vim\plugin\entrypoint.vim'
+    let my_config_path = win_home . '\nvim\my.vim'
+else
+    let entrypoint_path = $HOME . '/.vim/plugin/entrypoint.vim'
+    let my_config_path = $HOME . '/.config/nvim/my.vim'
+endif
+if filereadable(entrypoint_path)
+    execute 'source' entrypoint_path
+endif
+if filereadable(my_config_path)
+    execute 'source' my_config_path
+endif
 " 引用lua根文件
 lua require("bamboo")

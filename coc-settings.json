@@ -14,19 +14,26 @@
         "htmldjango",
         "blade"
     ],
-    // jedi configure
+    // jedi configure(支持顶级配置项), 注意, 需要提前安装: pip install jedi-language-server
     "jedi.enable": true,
     // Language: 各种语言服务器配置, 其支持三种模式配置: module, executable, socket, 下面的go是第二种
     "languageserver": {
-        "golang": {
+        "go": {
             "command": "gopls",
             "rootPatterns": [
+                "go.work",
                 "go.mod",
-                ".git/"
+                ".vim/",
+                ".git/",
+                ".hg/"
             ],
             "filetypes": [
                 "go"
-            ]
+            ],
+            "initializationOptions": {
+                "usePlaceholders": true,
+                "completeUnimported": true
+            }
         }
     }
 }
