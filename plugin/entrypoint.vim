@@ -73,7 +73,7 @@ set guifont=Monaco:h20
 set mouse=a
 " noremap  <F4> :let &mouse = (&mouse == 'a' ? 'v' : 'a')<CR>
 " paste设置，不适用F7，而是采用,+p
-set pastetoggle=<leader>+p
+nnoremap <leader>p :set paste!<CR>
 " 保存所有文件
 nmap <leader>wa :wa<cr>
 " 仅仅在下拉菜单中显示匹配项目，自动插入所有匹配项目的相同文本
@@ -246,11 +246,12 @@ endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 " wsl编码错误问题
+" 2026-02-14: neovim中不需要
 """"""""""""""""""""""""""""""""""""""""""""""""
-set encoding=utf-8
-set fileencoding=utf-8
-set termencoding=utf-8
-set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+" set encoding=utf-8
+" set fileencoding=utf-8
+" set termencoding=utf-8
+" set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""
