@@ -31,7 +31,7 @@ Plug 'tpope/vim-fugitive'
 " 代码注释
 Plug 'scrooloose/nerdcommenter'
 " 代码片段
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 " 代码格式化
 Plug 'sbdchd/neoformat'
 " 搜索
