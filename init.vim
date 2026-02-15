@@ -41,8 +41,6 @@ Plug 'yianwillis/vimcdoc'
 "  Vim 的 Git 插件
 Plug 'tpope/vim-fugitive'
 
-" 代码片段(TODO: 使用coc-snippets), 目前所有代码片段都放在~/.vim/UltiSnips下
-Plug 'SirVer/ultisnips'
 " 代码格式化(保存的时候自动格式化等)
 Plug 'sbdchd/neoformat'
 " 搜索: 强大的模糊搜索功能
