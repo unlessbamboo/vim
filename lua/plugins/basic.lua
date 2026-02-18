@@ -55,13 +55,4 @@ return {
     "tomasr/molokai", -- Molokai 配色插件（核心）
     lazy = false,
   },
-  {
-    "numToStr/Comment.nvim", -- 代码注释（依赖 treesitter）
-    lazy = true,
-    event = "BufReadPost",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    config = function()
-      require("Comment").setup() -- 默认配置，满足基础注释需求
-    end,
-  },
 }

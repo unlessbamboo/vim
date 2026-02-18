@@ -30,7 +30,8 @@ require("lazy").setup(
       require("plugins.lsp"),
       -- treesitter
       require("plugins.treesitter"),
-  }, {
+  }, 
+  {
       install = {
         missing = true, -- 自动安装缺失插件
       },
@@ -43,3 +44,8 @@ require("lazy").setup(
      },
   }
 )
+
+-- 安装需要的语言
+require'nvim-treesitter'.install {
+    'rust', 'javascript', 'python', 'html', 'css'
+}
