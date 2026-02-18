@@ -99,6 +99,13 @@ CocList marketplace python
 
 2) 通过coc.nvim官网的文档查看支持的插件: [coc.extensions](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions#implemented-coc-extensions)
 
+### 4 plugins
+
++ bamboo.vim: 自定义
++ filebuff.vim: 文件缓冲区配置
++ plugins.vim: 插件配置
++ colors.vim: 配色配置
+
 
 参考:
 
