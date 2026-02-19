@@ -45,7 +45,6 @@ require("lazy").setup(
   }
 )
 
--- 安装需要的语言
-require'nvim-treesitter'.install {
-    'rust', 'javascript', 'python', 'html', 'css'
-}
+-- ========================================
+-- 4. 补充
+-- ========================================

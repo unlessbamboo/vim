@@ -2,6 +2,7 @@
 -- 1. 系统环境与路径配置（替代原有 Vimscript 路径逻辑）
 -- ========================================
 vim.g.mapleader = ","
+vim.g.maplocalleader = ","
 local ok, prev = pcall(require, "prev")
 if ok and prev and type(prev.setup) == "function" then
   prev.setup()  -- 仅当模块加载成功且有 setup 函数时执行
@@ -27,14 +28,16 @@ vim.api.nvim_create_autocmd("User", {
     require("lazy.core.config").options.git.url_format = lazy_mirror .. "%s.git"
   end,
 })
-require("lazyconfig")
+require("lazyentry")
 
 
 -- ========================================
 -- 4. 通用和入口配置
 -- ========================================
-require("commonconfig")
-require('entrypoint')
+require('indent')
+require('color')
+require('reload')
+require('common')
 
 -- ========================================
 -- 5. 加载自定义 Lua 模块（bamboo）
