@@ -5,9 +5,9 @@ vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 local ok, prev = pcall(require, "prev")
 if ok and prev and type(prev.setup) == "function" then
-  prev.setup()  -- 仅当模块加载成功且有 setup 函数时执行
+	prev.setup() -- 仅当模块加载成功且有 setup 函数时执行
 else
-  print("加载 prev.lua 失败：" .. (prev or "模块不存在"))
+	print("加载 prev.lua 失败：" .. (prev or "模块不存在"))
 end
 
 -- ========================================
@@ -23,21 +23,20 @@ vim.g.git_default_url_format = "https://hub.fastgit.xyz/%s.git"
 local lazy_mirror = "https://hub.fastgit.xyz/"
 -- 覆盖 Lazy.nvim 的默认 git 克隆参数
 vim.api.nvim_create_autocmd("User", {
-  pattern = "LazySetup",
-  callback = function()
-    require("lazy.core.config").options.git.url_format = lazy_mirror .. "%s.git"
-  end,
+	pattern = "LazySetup",
+	callback = function()
+		require("lazy.core.config").options.git.url_format = lazy_mirror .. "%s.git"
+	end,
 })
 require("lazyentry")
-
 
 -- ========================================
 -- 4. 通用和入口配置
 -- ========================================
-require('indent')
-require('color')
-require('reload')
-require('common')
+require("indent")
+require("color")
+require("reload")
+require("common")
 
 -- ========================================
 -- 5. 加载自定义 Lua 模块（bamboo）

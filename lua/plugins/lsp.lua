@@ -20,8 +20,12 @@ return {
     },
     config = function()
       require("lsp.init").setup()
+      -- python
       require("lsp.pyright")
       require("format.ruff").setup()
+      -- lua
+      require("lsp.lua_ls")
+      require("format.stylua").setup()
     end,
   },
   {
