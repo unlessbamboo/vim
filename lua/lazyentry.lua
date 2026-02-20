@@ -24,13 +24,13 @@ require("lazy").setup(
   {
       -- 基础
       require("plugins.basic"),
-      require("plugins.translate").setup(),
       require("plugins.fzf"),
       require("plugins.filetree"),
-      -- 插件分组：语言/语法支持
+      -- 语言/语法支持
       require("plugins.language"),
-      -- 插件分组：代码补全（LSP + cmp）
+      -- 代码补全（LSP + cmp）, 所有按键映射必须放后面
       require("plugins.lsp"),
+      require("plugins.translate").setup(),
       -- treesitter
       require("plugins.treesitter"),
   }, 

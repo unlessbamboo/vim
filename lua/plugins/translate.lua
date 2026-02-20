@@ -77,6 +77,7 @@ function M.setup()
     text = table.concat(text, "\n")
     local result = translate_text(text, "en", "zh")
     if result ~= "" then
+      -- vim.notify(string.format("选中文本翻译：%s", result), vim.log.levels.INFO)
       show_float_win(result)
     end
   end, opts)
