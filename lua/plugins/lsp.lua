@@ -21,6 +21,7 @@ return {
     config = function()
       require("lsp.init").setup()
       require("lsp.pyright")
+      require("format.ruff").setup()
     end,
   },
   {
