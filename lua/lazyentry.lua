@@ -24,6 +24,7 @@ require("lazy").setup(
   {
       -- 基础
       require("plugins.basic"),
+      require("plugins.translate").setup(),
       require("plugins.fzf"),
       require("plugins.filetree"),
       -- 插件分组：语言/语法支持
