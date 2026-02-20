@@ -24,6 +24,8 @@ require("lazy").setup(
   {
       -- 基础
       require("plugins.basic"),
+      require("plugins.fzf"),
+      require("plugins.filetree"),
       -- 插件分组：语言/语法支持
       require("plugins.language"),
       -- 插件分组：代码补全（LSP + cmp）

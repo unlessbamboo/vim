@@ -31,18 +31,6 @@ return {
     cmd = { "Git", "Gstatus", "Gcommit", "Gblame" },
   },
   {
-    "junegunn/fzf", -- 模糊搜索
-    lazy = true,
-    build = "./install --bin", -- 仅安装二进制文件
-    cmd = "FZF",
-  },
-  {
-    "junegunn/fzf.vim", -- fzf vim 集成
-    lazy = true,
-    dependencies = { "junegunn/fzf" },
-    cmd = { "Files", "Buffers", "Rg" },
-  },
-  {
     "godlygeek/tabular", -- 文本对齐（markdown 依赖）
     lazy = true,
     cmd = "Tabularize",
