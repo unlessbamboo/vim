@@ -39,6 +39,7 @@ require("custom.indent")
 require("custom.color")
 require("custom.reload")
 require("custom.common")
+require("custom.quickfix")
 
 -- ========================================
 -- 5. 加载自定义 Lua 模块（bamboo）
