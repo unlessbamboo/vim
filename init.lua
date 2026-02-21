@@ -32,11 +32,13 @@ require("lazyentry")
 
 -- ========================================
 -- 4. 通用和入口配置
+-- NOTE: 对于自定义的插件,不能使用lazy来进行加载, lazy是插件管理
 -- ========================================
-require("indent")
-require("color")
-require("reload")
-require("common")
+require("custom.translate").setup()
+require("custom.indent")
+require("custom.color")
+require("custom.reload")
+require("custom.common")
 
 -- ========================================
 -- 5. 加载自定义 Lua 模块（bamboo）

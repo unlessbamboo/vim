@@ -1,3 +1,5 @@
+--
+
 local M = {}
 
 function M.setup()
@@ -5,6 +7,7 @@ function M.setup()
 	local stylua_augroup = vim.api.nvim_create_augroup("StyluaAutoFormat", { clear = true })
 	vim.api.nvim_create_autocmd("BufWritePre", {
 		group = stylua_augroup,
+
 		pattern = "*.lua", -- 仅对 Lua 文件生效
 		callback = function()
 			-- 跳过大型文件
