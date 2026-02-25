@@ -28,7 +28,9 @@ require("lazy").setup({
 	-- 语言/语法支持
 	require("plugins.language"),
 	-- 代码补全（LSP + cmp）, 所有按键映射必须放后面
-	require("plugins.lsp"),
+	require("plugins.lspconfig"),
+	require("plugins.cmp"),
+	require("plugins.lint"),
 	-- treesitter
 	require("plugins.treesitter"),
 	require("plugins.comment"),
