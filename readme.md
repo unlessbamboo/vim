@@ -55,6 +55,7 @@
 
 ```sh
 # a. 下载安装最新的neovim，最好升级下brew并做一次doctor再进行操作，将电脑里面老的没有的app删了
+#		在下面过程中通过命令来更新插件 :Lazy update
 brew install neovim
 # b. 安装字体并在item2终端上更改字体，以便treefolder左边的文件格式图标不会显示为问号
 brew install font-hack-nerd-font
@@ -64,14 +65,17 @@ fd --version && fzf --version
 # d. neovim中英翻译
 brew install translate-shell
 # e. nvim-treesitter增量解析器生成工具，能将代码文本转换成结构化的「抽象语法树（AST）」
-npm install -g tree-sitter-cli
+  npm install -g tree-sitter-cli
+# 注意安装好后需要打开neovim安装python和lua： 
+#		:TSInstall python lua
+#		:checkhealth nvim-treesitter
 ```
 
 2. python开发环境
 
 ```sh
 # a. 安装ruff
-uv tool install ruff@latest
+curl -LsSf https://astral.sh/ruff/install.sh | sh
 # b. pyright
 npm install -g pyright
 ```
