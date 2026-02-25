@@ -5,7 +5,7 @@
   "cmp-nvim-lsp": { "branch": "main", "commit": "cbc7b02bb99fae35cb42f514762b89b5126651ef" },
   "cmp-path": { "branch": "main", "commit": "c642487086dbd9a93160e1679a1327be111cbc25" },
   "fzf-lua": { "branch": "main", "commit": "cc81c66dba2153f08c382565466e18d6ea5a6c50" },
-  "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
+  "lazy.nvim": { "branch": "main", "commit": "85c7ff3711b730b4030d03144f6db6375044ae82" },
   "nvim-cmp": { "branch": "main", "commit": "da88697d7f45d16852c6b2769dc52387d1ddc45f" },
   "nvim-lint": { "branch": "master", "commit": "606b823a57b027502a9ae00978ebf4f5d5158098" },
   "nvim-lspconfig": { "branch": "master", "commit": "ab5139c99df944479e5a26495a37840fcbb1d512" },

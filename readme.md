@@ -56,6 +56,7 @@
 ```sh
 # a. 下载安装最新的neovim，最好升级下brew并做一次doctor再进行操作，将电脑里面老的没有的app删了
 #		在下面过程中通过命令来更新插件 :Lazy update
+# 最后，建议先清理一遍电脑中已有的neovim包，删除neovim再重装
 brew install neovim
 # b. 安装字体并在item2终端上更改字体，以便treefolder左边的文件格式图标不会显示为问号
 brew install font-hack-nerd-font

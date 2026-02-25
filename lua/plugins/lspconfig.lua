@@ -9,22 +9,22 @@
 NOTE: 注意,能以lazy.nvim插件配置格式返回的都是已有的插件
 --]]
 return {
-		"neovim/nvim-lspconfig", -- LSP 配置简化工具
-		lazy = false,
-		ft = { "python", "go", "lua", "javascript", "typescript", "html", "css" },
-		dependencies = {
-			"hrsh7th/nvim-cmp", -- 补全框架
-			"hrsh7th/cmp-nvim-lsp", -- cmp 对接 LSP 的桥梁
-			"hrsh7th/cmp-buffer", -- 缓冲区补全
-			"hrsh7th/cmp-path", -- 路径补全
-		},
-		config = function()
-			require("lsp.init").setup()
-			-- python
-			require("lsp.pyright")
-			require("format.ruff").setup()
-			-- lua
-			require("lsp.lua_ls")
-			require("format.stylua").setup()
-		end,
+	"neovim/nvim-lspconfig", -- LSP 配置简化工具
+	lazy = false,
+	ft = { "python", "go", "lua", "javascript", "typescript", "html", "css" },
+	dependencies = {
+		"hrsh7th/nvim-cmp", -- 补全框架
+		"hrsh7th/cmp-nvim-lsp", -- cmp 对接 LSP 的桥梁
+		"hrsh7th/cmp-buffer", -- 缓冲区补全
+		"hrsh7th/cmp-path", -- 路径补全
+	},
+	config = function()
+		require("lsp.init").setup()
+		-- python
+		require("lsp.pyright")
+		require("format.ruff").setup()
+		-- lua
+		require("lsp.lua_ls")
+		require("format.stylua").setup()
+	end,
 }
