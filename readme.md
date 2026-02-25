@@ -84,9 +84,12 @@ npm install -g pyright
 3. lua开发环境
 
 ```sh
-# a. 安装lua_ls，注意，不用通过tree-sitter安装lua，否则出现各种古里古怪的错误
+# a. 安装luacheck
+brew install lua luarocks
+sudo luarocks install luacheck
+# b. 安装lua_ls，注意，不用通过tree-sitter安装lua，否则出现各种古里古怪的错误
 brew install lua-language-server
-# b. 安装stylua
+# c. 安装stylua
 brew install stylua
 ```
 
