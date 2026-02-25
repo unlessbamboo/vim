@@ -17,7 +17,6 @@ return {
 		config = function()
 			require("nvim-treesitter").install({
 				"rust",
-				"lua",
 				"javascript",
 				"python",
 				"html",
