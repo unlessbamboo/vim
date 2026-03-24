@@ -25,12 +25,19 @@ require("lazy").setup({
 	require("plugins.basic"),
 	require("plugins.fzf"),
 	require("plugins.filetree"),
+	require("plugins.gitsigns"),
+	require("plugins.lualine"),
 	-- 语言/语法支持
 	require("plugins.language"),
-	-- 代码补全（LSP + cmp）, 所有按键映射必须放后面
+	-- 代码补全（LSP + cmp）
 	require("plugins.lspconfig"),
 	require("plugins.cmp"),
+	require("plugins.autopairs"),
+	-- 格式化和检查
+	require("plugins.conform"),
 	require("plugins.lint"),
+	-- 工具管理
+	require("plugins.mason"),
 	-- treesitter
 	require("plugins.treesitter"),
 	require("plugins.comment"),
