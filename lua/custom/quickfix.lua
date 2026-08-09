@@ -6,7 +6,9 @@ vim.keymap.set("n", "<leader>qfix", ":cclose<CR>", {
 })
 
 -- 终极方案：quickfix 窗口中触发跳转后立即关闭
+vim.api.nvim_create_augroup("QuickfixAutoClose", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
+	group = "QuickfixAutoClose",
 	pattern = "qf", -- 仅匹配 quickfix 缓冲区
 	callback = function(args)
 		local qf_bufnr = args.buf
@@ -38,7 +40,9 @@ vim.api.nvim_create_autocmd("FileType", {
 		end, { buffer = qf_bufnr, noremap = true, silent = true })
 
 		-- 3. 兼容 :cc/:cn 等命令跳转（保留原有逻辑）
+		local qf_cmd_group = vim.api.nvim_create_augroup("QuickfixCmdAutoClose", { clear = true })
 		vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+			group = qf_cmd_group,
 			pattern = { "cc", "cn", "cp", "cnext", "cprev", "cfirst", "clast" },
 			callback = function()
 				local close_qf = function()
@@ -58,8 +62,8 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- 可选：自定义快捷键（一键跳转+关闭）
-vim.keymap.set("n", "<leader>cc", function()
-	vim.cmd("cc")
+vim.keymap.set("n", "<leader>cq", function()
+	vim.cmd("cq")
 	local all_wins = vim.fn.getwininfo()
 	for _, win in ipairs(all_wins) do
 		if win.quickfix == 1 and vim.api.nvim_win_is_valid(win.winid) then

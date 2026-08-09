@@ -26,7 +26,6 @@
 ├── lazy-lock.json
 ├── lua
 │   ├── custom
-│   ├── format
 │   ├── lazyentry.lua
 │   ├── lsp
 │   ├── plugins
@@ -39,7 +38,7 @@
 + lua/lazyentry.lua：lazy插件管理入口文件
 + lua/plugins：存放lazy管理的部分需要单独配置（模块化）的插件，一个文件代表一个插件配置
 + lua/lsp：所有语言的lsp单独配置，他们一般会在lua/plugins/lspconfig.lua中被引用
-+ lua/format：所有语言的格式化单独配置，他们会在lua/plugins/lspconfig.lua中被引用，不过放在lsp引用之后
++ lua/plugins/conform.lua：所有语言的格式化统一在此配置（conform.nvim + ruff / stylua / prettier）
 + lua/custom：所有不能使用lazy管理的插件，一般为通过外置命令行等配置的插件
 
 在进行改动的时候请大体按照已有的模块化逻辑进行改动

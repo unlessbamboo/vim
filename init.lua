@@ -11,23 +11,10 @@ else
 end
 
 -- ========================================
--- 2. 全局镜像配置（适配所有基于 git 的插件）
+-- 2. 插件源配置（恢复官方 GitHub 源）
 -- ========================================
--- 替换 git clone 的默认源（FastGit 镜像，稳定）
-vim.g.git_default_url_format = "https://hub.fastgit.xyz/%s.git"
-
--- ========================================
--- 3. Lazy.nvim 插件镜像配置（核心）
--- ========================================
--- 配置 Lazy.nvim 下载插件时使用镜像
-local lazy_mirror = "https://hub.fastgit.xyz/"
--- 覆盖 Lazy.nvim 的默认 git 克隆参数
-vim.api.nvim_create_autocmd("User", {
-	pattern = "LazySetup",
-	callback = function()
-		require("lazy.core.config").options.git.url_format = lazy_mirror .. "%s.git"
-	end,
-})
+-- FastGit 镜像已停运，这里不再覆盖 lazy.nvim 的默认 git 源
+-- （默认 url_format 即 https://github.com/%s.git）
 require("lazyentry")
 
 -- ========================================

@@ -16,7 +16,6 @@
 ├── lazy-lock.json
 ├── lua
 │   ├── custom
-│   ├── format
 │   ├── lazyentry.lua
 │   ├── lsp
 │   ├── plugins
@@ -29,7 +28,7 @@
 + lua/lazyentry.lua：lazy插件管理入口文件
 + lua/plugins：存放lazy管理的部分需要单独配置（模块化）的插件，一个文件代表一个插件配置
 + lua/lsp：所有语言的lsp单独配置，他们一般会在lua/plugins/lspconfig.lua中被引用
-+ lua/format：所有语言的格式化单独配置，他们会在lua/plugins/lspconfig.lua中被引用，不过放在lsp引用之后
++ lua/plugins/conform.lua：所有语言的格式化统一在此配置（conform.nvim + ruff / stylua / prettier）
 + lua/custom：所有不能使用lazy管理的插件，一般为通过外置命令行等配置的插件
 
 2. python
@@ -67,9 +66,8 @@ fd --version && fzf --version
 brew install translate-shell
 # e. nvim-treesitter增量解析器生成工具，能将代码文本转换成结构化的「抽象语法树（AST）」
   npm install -g tree-sitter-cli
-# 注意安装好后需要打开neovim安装python和lua： 
-#		:TSInstall python lua
-#		:checkhealth nvim-treesitter
+# 注意：解析器由配置在启动时自动安装（require("nvim-treesitter").install({...})），无需手动 :TSInstall
+#		如需检查解析器状态：:checkhealth nvim-treesitter
 ```
 
 2. python开发环境
@@ -92,6 +90,5 @@ brew install lua-language-server
 # c. 安装stylua
 brew install stylua
 ```
-
 
 

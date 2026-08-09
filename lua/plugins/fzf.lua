@@ -18,7 +18,8 @@ return {
       return "--exclude " .. dir
     end, exclude_dirs)
     local rg_exclude = vim.tbl_map(function(dir)
-      return "--glob '!" .. dir .. "/**'"
+      -- 注意：live_grep 以绝对路径作为搜索根，必须用 !**/dir/** 才能排除子目录
+      return "--glob '!**/" .. dir .. "/**'"
     end, exclude_dirs)
 
     -- 基础配置（按需调整）
