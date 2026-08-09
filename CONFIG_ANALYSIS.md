@@ -378,20 +378,21 @@ brew install ruff golangci-lint
 
 ### 7.2 中危（功能失效 / 键位冲突）
 
-4. **`,cc` 键位冲突**：`lua/custom/quickfix.lua` 与 Comment.nvim 都把 `,cc` 绑定为行注释切换。由于 Comment.nvim 在打开文件后加载、后绑定，实际生效的是**注释切换**，quickfix 的 `,cc`（跳转+关闭）被覆盖。建议把其中一个改成别的键（如 `,cq`）。
+4. **`,cc` 键位冲突（已修复）**：quickfix 侧已改绑为 `,cq`，不再与 Comment.nvim 的 `,cc` 冲突；顺带修正了 `,cq` 原先误绑定 `:cq`（带错误码退出）的问题，现在是一键跳转+关闭。
 5. **`,toc` 失效（已修复）**：已通过 lazy 安装 `preservim/vim-markdown`（`ft = "markdown"` 懒加载），`:Toc` 命令可用，`,toc` 恢复打开 Markdown 目录。
 6. **`,ss` 重载不彻底（已修复）**：`reload.lua` 现在会清空 `custom.*`、`prev`、`lazyentry`、`bamboo` 的模块缓存后重新执行 `init.lua`；`lazyentry.lua` 通过 `lazy_did_setup` 跳过 lazy 重复初始化；自动命令改用命名 augroup（clear=true），不会随重载堆叠。
 7. **Java 声明与实现不符**：`CLAUDE.md` 声称支持 Java 开发，但配置中没有 jdtls、没有 Java treesitter 解析器。要么补上 jdtls，要么改文档。
 8. **前端 LSP 键位缺失（已修复）**：mason-lspconfig 的 `automatic_enable` 会默认启用已安装的 ts_ls/html/cssls，但用的是默认配置、未挂载自定义 `on_attach`，导致 `,gd` 等键位在 TS/HTML/CSS 中不存在（Python/Lua 正常）。已新增显式配置并复用 `lsp.init` 的键位与 capabilities。
+9. **quickfix 回车跳转失效（已修复）**：原实现用 `:normal! <CR>` 触发跳转，但键码不会被执行，导致选中引用后原地不动；且尝试用 `feedkeys` 修复时默认会重新映射按键，造成递归崩溃。现改为 `feedkeys(..., "nx")`（不重映射 + 立即执行）触发内置跳转，回车/鼠标点击/`,cq` 均已实测可跳到所选条目并自动关闭窗口。
 
 ### 7.3 低危（清理项）
 
-9. **旧 vim-plug 残留（已清理）**：`~/.local/share/nvim/plugged/`（约 95MB）已移至 `~/.local/share/nvim/plugged.bak-20260809` 备份，未直接删除，确认无误后可手动移除该备份目录。
-10. **`translate.nvim.cloning` 残留（已删除）**：`~/.local/share/nvim/lazy/` 下 0 字节的克隆失败残留文件已移除。
-11. **`.nvimlog` 未忽略（已修复）**：日志文件已删除，并新增仓库级 `.gitignore`（忽略 `.nvimlog` 与 `*.swp`）。
-12. **`colors/.molokai.vim.swp` 残留（已删除）**：vim 交换文件已移除。
-13. **README / CLAUSE.md 部分过时（已更新）**：目录结构中的 `lua/format/` 已移除并改为指向 `lua/plugins/conform.lua`；treesitter 说明改为「解析器由配置启动时自动安装」。
-14. **fzf-lua grep 排除规则（已修复）**：经实测，单引号会被 shell 正确解析，真正的坑是 ripgrep 的 glob 语义——当搜索根为绝对路径时，`!dir/**` 无法排除子目录，需写成 `!**/dir/**`。`lua/plugins/fzf.lua` 已改用修正后的 glob 模式，实测排除生效。
+10. **旧 vim-plug 残留（已清理）**：`~/.local/share/nvim/plugged/`（约 95MB）已移至 `~/.local/share/nvim/plugged.bak-20260809` 备份，未直接删除，确认无误后可手动移除该备份目录。
+11. **`translate.nvim.cloning` 残留（已删除）**：`~/.local/share/nvim/lazy/` 下 0 字节的克隆失败残留文件已移除。
+12. **`.nvimlog` 未忽略（已修复）**：日志文件已删除，并新增仓库级 `.gitignore`（忽略 `.nvimlog` 与 `*.swp`）。
+13. **`colors/.molokai.vim.swp` 残留（已删除）**：vim 交换文件已移除。
+14. **README / CLAUSE.md 部分过时（已更新）**：目录结构中的 `lua/format/` 已移除并改为指向 `lua/plugins/conform.lua`；treesitter 说明改为「解析器由配置启动时自动安装」。
+15. **fzf-lua grep 排除规则（已修复）**：经实测，单引号会被 shell 正确解析，真正的坑是 ripgrep 的 glob 语义——当搜索根为绝对路径时，`!dir/**` 无法排除子目录，需写成 `!**/dir/**`。`lua/plugins/fzf.lua` 已改用修正后的 glob 模式，实测排除生效。
 
 ---
 
