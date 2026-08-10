@@ -17,7 +17,8 @@ local presets = {
 		provider_options = {
 			api_key = "DEEPSEEK_API_KEY", -- 对应环境变量名
 			name = "DeepSeek",
-			end_point = "https://api.deepseek.com/v1/completions",
+			-- DeepSeek 的 FIM 补全接口自 2025 年起只走 beta 域名,普通 /v1 会报错
+			end_point = "https://api.deepseek.com/beta/completions",
 			model = "deepseek-chat",
 			optional = {
 				max_tokens = 128,
