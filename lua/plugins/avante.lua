@@ -58,5 +58,9 @@ return {
 		},
 		-- 保持默认 native 输入框,不再引入 dressing/snacks 等额外依赖
 		input = { provider = "native" },
+		-- 侧栏窗口: width 为屏幕宽度百分比(默认 30,偏宽),可自行调整
+		windows = {
+			width = 15,
+		},
 	},
 }

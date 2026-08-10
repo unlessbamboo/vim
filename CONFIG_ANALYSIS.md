@@ -42,6 +42,11 @@
 - mini.pick / telescope 仅用于替代文件选择器，不装；copilot.lua 仅用于 `provider="copilot"`，不装。
 - 唯一可选未装的是 `img-clip.nvim`（对话中粘贴图片）；如需再加。
 
+### 2026-08-10：窗口宽度调整
+
+- avante 侧栏：`windows.width` 从默认 30% 调为 25%（`lua/plugins/avante.lua`，单位 = 屏幕宽度百分比）。
+- nvim-tree 宽度：位于 `lua/plugins/filetree.lua` 的 `view.width = 35`，单位 = 列数（nvim-tree 默认 30）；本轮未改动，按需调整。
+
 ---
 
 ## 1. 总体架构
