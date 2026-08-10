@@ -23,6 +23,7 @@ return {
 				"css",
 				"markdown",
 				"go",
+				"lua",
 			})
 		end,
 	},
