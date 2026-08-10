@@ -1,5 +1,6 @@
 # Neovim 运行时日志
 .nvimlog
+nvim.log
 
 # vim 交换文件
 *.swp

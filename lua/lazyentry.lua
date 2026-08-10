@@ -36,6 +36,9 @@ if not vim.g.lazy_did_setup then
 		require("plugins.lspconfig"),
 		require("plugins.cmp"),
 		require("plugins.autopairs"),
+		-- AI 补全与助手
+		require("plugins.minuet"),
+		require("plugins.avante"),
 		-- 格式化和检查
 		require("plugins.conform"),
 		require("plugins.lint"),

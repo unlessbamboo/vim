@@ -1,7 +1,46 @@
 # Neovim 配置分析文档
 
-> 生成日期：2026-08-09　|　环境：macOS / Neovim v0.11.6 / LuaJIT 2.1
+> 生成日期：2026-08-09　|　环境：macOS / Neovim v0.12.4 / LuaJIT 2.1
 > 管理方式：lazy.nvim（插件）+ mason.nvim（语言工具）+ 自写 Lua 模块（custom）
+> 最近更新：2026-08-09（接入 minuet-ai.nvim + avante.nvim，见第 0 节）
+
+---
+
+## 0. 变更记录（跨机器同步参考）
+
+> 本 session 起，每次对话造成的配置改动都会同步记录到本节，方便在其他电脑上还原。
+
+### 2026-08-09：接入 AI 补全与助手
+
+- 新增 [lua/plugins/minuet.lua]：minuet-ai.nvim，as-you-type AI 补全，接入 nvim-cmp（source `minuet`、`<A-y>` 手动触发、`fetching_timeout = 2000`）。
+- 新增 [lua/plugins/avante.lua]：avante.nvim，Cursor 风格 AI 助手；自动安装依赖 plenary.nvim、nui.nvim、nvim-web-devicons、render-markdown.nvim；文件选择复用已有 fzf-lua。
+- `lua/lazyentry.lua` 注册两个新插件文件；`lazy-lock.json` 已更新（含 5 个新插件）。
+- 默认模型 DeepSeek（minuet 用 `openai_fim_compatible`，avante 用 `__inherited_from = "openai"` 的自定义 provider）；`AI_PROVIDER=openai` 可整体切到 OpenAI。
+- API key 一律通过环境变量注入（DEEPSEEK_API_KEY / OPENAI_API_KEY / ANTHROPIC_API_KEY），不写入仓库（详见 2.16 / 2.17 / 7.4 节）。
+- avante 首次安装已在本机完成 `build = "make"`（下载预编译 tiktoken 等组件，约 12MB）。
+
+### 2026-08-09（补充）：API key 环境检查与修复
+
+- 检查结论：`~/.bamboo_profile`（symlink → `~/bambooenv/bamboo/env/.bamboo_profile`，由 `~/.zshrc` 106-107 行 source）里的 Neovim key 段落存在自引用 bug：`export DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}`，导致 DeepSeek key 始终为空；真实 key 定义在 `/data/shell/key.sh` 的 `MY_DEEPSEEK_API_KEY` / `MY_PACKYCODE_API_KEY`。
+- 修复：改为 `export DEEPSEEK_API_KEY=${MY_DEEPSEEK_API_KEY}`；`OPENAI_API_KEY=${MY_PACKYCODE_API_KEY}`、`ANTHROPIC_API_KEY=${MY_ANTHROPIC_API_KEY}`（key.sh 中当前为空）、`AI_PROVIDER="deepseek"` 均正常。
+- 验证：新交互 shell 中 `AI_PROVIDER=deepseek`、`DEEPSEEK_API_KEY` 35 字符、`OPENAI_API_KEY` 51 字符，加载正常。
+- 权限：`.bamboo_profile` 与 `/data/shell/key.sh` 均已 `chmod 600`（此前 755/644，本机其他用户可读）。
+- 提醒：排查过程中 key 明文曾出现在诊断输出中，建议轮换；key 不要提交进 git 仓库（key.sh 未跟踪；`.bamboo_profile` 虽在 bambooenv 仓库内，但只含 `${MY_*}` 引用、无明文 key）。
+
+### 2026-08-09（补充）：minuet "API key 环境变量不存在" 报错排查
+
+- 报错含义：minuet 在 nvim 启动时按配置的 `api_key` 变量名取环境变量，取不到就报 `The API key has not been provided as an environment variable...`（来源：`lua/minuet/backends/openai_fim_compatible.lua` / `openai_compatible.lua`）。
+- 原因：报错的 nvim 实例是修复 `.bamboo_profile` 之前启动的，启动时环境里 `DEEPSEEK_API_KEY` 为空；nvim 启动后 `vim.env` 不会刷新。
+- 验证：新交互 shell 中启动 nvim，`vim.env` 可见 `DEEPSEEK_API_KEY=35`、`OPENAI_API_KEY=51`、`AI_PROVIDER=deepseek`，加载正常。
+- 解决：关闭旧 nvim 实例，从新终端（或 `source ~/.bamboo_profile` 后）重新启动。
+- 预防：若以后从 GUI（Spotlight/Finder）启动 nvim，zsh 启动文件不会执行，需改用 `launchctl setenv` 或把 export 挪到 `~/.zshenv`；tmux 场景注意旧 server 继承的旧环境。
+
+### 2026-08-10：核对 avante 官方依赖清单（结论：无需改动）
+
+- 必需项 plenary / nui / nvim-web-devicons / render-markdown 均已配置。
+- nvim-cmp 与 fzf-lua 本配置已有（fzf 已设为 avante 的 selector），不重复声明。
+- mini.pick / telescope 仅用于替代文件选择器，不装；copilot.lua 仅用于 `provider="copilot"`，不装。
+- 唯一可选未装的是 `img-clip.nvim`（对话中粘贴图片）；如需再加。
 
 ---
 
@@ -43,6 +82,8 @@
 │       ├── lspconfig.lua     # LSP 框架入口
 │       ├── cmp.lua           # 补全 nvim-cmp
 │       ├── autopairs.lua     # 自动括号
+│       ├── minuet.lua        # AI 补全（DeepSeek/OpenAI 按 AI_PROVIDER 切换）
+│       ├── avante.lua        # AI 助手（Cursor 风格，含依赖声明）
 │       ├── conform.lua       # 保存时格式化
 │       ├── lint.lua          # 异步 lint
 │       ├── mason.lua         # LSP/工具安装管理
@@ -138,7 +179,19 @@
 - `,toc` 打开 Markdown 标题目录（`:Toc`），窗口宽度自动适配；对应选项在 `common.lua` 中设置。
 - 提供 Markdown 折叠与语法支持，按 `ft = "markdown"` 懒加载。
 
-### 2.16 配置自维护
+### 2.16 AI 补全（minuet-ai.nvim）
+- as-you-type 代码补全，支持 FIM（DeepSeek/Codestral/Qwen 等）与 chat 补全（OpenAI 等），随 nvim-cmp 菜单展示。
+- 模型切换：`AI_PROVIDER` 环境变量（默认 `deepseek`；`openai` 走 `openai_compatible` chat 补全），预设表在 `minuet.lua` 顶部，改后重启 nvim 或 `:Lazy reload minuet-ai.nvim` 生效。
+- 快捷键：`<A-y>` 手动触发补全；接受/选择沿用 cmp 的 Tab/Enter。
+- 运行中可 `:Minuet change_provider <name>` / `:Minuet change_model [provider:model]` 切换 provider 类型/模型（同类型不同端点仍需改 `AI_PROVIDER`）。
+
+### 2.17 AI 助手（avante.nvim）
+- Cursor 风格：侧栏对话、选中代码内联编辑、自动应用 diff；项目根目录放 `avante.md` 可注入项目级指令。
+- 模型切换：启动时读 `AI_PROVIDER`（deepseek / openai / claude）；运行中 `:AvanteModels` 或 `:AvanteSwitchProvider` 直接切换，无需重启。
+- 快捷键（`,` 为 leader）：`,aa` 提问、`,an` 新对话、`,ae` 内联编辑、`,at` 开关侧栏、`,ar` 刷新、`,ac` 添加当前文件到会话（avante 默认键位，冲突时自动跳过）。
+- 依赖与构建：plenary / nui / nvim-web-devicons / render-markdown 随 lazy 自动安装；`build = "make"` 必须保留。
+
+### 2.18 配置自维护
 - `,ee` 快速打开 `init.lua`；`,ss` 重载配置（会清空 `custom.*` 等模块缓存后重新执行 `init.lua`）；保存 `init.lua` 后自动重载。
 - quickfix 窗口：回车/鼠标点击跳转后自动关闭，`:cc/:cn` 等跳转命令后也会自动关闭；`,qfix` 手动关闭。
 
@@ -156,7 +209,7 @@
 | nvim-lualine/lualine.nvim | 启动 | 状态栏 |
 | nvim-treesitter/nvim-treesitter | 启动 | 语法树高亮、解析器安装 |
 | neovim/nvim-lspconfig | 按文件类型 | LSP 配置框架（pyright / lua_ls 等） |
-| hrsh7th/nvim-cmp | InsertEnter | 补全框架 |
+| hrsh7th/nvim-cmp | InsertEnter | 补全框架（含 minuet AI 源） |
 | hrsh7th/cmp-nvim-lsp | 依赖 | 为 LSP 提供补全 capabilities |
 | hrsh7th/cmp-buffer | 依赖 | 当前缓冲区补全源 |
 | hrsh7th/cmp-path | 依赖 | 文件路径补全源 |
@@ -168,6 +221,11 @@
 | williamboman/mason-lspconfig.nvim | 依赖 | mason 与 lspconfig 的桥接（声明管理清单） |
 | numToStr/Comment.nvim | BufReadPost | 行/块注释切换 |
 | preservim/vim-markdown | ft = markdown | Markdown 目录（:Toc）、折叠与语法支持 |
+| milanglacier/minuet-ai.nvim | InsertEnter | AI as-you-type 补全（FIM/chat，DeepSeek/OpenAI 可切换） |
+| yetone/avante.nvim | VeryLazy | Cursor 风格 AI 助手（对话/内联编辑/自动 diff） |
+| nvim-lua/plenary.nvim | 依赖（avante） | Lua 通用工具库 |
+| MunifTanjim/nui.nvim | 依赖（avante） | UI 组件库 |
+| MeanderingProgrammer/render-markdown.nvim | ft = markdown/Avante | Markdown 渲染（对话窗口美化） |
 
 > 注：`lua/plugins/basic.lua`（molokai 插件）与 `language.lua` 均为空占位；`prev.lua` 为兼容旧配置的空壳。
 
@@ -239,6 +297,20 @@ return {
 ```
 
 当前 mason 已安装：pyright、lua-language-server、typescript-language-server、css/html 语言服务器。
+
+### 4.6 AI 插件维护要点（minuet / avante）
+
+1. **API key**：只放环境变量，不要写进本仓库。推荐在 `~/.zshrc` 导出：
+
+   ```sh
+   export DEEPSEEK_API_KEY="..."
+   export OPENAI_API_KEY="..."
+   export AI_PROVIDER="deepseek"   # deepseek | openai | claude
+   ```
+
+2. **切换模型**：改 `AI_PROVIDER` 后重启 nvim（minuet 不重启不生效）；avante 可在运行中 `:AvanteModels` / `:AvanteSwitchProvider` 切换。
+3. **avante 构建**：更新后若提示构建过期，执行 `:AvanteBuild`（或 `:Lazy build avante.nvim`）。
+4. **新电脑同步**：首次 `:Lazy install` 会自动执行 avante 的 `make` 构建，需要网络；预编译下载失败时，安装 cargo 后 `:AvanteBuild source=true`。
 
 ---
 
@@ -332,7 +404,18 @@ return {
 | `:checkhealth` | 健康检查（装完新工具后建议跑一次） |
 | `:TSInstall python` 等 | 按需安装 treesitter 解析器（当前已装 9 个，一般不需要） |
 
-### 5.8 典型工作流
+### 5.8 AI 补全与助手
+
+| 快捷键 / 命令 | 功能 |
+|---|---|
+| `<A-y>` | 手动触发 minuet AI 补全 |
+| `,aa` / `,an` / `,ae` | avante 提问 / 新对话 / 内联编辑选中代码 |
+| `,at` / `,ar` / `,ac` | avante 开关侧栏 / 刷新 / 添加当前文件 |
+| `:AvanteModels` / `:AvanteSwitchProvider` | avante 运行中切换模型 / provider |
+| `:Minuet change_provider <name>` | minuet 切换 provider 类型 |
+| `:Minuet change_model [provider:model]` | minuet 切换模型 |
+
+### 5.9 典型工作流
 
 - **Python**：打开 `.py` → pyright 自动启动（类型检查、补全）→ 写代码用 `Tab` 补全 → `,gd` 跳转、`,K` 看文档 → 保存时 conform 调用 ruff 格式化（**需先安装 ruff**）→ `]d` 逐个查看错误，`,e` 看详情，`,ca` 修复。
 - **前端（JS/TS/Vue/HTML/CSS）**：`F2` 开文件树，`,ff` 找文件，`,fg` 搜代码；eslint/prettier 已装，保存自动格式化和 lint。
@@ -355,6 +438,10 @@ return {
 | prettier | 前端格式化 | ✅ 已装 |
 | eslint | JS/TS lint | ✅ 已装 |
 | shellcheck | Shell lint | ✅ 已装 |
+| curl | minuet 请求后端 | ✅ 系统自带 |
+| make / gcc | avante 构建 | ✅ 已装（首次构建用预编译组件） |
+| DEEPSEEK_API_KEY / OPENAI_API_KEY / ANTHROPIC_API_KEY | AI 插件密钥（环境变量） | ✅ 已配置（~/.bamboo_profile + /data/shell/key.sh，600 权限） |
+| ollama | minuet/avante 本地模型（可选） | ❌ 未安装（需要时 `brew install ollama`） |
 | **ruff** | Python 格式化 + lint | ❌ **未安装** |
 | **golangci-lint** | Go lint | ❌ **未安装** |
 
@@ -394,6 +481,11 @@ brew install ruff golangci-lint
 14. **README / CLAUSE.md 部分过时（已更新）**：目录结构中的 `lua/format/` 已移除并改为指向 `lua/plugins/conform.lua`；treesitter 说明改为「解析器由配置启动时自动安装」。
 15. **fzf-lua grep 排除规则（已修复）**：经实测，单引号会被 shell 正确解析，真正的坑是 ripgrep 的 glob 语义——当搜索根为绝对路径时，`!dir/**` 无法排除子目录，需写成 `!**/dir/**`。`lua/plugins/fzf.lua` 已改用修正后的 glob 模式，实测排除生效。
 
+### 7.4 AI 插件（2026-08-09 新增）
+
+16. **API key 配置（已修复）**：minuet/avante 默认读 `DEEPSEEK_API_KEY`，切 OpenAI 需 `AI_PROVIDER=openai` + `OPENAI_API_KEY`。key 由 `~/.zshrc` → `~/.bamboo_profile` → `/data/shell/key.sh` 注入；已修复 `DEEPSEEK_API_KEY` 自引用 bug 并收紧文件权限为 600。密钥不要提交到本 git 仓库（也可用 direnv / macOS Keychain 管理）。
+17. **avante 构建依赖网络**：首次安装已在本机完成；换机器同步后 `:Lazy install` 会重新执行 `build = "make"`（下载预编译组件，约 12MB）。若下载失败，需安装 cargo 后执行 `:AvanteBuild source=true`。
+
 ---
 
 ## 8. 整体总结
@@ -401,7 +493,7 @@ brew install ruff golangci-lint
 这是一套结构清晰、现代感十足的 Neovim 配置：
 
 - **架构**：lazy.nvim 统一管理插件，配置按「plugins（插件）/ lsp（语言）/ custom（自写逻辑）」三块拆分，`lazy-lock.json` 保证版本可复现，`init.lua` 只做装配，改动成本低。
-- **能力**：覆盖了日常开发的完整链路——查找（fzf-lua + 文件树）、编辑（补全/括号/注释/折叠）、质量（LSP 诊断、格式化、lint）、版本控制（gitsigns）、体验（状态栏、主题、翻译、快速重载）。Python、Lua、前端（JS/TS/HTML/CSS）是实际可用的主力环境。
+- **能力**：覆盖了日常开发的完整链路——查找（fzf-lua + 文件树）、编辑（补全/括号/注释/折叠）、质量（LSP 诊断、格式化、lint）、版本控制（gitsigns）、AI（minuet 补全 + avante 助手）、体验（状态栏、主题、翻译、快速重载）。Python、Lua、前端（JS/TS/HTML/CSS）是实际可用的主力环境。
 - **当前健康度**：配置可正常启动（约 0.25s），大部分功能在线；但有三个真实断点需要处理：FastGit 镜像失效（影响加插件）、ruff 缺失（影响 Python 格式/lint）、`,cc` 键位冲突。清理后这套配置会处于很稳定的状态。
 
 一句话：**这是一套“lazy + LSP + treesitter”体系的标准现代配置，底子很好；维护时优先处理镜像、补齐 ruff，其余按第 4 节的流程增删插件即可。**
