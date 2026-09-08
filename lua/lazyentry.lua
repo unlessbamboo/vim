@@ -30,6 +30,7 @@ if not vim.g.lazy_did_setup then
 		require("plugins.filetree"),
 		require("plugins.gitsigns"),
 		require("plugins.lualine"),
+		require("plugins.outline"),
 		-- 语言/语法支持
 		require("plugins.language"),
 		-- 代码补全（LSP + cmp）

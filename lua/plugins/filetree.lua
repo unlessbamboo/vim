@@ -1,5 +1,5 @@
 --[[
-依赖项: 
+依赖项:
   a. 需要提前安装字体, brew install font-hack-nerd-font
   b. 需要iterm2终端选择该字体,才会显示相应的图标,否则都是问号
 
@@ -76,7 +76,7 @@ return {
 
 		-- 绑定快捷键（和你的 fzf-lua 快捷键风格统一）
 		local opts = { noremap = true, silent = true }
-		vim.keymap.set("n", "<F2>", "<cmd>NvimTreeToggle<CR>", opts) -- 切换树形窗口
+		-- <F2> 改为「文件树 + 大纲」一起开关，定义在 lua/plugins/outline.lua
 		vim.keymap.set("n", "<leader>ef", "<cmd>NvimTreeFindFile<CR>", opts) -- 定位当前文件在树中的位置
 		vim.keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", opts) -- 折叠所有目录
 		vim.keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", opts) -- 刷新树形窗口

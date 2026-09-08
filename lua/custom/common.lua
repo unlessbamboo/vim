@@ -93,3 +93,44 @@ vim.keymap.set("n", "<leader>s_", ":resize -20<CR>", { desc = "窗口高度减�
 vim.keymap.set("n", "<leader>s+", ":resize +20<CR>", { desc = "窗口高度增加 20" })
 vim.keymap.set("n", "<leader>v_", ":vertical resize -20<CR>", { desc = "窗口宽度减少 20" })
 vim.keymap.set("n", "<leader>v+", ":vertical resize +20<CR>", { desc = "窗口宽度增加 20" })
+
+-- ========================================
+-- Session：mksession 不能恢复 nvim-tree / outline 这类运行时生成的窗口
+-- （它们是 nofile 的临时 buffer，恢复后只剩一个空窗口）
+-- 所以存 session 前先把这两个侧边栏关掉；加载 session 后再按需重开文件树。
+-- ========================================
+local session_sidebar_ft = { "NvimTree", "Outline" }
+
+local function close_session_sidebars()
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local ok, ft = pcall(function()
+      return vim.bo[vim.api.nvim_win_get_buf(win)].filetype
+    end)
+    if ok and vim.tbl_contains(session_sidebar_ft, ft) then
+      pcall(vim.api.nvim_win_close, win, true)
+    end
+  end
+end
+
+-- :SaveSession [文件]  —— 默认 Session.vim，会自动关掉侧边栏再存
+vim.api.nvim_create_user_command("SaveSession", function(o)
+  local file = o.args ~= "" and o.args or "Session.vim"
+  close_session_sidebars()
+  vim.cmd("mksession! " .. vim.fn.fnameescape(file))
+  vim.notify("session 已保存：" .. file)
+end, { nargs = "?", complete = "file", desc = "保存 session（先关掉 nvim-tree / outline）" })
+
+-- 加载 session 后：清掉残留的空侧边栏窗口（针对旧的、没用 :SaveSession 存的 session）
+vim.api.nvim_create_autocmd("SessionLoadPost", {
+  group = vim.api.nvim_create_augroup("session_sidebar_cleanup", { clear = true }),
+  callback = function()
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+      local buf = vim.api.nvim_win_get_buf(win)
+      -- mksession 恢复出来的假 buffer 名字形如 NvimTree_1 / OUTLINE_1
+      local tail = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(buf), ":t")
+      if tail:match("^NvimTree_") or tail:match("^OUTLINE_?") then
+        pcall(vim.api.nvim_win_close, win, true)
+      end
+    end
+  end,
+})
