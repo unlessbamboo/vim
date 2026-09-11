@@ -31,12 +31,15 @@ if not vim.g.lazy_did_setup then
 		require("plugins.gitsigns"),
 		require("plugins.lualine"),
 		require("plugins.outline"),
+		require("plugins.whichkey"),
 		-- 语言/语法支持
 		require("plugins.language"),
 		-- 代码补全（LSP + cmp）
 		require("plugins.lspconfig"),
 		require("plugins.cmp"),
 		require("plugins.autopairs"),
+		-- 前端 HTML/CSS 快速输入
+		require("plugins.emmet"),
 		-- AI 补全与助手
 		require("plugins.minuet"),
 		require("plugins.avante"),
