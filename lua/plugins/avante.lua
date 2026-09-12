@@ -3,14 +3,18 @@ AI 助手插件: avante.nvim(Cursor 风格: 对话、内联编辑、自动应用
 依赖(自动随 avante 安装): plenary.nvim / nui.nvim / nvim-web-devicons / render-markdown.nvim
 
 模型切换:
-    启动默认模型: export AI_PROVIDER=deepseek(默认) | openai | claude
+    启动默认模型: export AI_PROVIDER=deepseek(默认) | openai | claude | ollama
     nvim 内随时切换(无需重启): :AvanteSwitchProvider 或 :AvanteModels
+
+ollama 复用 bamboo-server 上给 minuet 用的同一个 qwen2.5-coder:3b(纯 CPU,约 11 token/s),
+对话场景比补全更耗 token,回复会明显慢,只适合简单问答/小改动。
 ]]
 local AI_PROVIDER = vim.env.AI_PROVIDER or "deepseek"
 local provider_by_env = {
 	deepseek = "deepseek",
 	openai = "openai",
 	claude = "claude",
+	ollama = "ollama",
 }
 
 return {
@@ -50,6 +54,23 @@ return {
 			claude = {
 				model = "claude-sonnet-4-20250514",
 				api_key_name = "ANTHROPIC_API_KEY",
+			},
+			ollama = {
+				endpoint = "http://bamboo-server.local:11434",
+				model = "qwen2.5-coder:3b",
+				timeout = 60000, -- 纯 CPU 推理,对话比补全慢很多,超时给宽松点
+				-- ollama provider 默认禁用(avante 内置行为),要用它必须显式探活开启
+				-- 用函数包一层延迟 require,避免 avante.nvim 还没被 lazy 加载到 rtp 时报 module not found
+				is_env_set = function()
+					return require("avante.providers.ollama").check_endpoint_alive()
+				end,
+				extra_request_body = {
+					options = {
+						temperature = 0.75,
+						num_ctx = 4096, -- CPU 上 20480 默认值预填充太慢,降下来
+						keep_alive = "5m",
+					},
+				},
 			},
 		},
 		-- 复用已有 fzf-lua 做文件选择
