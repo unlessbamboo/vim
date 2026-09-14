@@ -1,1 +1,1 @@
-/Users/bamboounuse/Library/Mobile Documents/iCloud~md~obsidian/Documents/blog/learn/vim-ai-fix-record.md
+/Users/bamboopro/Library/Mobile Documents/iCloud~md~obsidian/Documents/blog/knowledge/tools/vim/vim-ai-fix-record.md

@@ -42,7 +42,8 @@ if not vim.g.lazy_did_setup then
 		require("plugins.emmet"),
 		-- AI 补全与助手
 		require("plugins.minuet"),
-		require("plugins.avante"),
+		-- avante.nvim(对话/内联编辑助手): 用不到,先关掉
+		-- require("plugins.avante"),
 		-- 格式化和检查
 		require("plugins.conform"),
 		require("plugins.lint"),
