@@ -6,9 +6,10 @@ return {
     local lint = require("lint")
     lint.linters_by_ft = {
       python = { "ruff" },
-      javascript = { "eslint" },
-      typescript = { "eslint" },
-      vue = { "eslint" },
+      -- eslint_d 由 mason 安装（:MasonInstall eslint_d），不依赖 fnm 当前 node 版本的全局包
+      javascript = { "eslint_d" },
+      typescript = { "eslint_d" },
+      vue = { "eslint_d" },
       go = { "golangci-lint" },
       sh = { "shellcheck" },
     }

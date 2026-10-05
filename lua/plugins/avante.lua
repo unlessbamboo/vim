@@ -3,13 +3,14 @@ AI 助手插件: avante.nvim(Cursor 风格: 对话、内联编辑、自动应用
 依赖(自动随 avante 安装): plenary.nvim / nui.nvim / nvim-web-devicons / render-markdown.nvim
 
 模型切换:
-    启动默认模型: export AI_PROVIDER=deepseek(默认) | openai | claude | ollama
+    启动默认模型: export AI_PROVIDER=opencode(默认) | deepseek | openai | claude
     nvim 内随时切换(无需重启): :AvanteSwitchProvider 或 :AvanteModels
 
-ollama 复用 bamboo-server 上给 minuet 用的同一个 qwen2.5-coder:3b(纯 CPU,约 11 token/s),
-对话场景比补全更耗 token,回复会明显慢,只适合简单问答/小改动。
+注意: avante 没接 opencode,AI_PROVIDER=opencode 时会退回 deepseek;avante 已在
+lazyentry.lua 里注释掉,暂不启用。下面 ollama provider 是旧配置(原跑在 bamboo-server,
+现 ollama 已停用),保留仅供参考。
 ]]
-local AI_PROVIDER = vim.env.AI_PROVIDER or "deepseek"
+local AI_PROVIDER = vim.env.AI_PROVIDER or "opencode"
 local provider_by_env = {
 	deepseek = "deepseek",
 	openai = "openai",

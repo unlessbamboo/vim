@@ -2,6 +2,29 @@
 AI 补全插件: minuet-ai.nvim
 提供 as-you-type 代码补全,支持 OpenAI 兼容 / FIM / Ollama / llama.cpp 等任意模型。
 
+== 术语 ==
+本文件里说的"灰字"不是传统意义上的补全,两者技术路径完全不同,业界用不同的词区分:
+
+  ghost text(幽灵文本)
+      光标后那段灰色的、尚未接受的预览文本,指的是"视觉形态"。
+      Copilot / VSCode / JetBrains 都用这个叫法。
+  virtual text(虚拟文本)
+      nvim extmark API 的概念: 不真实存在于 buffer 里、只负责渲染的文本。
+      是 ghost text 在 neovim 里的实现机制,下面那个 virtualtext = {} 配置就得名于此。
+  inline completion / inline suggestion(行内补全 / 行内建议)
+      指的是"功能"本身。LSP 3.18 起有标准方法 textDocument/inlineCompletion,
+      VSCode 扩展 API 叫 InlineCompletionItemProvider。
+  FIM (Fill-in-the-Middle,中间填充)
+      模型侧的任务名。请求体里的 prompt(光标前) + suffix(光标后)就是 FIM 接口 ——
+      让模型看着前后文填中间那段。传统补全不存在这个概念。
+
+和传统补全(autocomplete / IntelliSense)的区别:
+  传统补全  弹候选列表 | 来自 LSP 静态分析和 buffer 词法 | 补标识符 | 确定性,符号存在就合法
+  行内补全  直接显示整段 | 来自 LLM 生成      | 补任意片段,可跨行 | 概率性,可能是幻觉
+
+注意 minuet 把这两种前端都提供了 —— 下面 cmp source 走传统候选菜单,virtualtext 走灰字,
+同一个模型的输出有两条展示路径。(它俩默认互斥,见 virtualtext.show_on_completion_menu 的注释)
+
 cmp source 只在 @ . ( [ : 空格等触发字符处自动请求(插件自身写死,普通字母不算关键字),
 平时打字看不到自动弹出是设计如此,靠 <C-l> / <A-y> 手动强制。
 想要随打随出的效果用下面 virtualtext(灰字)前端,常用键位:
@@ -9,19 +32,19 @@ cmp source 只在 @ . ( [ : 空格等触发字符处自动请求(插件自身写
     <A-[> / <A-]> 切换候选(灰字未显示时也可用来手动触发)
 
 模型切换(改环境变量后重启 nvim,或 :Lazy reload minuet-ai.nvim 生效):
-    export AI_PROVIDER=deepseek   # 默认,需要 DEEPSEEK_API_KEY
+    export AI_PROVIDER=opencode   # 默认,OpenCode Go 套餐网关,需要 OPENCODE_API_KEY
+    export AI_PROVIDER=deepseek   # 需要 DEEPSEEK_API_KEY
     export AI_PROVIDER=openai     # 需要 OPENAI_API_KEY
-    export AI_PROVIDER=opencode   # OpenCode Go 套餐网关,需要 OPENCODE_API_KEY
-    export AI_PROVIDER=ollama     # 内网 bamboo-mini(M2)跑的 qwen2.5-coder:7b,无需 API key
 
-avante.nvim 共用同一个 AI_PROVIDER 变量,两个插件保持同一模型栈(avante 未接 ollama,切过去 avante 会退回 deepseek)。
+本地 ollama 栈(bamboo-mini 上的 qwen2.5-coder:7b)已停用:实际写代码的时间很少,补全这种
+场景用不上本地小模型,还一直拖着 5GB 权重常驻占内存;改用 OpenCode Go 网关的
+deepseek-v4.1-flash。minuet 本身仍支持 ollama / llama.cpp 等本地后端,
+想恢复在下面 presets 里把 ollama 那份配置加回来即可(旧的 ollama preset 见 git 历史)。
 
-ollama 最早跑在 bamboo-server(纯 CPU,老 Xeon)上,qwen2.5-coder:3b 只有约 11 token/s,
-FIM 请求经常撞超时拿不到补全,已经放弃,换成了 bamboo-mini(Mac mini M2,Metal GPU 加速)。
-实测 qwen2.5-coder:7b 在 M2 上能跑到约 20 token/s(ollama ps 显示 100% GPU),
-比之前快很多,所以 context_window/max_tokens 都放宽了一些。
+avante.nvim 共用同一个 AI_PROVIDER 变量,但它没接 opencode(切过去会退回 deepseek);
+avante 已在 lazyentry.lua 里注释掉,暂不启用。
 ]]
-local AI_PROVIDER = vim.env.AI_PROVIDER or "deepseek"
+local AI_PROVIDER = vim.env.AI_PROVIDER or "opencode"
 
 -- OpenCode Go 网关要求每个请求带 x-opencode-session,否则报 MissingSessionID
 -- (https://opencode.ai/docs/go/#where-can-i-use-it);本次 nvim 进程生成一个 id,所有请求复用
@@ -87,30 +110,9 @@ local presets = {
 			},
 		},
 	},
-	ollama = {
-		provider = "openai_fim_compatible",
-		-- 单位是字符,实测 M2 上约 3.4 字符/token,4096 字符 ≈ 1200 token,
-		-- 远低于 ollama 给这个模型的 num_ctx=8192,不会被静默截断。
-		-- 实测 prompt eval 约 345 tok/s: 冷 cache 读 4096 字符要 3.5s(在 timeout 10s 内),
-		-- 但 ollama 的 KV cache 按前缀复用,同一文件连续编辑只要 0.2s,所以日常无感。
-		-- 再往上给(8192 字符≈2400 token)冷启动涨到 7s,而 7B 的有效注意力本就只有 1-2k token,
-		-- 质量不升反降,不划算。
-		context_window = 4096,
-		request_timeout = 10, -- 留够余量给模型闲置卸载后的冷启动(实测热态 1-3s,冷启动会更久)
-		provider_options = {
-			api_key = "TERM", -- Ollama 不校验 key,只要求环境变量存在且非空
-			name = "Ollama",
-			end_point = "http://bamboo-mini.local:11434/v1/completions",
-			model = "qwen2.5-coder:7b",
-			optional = {
-				max_tokens = 64,
-				top_p = 0.9,
-			},
-		},
-	},
 }
 
-local active = presets[AI_PROVIDER] or presets.deepseek
+local active = presets[AI_PROVIDER] or presets.opencode
 
 -- 灰字自动弹出只在这些语言开启(避免其他 filetype 也发请求增加费用)
 local auto_trigger_ft = { "python", "javascript", "typescript", "vue", "html", "css", "lua", "go" }
@@ -127,7 +129,7 @@ return {
 			local key_var = po.api_key
 			local key_val = vim.env[key_var]
 			local lines = {
-				"AI_PROVIDER   = " .. (vim.env.AI_PROVIDER or "(未设置,回退 deepseek)"),
+				"AI_PROVIDER   = " .. (vim.env.AI_PROVIDER or "(未设置,回退 opencode)"),
 				"provider      = " .. active.provider,
 				"model         = " .. (po.model or "?"),
 				"endpoint      = " .. (po.end_point or "?"),
@@ -139,45 +141,7 @@ return {
 				),
 			}
 
-			local base = (po.end_point or ""):match("^(https?://[^/]+)")
-			if AI_PROVIDER ~= "ollama" or not base then
-				vim.notify(table.concat(lines, "\n"), vim.log.levels.INFO)
-				return
-			end
-
-			-- ollama: 额外探测服务可达性与模型驻留状态
-			vim.system({ "curl", "-sf", "--max-time", "5", base .. "/api/ps" }, { text = true }, function(res)
-				vim.schedule(function()
-					if res.code ~= 0 then
-						table.insert(
-							lines,
-							"连接        = 【失败】curl exit " .. res.code .. " " .. (res.stderr or "")
-						)
-						vim.notify(table.concat(lines, "\n"), vim.log.levels.ERROR)
-						return
-					end
-					local ok, data = pcall(vim.json.decode, res.stdout)
-					local models = ok and data and data.models or {}
-					table.insert(lines, "连接        = OK")
-					if #models == 0 then
-						table.insert(lines, "模型驻留    = 无(首次补全需加载权重,会慢几秒)")
-					else
-						for _, m in ipairs(models) do
-							table.insert(
-								lines,
-								string.format(
-									"模型驻留    = %s (%.1fGB VRAM, ctx %s, 到期 %s)",
-									m.name,
-									(m.size_vram or 0) / 1e9,
-									m.context_length or "?",
-									(m.expires_at or ""):sub(1, 19)
-								)
-							)
-						end
-					end
-					vim.notify(table.concat(lines, "\n"), vim.log.levels.INFO)
-				end)
-			end)
+			vim.notify(table.concat(lines, "\n"), vim.log.levels.INFO)
 		end, { desc = "检查当前 AI 补全后端(provider/model/key/连通性)" })
 	end,
 	-- 仅靠 event = InsertEnter 懒加载会漏掉 virtualtext 的自动触发:
@@ -191,8 +155,9 @@ return {
 		n_completions = 1, -- 省钱/省资源,云端模型可调大
 		context_window = active.context_window or 4096, -- 上下文窗口(字符)
 		request_timeout = active.request_timeout or 3,
-		throttle = 1000, -- 请求节流,防止费用飙升
-		debounce = 400,
+		-- 默认值按云端 API 省钱设计;本地 provider 可在自己的 preset 里覆盖成更跟手的值
+		throttle = active.throttle or 1000, -- 最快多久发一次请求
+		debounce = active.debounce or 400, -- 停手多久后才发请求
 		provider_options = {
 			[active.provider] = active.provider_options,
 		},
